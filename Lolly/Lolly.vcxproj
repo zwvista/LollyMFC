@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{93B213AA-9686-44C8-8F0F-87835626181B}</ProjectGuid>
+    <RootNamespace>Lolly</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <ProjectName>LollyMFC</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;..\ADO;..\LibLolly;..\LibLolly\UGrid;Auxiliary;Tools;Words;Phrases;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalOptions>-Zm122 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>UxTheme.lib;Oleacc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>REM Mark project as DEP Noncompliant
+call "$(DevEnvDir)..\..\VC\bin\vcvars32.bat"
+call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>.;..\ADO;..\LibLolly;..\LibLolly\UGrid;Auxiliary;Tools;Words;Phrases;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm122 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>UxTheme.lib;Oleacc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <ClCompile>
+      <AdditionalOptions>-Zm122 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Auxiliary\AuxAutoCorrectFrame.cpp" />
+    <ClCompile Include="Auxiliary\AuxBooksFrame.cpp" />
+    <ClCompile Include="Auxiliary\AuxDictionariesFrame.cpp" />
+    <ClCompile Include="Auxiliary\AuxPicBooksFrame.cpp" />
+    <ClCompile Include="Auxiliary\AuxWebExtractFrame.cpp" />
+    <ClCompile Include="Auxiliary\AuxWebTextFrame.cpp" />
+    <ClCompile Include="DataGrid.cpp" />
+    <ClCompile Include="DataGridView.cpp" />
+    <ClCompile Include="EditTransDlg.cpp" />
+    <ClCompile Include="FilterDlg.cpp" />
+    <ClCompile Include="Frhelper.cpp" />
+    <ClCompile Include="HTMLEdView.cpp" />
+    <ClCompile Include="Lolly.cpp" />
+    <ClCompile Include="LollyFrame.cpp" />
+    <ClCompile Include="LollyFrameGrid.cpp" />
+    <ClCompile Include="LollyFrameGridOnly.cpp" />
+    <ClCompile Include="LollyHtmlView.cpp" />
+    <ClCompile Include="LollyMixin.cpp" />
+    <ClCompile Include="Lingoes.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="Phrases\NewPhrasesDlg.cpp" />
+    <ClCompile Include="Phrases\PhrasesBaseFrame.cpp" />
+    <ClCompile Include="Phrases\PhrasesLangFrame.cpp" />
+    <ClCompile Include="Phrases\PhrasesLessonsFrame.cpp" />
+    <ClCompile Include="ReindexDlg.cpp" />
+    <ClCompile Include="SelectKanaDlg.cpp" />
+    <ClCompile Include="SelectLessonsDlg.cpp" />
+    <ClCompile Include="SelectPicBookDlg.cpp" />
+    <ClCompile Include="StartProcess.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Tools\AutoCorrectTextDlg.cpp" />
+    <ClCompile Include="Tools\BlogPostFrame.cpp" />
+    <ClCompile Include="Tools\BlogPostView.cpp" />
+    <ClCompile Include="Tools\ExtractWebDictFrame.cpp" />
+    <ClCompile Include="Tools\ExtractWebDictGrid.cpp" />
+    <ClCompile Include="Tools\ExtractWebDictOptionsDlg.cpp" />
+    <ClCompile Include="Tools\HtmlLessonFrame.cpp" />
+    <ClCompile Include="Tools\Text2PostDlg.cpp" />
+    <ClCompile Include="Tools\OptionsDlg.cpp" />
+    <ClCompile Include="Tools\PicBookFrame.cpp" />
+    <ClCompile Include="Tools\PicBookView.cpp" />
+    <ClCompile Include="Tools\TestDlg.cpp" />
+    <ClCompile Include="Tools\TestDlg2.cpp" />
+    <ClCompile Include="UGNewCheckBoxCellType.cpp" />
+    <ClCompile Include="UGRecordMarkerCellType.cpp" />
+    <ClCompile Include="UTF8.cpp" />
+    <ClCompile Include="WebBrowserFrame.cpp" />
+    <ClCompile Include="Words\DictHtmlCtrl.cpp" />
+    <ClCompile Include="Words\NewWordsDlg.cpp" />
+    <ClCompile Include="Words\WordsAtWillEBFrame.cpp" />
+    <ClCompile Include="Words\WordsAtWillFrame.cpp" />
+    <ClCompile Include="Words\WordsBaseFrame.cpp" />
+    <ClCompile Include="Words\WordsBooksFrame.cpp" />
+    <ClCompile Include="Words\WordsEBFrame.cpp" />
+    <ClCompile Include="Words\WordsEBView.cpp" />
+    <ClCompile Include="Words\WordsLangFrame.cpp" />
+    <ClCompile Include="Words\WordsLessonsEBFrame.cpp" />
+    <ClCompile Include="Words\WordsLessonsFrame.cpp" />
+    <ClCompile Include="Words\WordsWebFrame.cpp" />
+    <ClCompile Include="Words\WordsWebView.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Auxiliary\AuxAutoCorrectFrame.h" />
+    <ClInclude Include="Auxiliary\AuxBooksFrame.h" />
+    <ClInclude Include="Auxiliary\AuxDictionariesFrame.h" />
+    <ClInclude Include="Auxiliary\AuxPicBooksFrame.h" />
+    <ClInclude Include="Auxiliary\AuxWebExtractFrame.h" />
+    <ClInclude Include="Auxiliary\AuxWebTextFrame.h" />
+    <ClInclude Include="DataGrid.h" />
+    <ClInclude Include="DataGridView.h" />
+    <ClInclude Include="EditTransDlg.h" />
+    <ClInclude Include="FilterDlg.h" />
+    <ClInclude Include="Frhelper.h" />
+    <ClInclude Include="HTMLEdView.h" />
+    <ClInclude Include="Lolly.h" />
+    <ClInclude Include="LollyFrame.h" />
+    <ClInclude Include="LollyFrameGrid.h" />
+    <ClInclude Include="LollyFrameGridOnly.h" />
+    <ClInclude Include="LollyHtmlView.h" />
+    <ClInclude Include="LollyMixin.h" />
+    <ClInclude Include="Lingoes.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="Phrases\NewPhrasesDlg.h" />
+    <ClInclude Include="Phrases\PhrasesBaseFrame.h" />
+    <ClInclude Include="Phrases\PhrasesLangFrame.h" />
+    <ClInclude Include="Phrases\PhrasesLessonsFrame.h" />
+    <ClInclude Include="ReindexDlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SelectKanaDlg.h" />
+    <ClInclude Include="SelectLessonsDlg.h" />
+    <ClInclude Include="SelectPicBookDlg.h" />
+    <ClInclude Include="StartProcess.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Tools\AutoCorrectTextDlg.h" />
+    <ClInclude Include="Tools\BlogPostFrame.h" />
+    <ClInclude Include="Tools\BlogPostView.h" />
+    <ClInclude Include="Tools\ExtractWebDictFrame.h" />
+    <ClInclude Include="Tools\ExtractWebDictGrid.h" />
+    <ClInclude Include="Tools\ExtractWebDictOptionsDlg.h" />
+    <ClInclude Include="Tools\HtmlLessonFrame.h" />
+    <ClInclude Include="Tools\Text2PostDlg.h" />
+    <ClInclude Include="Tools\OptionsDlg.h" />
+    <ClInclude Include="Tools\PicBookFrame.h" />
+    <ClInclude Include="Tools\PicBookView.h" />
+    <ClInclude Include="Tools\TestDlg.h" />
+    <ClInclude Include="UGNewCheckBoxCellType.h" />
+    <ClInclude Include="UGRecordMarkerCellType.h" />
+    <ClInclude Include="UTF8.h" />
+    <ClInclude Include="WebBrowserFrame.h" />
+    <ClInclude Include="Words\DictHtmlCtrl.h" />
+    <ClInclude Include="Words\NewWordsDlg.h" />
+    <ClInclude Include="Words\WordsAtWillEBFrame.h" />
+    <ClInclude Include="Words\WordsAtWillFrame.h" />
+    <ClInclude Include="Words\WordsBaseFrame.h" />
+    <ClInclude Include="Words\WordsBooksFrame.h" />
+    <ClInclude Include="Words\WordsEBFrame.h" />
+    <ClInclude Include="Words\WordsEBView.h" />
+    <ClInclude Include="Words\WordsLangFrame.h" />
+    <ClInclude Include="Words\WordsLessonsEBFrame.h" />
+    <ClInclude Include="Words\WordsLessonsFrame.h" />
+    <ClInclude Include="Words\WordsWebFrame.h" />
+    <ClInclude Include="Words\WordsWebView.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\buttons.bmp" />
+    <None Include="res\dicttypes.bmp" />
+    <None Include="res\filelarge.bmp" />
+    <None Include="res\filesmall.bmp" />
+    <None Include="res\Lolly.ico" />
+    <None Include="res\Lolly.rc2" />
+    <None Include="res\main.bmp" />
+    <None Include="res\markers.bmp" />
+    <None Include="res\spanishdict.bullet.gif" />
+    <None Include="res\Toolbar.bmp" />
+    <None Include="res\Toolbar256.bmp" />
+    <None Include="res\ToolbarAutoCorrect.bmp" />
+    <None Include="res\ToolbarAuxAutoCorrect.bmp" />
+    <None Include="res\ToolbarAuxBooks.bmp" />
+    <None Include="res\ToolbarAuxDictionaries.bmp" />
+    <None Include="res\ToolbarAuxPicBooks.bmp" />
+    <None Include="res\ToolbarAuxToDoList.bmp" />
+    <None Include="res\ToolbarAuxWebExtract.bmp" />
+    <None Include="res\ToolbarAuxWebText.bmp" />
+    <None Include="res\ToolbarBlogPost.bmp" />
+    <None Include="res\ToolbarBooks.bmp" />
+    <None Include="res\ToolbarDicts.bmp" />
+    <None Include="res\ToolbarExtractWebDict.bmp" />
+    <None Include="res\ToolbarHtmlLesson.bmp" />
+    <None Include="res\ToolbarPhrasesLang.bmp" />
+    <None Include="res\ToolbarPhrasesLessons.bmp" />
+    <None Include="res\ToolbarPicBook.bmp" />
+    <None Include="res\ToolbarWebBrowser.bmp" />
+    <None Include="res\ToolbarWordsAtWill.bmp" />
+    <None Include="res\ToolbarWordsBooks.bmp" />
+    <None Include="res\ToolbarWordsEB.bmp" />
+    <None Include="res\ToolbarWordsJapan.bmp" />
+    <None Include="res\ToolbarWordsLang.bmp" />
+    <None Include="res\ToolbarWordsLessons.bmp" />
+    <None Include="res\ToolbarWordsLessonsEB.bmp" />
+    <None Include="res\ToolbarWPBlog.bmp" />
+    <None Include="UserImages.bmp" />
+    <None Include="res\writelarge.bmp" />
+    <None Include="res\writesmall.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Lolly.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibLolly\DllLolly.vcxproj">
+      <Project>{05dc9c7c-4391-4623-905d-a682f87ed5b7}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="Lolly.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

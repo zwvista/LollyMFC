@@ -1,0 +1,12 @@
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.aps
+/LollyCSOld/
+
+Debug
+Release
+x64
+packages
+ipch

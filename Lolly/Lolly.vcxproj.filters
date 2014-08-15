@@ -1,0 +1,520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Auxiliary">
+      <UniqueIdentifier>{35f97afb-6158-455f-8d86-8354df7cafcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{557432a2-0886-4613-add9-a1371243fa39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Words Files">
+      <UniqueIdentifier>{1ade6e19-f256-400f-a051-fa923c49060e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Phrases Files">
+      <UniqueIdentifier>{9a7b85f7-4ab5-490d-8633-3b6c0141e5db}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DataGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataGridView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditTransDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lolly.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LollyFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LollyFrameGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LollyFrameGridOnly.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LollyHtmlView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LollyMixin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lingoes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectKanaDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectLessonsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectPicBookDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UGNewCheckBoxCellType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UGRecordMarkerCellType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UTF8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WebBrowserFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReindexDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Auxiliary\AuxAutoCorrectFrame.cpp">
+      <Filter>Auxiliary</Filter>
+    </ClCompile>
+    <ClCompile Include="Auxiliary\AuxBooksFrame.cpp">
+      <Filter>Auxiliary</Filter>
+    </ClCompile>
+    <ClCompile Include="Auxiliary\AuxDictionariesFrame.cpp">
+      <Filter>Auxiliary</Filter>
+    </ClCompile>
+    <ClCompile Include="Auxiliary\AuxPicBooksFrame.cpp">
+      <Filter>Auxiliary</Filter>
+    </ClCompile>
+    <ClCompile Include="Auxiliary\AuxWebExtractFrame.cpp">
+      <Filter>Auxiliary</Filter>
+    </ClCompile>
+    <ClCompile Include="Auxiliary\AuxWebTextFrame.cpp">
+      <Filter>Auxiliary</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\AutoCorrectTextDlg.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\ExtractWebDictFrame.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\ExtractWebDictGrid.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\ExtractWebDictOptionsDlg.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\HtmlLessonFrame.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\OptionsDlg.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\PicBookFrame.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\PicBookView.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\TestDlg.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\TestDlg2.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLEdView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\Text2PostDlg.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\BlogPostFrame.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\BlogPostView.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\WordsAtWillFrame.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\WordsBaseFrame.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\WordsBooksFrame.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\WordsEBView.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\WordsLangFrame.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\WordsLessonsEBFrame.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\WordsLessonsFrame.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\WordsWebFrame.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\WordsEBFrame.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\WordsAtWillEBFrame.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\NewWordsDlg.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Phrases\NewPhrasesDlg.cpp">
+      <Filter>Phrases Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Phrases\PhrasesBaseFrame.cpp">
+      <Filter>Phrases Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Phrases\PhrasesLangFrame.cpp">
+      <Filter>Phrases Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Phrases\PhrasesLessonsFrame.cpp">
+      <Filter>Phrases Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\DictHtmlCtrl.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Words\WordsWebView.cpp">
+      <Filter>Words Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Frhelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DataGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataGridView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditTransDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lolly.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LollyFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LollyFrameGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LollyFrameGridOnly.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LollyHtmlView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LollyMixin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lingoes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectKanaDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectLessonsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectPicBookDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UGNewCheckBoxCellType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UGRecordMarkerCellType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UTF8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WebBrowserFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReindexDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Auxiliary\AuxAutoCorrectFrame.h">
+      <Filter>Auxiliary</Filter>
+    </ClInclude>
+    <ClInclude Include="Auxiliary\AuxBooksFrame.h">
+      <Filter>Auxiliary</Filter>
+    </ClInclude>
+    <ClInclude Include="Auxiliary\AuxDictionariesFrame.h">
+      <Filter>Auxiliary</Filter>
+    </ClInclude>
+    <ClInclude Include="Auxiliary\AuxPicBooksFrame.h">
+      <Filter>Auxiliary</Filter>
+    </ClInclude>
+    <ClInclude Include="Auxiliary\AuxWebExtractFrame.h">
+      <Filter>Auxiliary</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\AutoCorrectTextDlg.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\ExtractWebDictFrame.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\ExtractWebDictGrid.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\ExtractWebDictOptionsDlg.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\HtmlLessonFrame.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\OptionsDlg.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\PicBookFrame.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\PicBookView.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\TestDlg.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLEdView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\Text2PostDlg.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\BlogPostFrame.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\BlogPostView.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\WordsAtWillFrame.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\WordsBaseFrame.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\WordsBooksFrame.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\WordsEBView.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\WordsLangFrame.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\WordsLessonsEBFrame.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\WordsLessonsFrame.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\WordsWebFrame.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\WordsEBFrame.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\WordsAtWillEBFrame.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Auxiliary\AuxWebTextFrame.h">
+      <Filter>Auxiliary</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\NewWordsDlg.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Phrases\NewPhrasesDlg.h">
+      <Filter>Phrases Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Phrases\PhrasesBaseFrame.h">
+      <Filter>Phrases Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Phrases\PhrasesLangFrame.h">
+      <Filter>Phrases Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Phrases\PhrasesLessonsFrame.h">
+      <Filter>Phrases Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\DictHtmlCtrl.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Words\WordsWebView.h">
+      <Filter>Words Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Frhelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\buttons.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\dicttypes.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\filelarge.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\filesmall.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Lolly.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Lolly.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\main.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\markers.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\spanishdict.bullet.gif">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Toolbar256.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarAutoCorrect.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarBooks.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarDicts.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarExtractWebDict.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarHtmlLesson.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarPhrasesLang.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarPhrasesLessons.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarPicBook.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarWebBrowser.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarWordsBooks.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarWordsJapan.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarWordsLang.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarWordsLessons.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="UserImages.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\writelarge.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\writesmall.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarAuxAutoCorrect.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarAuxBooks.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarAuxDictionaries.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarAuxPicBooks.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarAuxWebExtract.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarAuxWebText.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarWordsAtWill.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarAuxToDoList.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarWPBlog.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarBlogPost.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarWordsLessonsEB.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToolbarWordsEB.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Lolly.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

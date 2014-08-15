@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="UGrid">
+      <UniqueIdentifier>{2077dc1c-595a-4804-836a-2ade8c11b7b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ADO">
+      <UniqueIdentifier>{bd896b95-c6fc-4315-943c-b6ddd17f938a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AutoSelEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboCompletion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FavoritesManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HtmlCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HtmlEditCtrl2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MFCToolBarButtons2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MFCToolBarComboBoxExButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdioFileEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGCBType.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGCell.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGCelTyp.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGCnrBtn.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGCTarrw.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGCtrl.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGCTsarw.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGDLType.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGDrgDrp.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGDrwHnt.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGDtaSrc.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGEdit.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGEditBase.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\ugformat.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\uggdinfo.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGGrid.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGHint.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\ughscrol.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\ugLstBox.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGMEdit.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGMemMan.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGMultiS.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\ugprint.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\ugptrlst.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\ugsidehd.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGStrOp.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\ugtab.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGTopHdg.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\ugvscrol.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="UGrid\UGXPThemes.cpp">
+      <Filter>UGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ADO\ado.cpp">
+      <Filter>ADO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ADO\ADOEvents.cpp">
+      <Filter>ADO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ADO\AutoFont.cpp">
+      <Filter>ADO</Filter>
+    </ClCompile>
+    <ClCompile Include="DragAndDropListBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WndResizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AutoSelEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboCompletion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FavoritesManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HtmlCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HtmlEditCtrl2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MFCToolBarButtons2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MFCToolBarComboBoxExButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdioFileEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UG64Bit.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGCBType.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGCell.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\ugceltyp.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGCnrBtn.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGCTarrw.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGCtrl.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGCTsarw.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\ugdefine.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGDLType.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGDrgDrp.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGDrwHnt.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGDtaSrc.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGEdit.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGEditBase.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\ugformat.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\uggdinfo.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGGrid.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGHint.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\ughscrol.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\uglstbox.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGMEdit.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGMemMan.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGMultiS.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\ugprint.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\ugptrlst.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\ugsidehd.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGStrOp.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\ugstruct.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\ugtab.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\UGTopHdg.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\ugvscrol.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="UGrid\ugxpthemes.h">
+      <Filter>UGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ADO\ado.h">
+      <Filter>ADO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ADO\ADOEvents.h">
+      <Filter>ADO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ADO\AutoFont.h">
+      <Filter>ADO</Filter>
+    </ClInclude>
+    <ClInclude Include="DragAndDropListBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WndResizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DllLolly.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="DllLolly.vcproj" />
+  </ItemGroup>
+</Project>
