@@ -47,9 +47,10 @@ BOOL CDataGridView::PreCreateWindow( CREATESTRUCT& cs )
 
 void CDataGridView::OnInitialUpdate()
 {
-	CFormView::OnInitialUpdate();
-	GetParentFrame()->RecalcLayout();
-	ResizeParentToFit();
+	//CFormView::OnInitialUpdate();
+
+	//GetParentFrame()->RecalcLayout();
+	//ResizeParentToFit();
 
 	m_pDataGrid->AttachGrid(this, IDC_GRID_WORD);
 
@@ -59,9 +60,9 @@ void CDataGridView::OnInitialUpdate()
 
 	AFXGetParentFrame(this)->SendMessage(WM_LBLSETTINGS_CHANGED);
 
-	CRect r;
-	GetClientRect(r);
-	SendMessage(WM_SIZE, SIZE_RESTORED, MAKELPARAM(r.Width(), r.Height()));
+	//CRect r;
+	//GetClientRect(r);
+	//SendMessage(WM_SIZE, SIZE_RESTORED, MAKELPARAM(r.Width(), r.Height()));
 }
 
 // CDataGridView message handlers

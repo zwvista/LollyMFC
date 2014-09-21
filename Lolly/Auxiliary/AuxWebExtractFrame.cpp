@@ -42,10 +42,9 @@ SDataGridColumnInfo* CAuxWebExtractFrame::GetDataGridColumnInfo()
 {
 	static SDataGridColumnInfo ci[] = {
 		{ _T("SITENAME"), _T("SITENAME"), _T("SITENAME"), 1, 5, TRUE },
-		{ _T("TRANSFROM_WIN"), _T("TRANSFROM_WIN"), NULL, 2, 5, TRUE },
-		{ _T("TRANSFROM_MAC"), _T("TRANSFROM_MAC"), NULL, 2, 5, TRUE },
+		{ _T("TRANSFORM_WIN"), _T("TRANSFORM_WIN"), NULL, 2, 5, TRUE },
+		{ _T("TRANSFORM_MAC"), _T("TRANSFORM_MAC"), NULL, 2, 5, TRUE },
 		{ _T("WAIT"), _T("WAIT"), NULL, 50, 0, TRUE },
-		{ _T("BODY"), _T("BODY"), NULL, 50, 0, TRUE },
 		{ NULL, NULL, NULL, 0, 0, TRUE },
 	};
 	return ci;

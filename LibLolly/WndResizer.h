@@ -325,6 +325,7 @@ private:
   void OnPaint();
   void OnSize(UINT nType, int cx, int cy);
   void OnSizing(UINT fwSide, LPRECT pRect);
+  void OnScroll();
   void OnDestroy();
 	void OnLButtonDown(UINT nFlags, CPoint point);
 	void OnMouseMove(UINT nFlags, CPoint point);
@@ -343,6 +344,8 @@ private:
 
   void UpdateSplitterOffset(CPoint ptCurr);
   void GetDebugInfo(CPanel * pRoot, CString & info, CString  indent);
+  void GetTrueClientRect(CWnd * pWnd, CRect * prc);
+  void EnsureRootMinMax();
 
   WNDPROC m_pfnWndProc;
   static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

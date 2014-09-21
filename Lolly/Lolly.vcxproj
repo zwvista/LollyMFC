@@ -18,7 +18,7 @@
     <ProjectGuid>{93B213AA-9686-44C8-8F0F-87835626181B}</ProjectGuid>
     <RootNamespace>Lolly</RootNamespace>
     <Keyword>MFCProj</Keyword>
-    <ProjectName>LollyMFC</ProjectName>
+    <ProjectName>Lolly</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

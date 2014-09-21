@@ -74,7 +74,7 @@ CString ReadAllTextFromFile(LPCTSTR pszFileName);
 void SplitString(const CString& str, LPCTSTR pszDelim, vector<CString>& vstrs);
 CString GetTextFromClipBoard();
 void CopyTextToClipBoard(const CString& strText);
-CString GetDocumentText(CHtmlView* pView, bool bBody = false);
+CString GetDocumentText(CHtmlView* pView);
 CString GetDocumentTitle(CHtmlView* pView);
 inline CString HtmlEncode(CString strText)
 {

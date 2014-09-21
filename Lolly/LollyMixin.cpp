@@ -138,7 +138,7 @@ CString ExtractFromHtml(LPCTSTR pszText, LPCTSTR pszTransform, LPCTSTR pszDefaul
 
 CString CLollyMixin::ExtractFromWeb(CHtmlView* pView, CADORecordset2& rsExtract, CString strDefault /* = _T("") */)
 {
-	CString strText = GetDocumentText(pView, rsExtract.GetFieldValueAsBool(_T("BODY")));
+	CString strText = GetDocumentText(pView);
 	CString strTransform = rsExtract.GetFieldValueAsString(_T("TRANSFORM_WIN"));
 	return ExtractFromHtml(strText, strTransform, strDefault);
 }
@@ -264,19 +264,15 @@ void SplitString( const CString& strText, LPCTSTR pszDelim, vector<CString>& vst
 	}
 }
 
-CString GetDocumentText( CHtmlView* pView, bool bBody /*= false*/ )
+CString GetDocumentText( CHtmlView* pView )
 {
 	CComQIPtr<IHTMLDocument2> doc = pView->GetHtmlDocument();
 	CComPtr<IHTMLElement> body;
 	CComBSTR bstr;
 	doc->get_body(&body);
-	if(!bBody){
-		CComPtr<IHTMLElement> parent;
-		body->get_parentElement(&parent);
-		parent->get_outerHTML(&bstr);
-	}
-	else
-		body->get_outerHTML(&bstr);
+	CComPtr<IHTMLElement> parent;
+	body->get_parentElement(&parent);
+	parent->get_outerHTML(&bstr);
 	return CString(bstr);
 }
 
