@@ -54,6 +54,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(ID_LEARN_WORDS_ATWILL_EB, &CMainFrame::OnWindowNextWordsAtWillEB)
 	ON_COMMAND(ID_WINDOW_NEW_CURRENT, &CMainFrame::OnNewCurrentWindow)
 	ON_UPDATE_COMMAND_UI(ID_WINDOW_NEW_CURRENT, &CMainFrame::OnUpdateNewCurrentWindow)
+	ON_REGISTERED_MESSAGE(AFX_WM_AFTER_TASKBAR_ACTIVATE, OnAfterTaskbarActivate)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -586,4 +587,14 @@ void CMainFrame::OnUpdateNewCurrentWindow( CCmdUI* pCmdUI )
 {
 	CMDIChildWnd* pWnd = MDIGetActive();
 	pCmdUI->Enable(pWnd != NULL && !pWnd->IsKindOf(RUNTIME_CLASS(CExtractWebDictFrame)));
+}
+
+LRESULT CMainFrame::OnAfterTaskbarActivate(WPARAM wParam, LPARAM lParam)
+{
+	HWND hwndMDIChild = (HWND)lParam;
+	if(hwndMDIChild != NULL && ::IsWindow(hwndMDIChild))
+	{
+		::SetFocus(hwndMDIChild);
+	}
+	return 0;
 }

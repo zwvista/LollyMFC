@@ -97,3 +97,11 @@ LRESULT CWordsLangFrame::OnToolbarReset( WPARAM wParam, LPARAM lParam )
 	}
 	return 0;
 }
+
+SDataGridNewRecordInfo* CWordsLangFrame::GetDataGridNewRecordInfo()
+{
+	static SDataGridNewRecordInfo nri[] = {
+		{0, NULL}, {-1, NULL}
+	};
+	return nri;
+}

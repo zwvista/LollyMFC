@@ -64,6 +64,7 @@ protected:
 	afx_msg void OnWindowNextWordsAtWillEB();
 	afx_msg void OnNewCurrentWindow();
 	afx_msg void OnUpdateNewCurrentWindow(CCmdUI* pCmdUI);
+	afx_msg LRESULT OnAfterTaskbarActivate(WPARAM wParam, LPARAM lParam);
 
 	DECLARE_MESSAGE_MAP()
 };

@@ -17,6 +17,7 @@ protected:
 	virtual CString GetSQL();
 	virtual SDataGridColumnInfo* GetDataGridColumnInfo();
 	virtual CString GetFrameText() const;
+	virtual SDataGridNewRecordInfo* GetDataGridNewRecordInfo();
 
 	virtual void WillChangeRecord(EventReasonEnum adReason, LONG cRecords, EventStatusEnum *adStatus, struct _Recordset *pRecordset);
 	virtual void RecordChangeComplete(EventReasonEnum adReason, LONG cRecords, struct Error *pError, EventStatusEnum *adStatus, struct _Recordset *pRecordset);

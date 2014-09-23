@@ -112,3 +112,11 @@ LRESULT CWordsBooksFrame::OnToolbarReset( WPARAM wParam, LPARAM lParam )
 	}
 	return 0;
 }
+
+SDataGridNewRecordInfo* CWordsBooksFrame::GetDataGridNewRecordInfo()
+{
+	static SDataGridNewRecordInfo nri[] = {
+		{4, NULL}, {-1, NULL}
+	};
+	return nri;
+}

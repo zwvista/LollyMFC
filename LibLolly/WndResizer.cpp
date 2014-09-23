@@ -913,7 +913,7 @@ LRESULT CALLBACK CWndResizer::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
       pResizer->OnLButtonUp((UINT) wParam, CPoint(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)));
       break;
     case WM_PAINT:
-      pResizer->OnPaint();
+      //pResizer->OnPaint();
       break;
     case WM_HSCROLL:
     case WM_VSCROLL:
