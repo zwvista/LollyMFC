@@ -1,14 +1,14 @@
 #pragma once
 
-// CHtmlLessonFrame
+// CHtmlUnitFrame
 
-class CHtmlLessonFrame : public CLollyFrame
+class CHtmlUnitFrame : public CLollyFrame
 {
-	DECLARE_DYNCREATE(CHtmlLessonFrame)
+	DECLARE_DYNCREATE(CHtmlUnitFrame)
 
 public:
-	CHtmlLessonFrame();
-	virtual ~CHtmlLessonFrame();
+	CHtmlUnitFrame();
+	virtual ~CHtmlUnitFrame();
 
 protected:
 	CString m_strFileName;

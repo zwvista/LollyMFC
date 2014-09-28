@@ -224,7 +224,7 @@ void CWordsWebFrame::LoadDicts()
 		vstrDictGroups.insert(it, strDictGroup);
 	};
 
-	auto ptDicts = theApp.GetConfigDicts(m_lblSettings.nLangID);
+	auto ptDicts = theApp.GetConfigDicts(m_lbuSettings.nLangID);
 
 	// custom
 	vector<CString> vstrCustomDicts;
@@ -252,7 +252,7 @@ void CWordsWebFrame::LoadDicts()
 
 	CADORecordset2 rsDict(&theApp.m_db);
 	CString sql;
-	sql.Format(_T("SELECT * FROM DICTALL WHERE LANGID=%d "), m_lblSettings.nLangID);
+	sql.Format(_T("SELECT * FROM DICTALL WHERE LANGID=%d "), m_lbuSettings.nLangID);
 	for(const auto& v : ptDicts)
 		if(v.first == _T("group")){
 			CString strDictGroup = v.second.data().c_str();
@@ -320,7 +320,7 @@ void CWordsWebFrame::AddDict( UINT nID, LPCTSTR pszDict, EDictImage nImageIndex 
 	pDictHtmlCtrl->m_nDictImage = nImageIndex;
 
 	CString sql;
-	sql.Format(_T("SELECT * FROM DICTALL WHERE LANGID=%d"), m_lblSettings.nLangID);
+	sql.Format(_T("SELECT * FROM DICTALL WHERE LANGID=%d"), m_lbuSettings.nLangID);
 	pDictHtmlCtrl->m_rsDict.Open(sql);
 	pDictHtmlCtrl->FindDict(pszDict);
 

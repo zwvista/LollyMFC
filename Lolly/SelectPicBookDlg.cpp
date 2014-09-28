@@ -49,7 +49,7 @@ BOOL CSelectPicBookDlg::OnInitDialog()
 		{ NULL, NULL, NULL, 0, 0, TRUE },
 	};
 	CString sql;
-	sql.Format(_T("SELECT * FROM PICBOOKS WHERE LANGID=%d"), theApp.m_lblSettings.nLangID);
+	sql.Format(_T("SELECT * FROM PICBOOKS WHERE LANGID=%d"), theApp.m_lbuSettings.nLangID);
 	m_gdBook.BindData(&m_rsBook, sql, ci);
 	m_gdBook.ResizeCols();
 

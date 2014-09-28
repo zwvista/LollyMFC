@@ -8,19 +8,19 @@
 #include "WndResizer.h"
 #include "StdioFileEx.h"
 
-struct SLangBookLessonSettings
+struct SLangBookUnitSettings
 {
-	int nLangID, nBookID, nLessonFrom, nPartFrom, nLessonTo, nPartTo;
+	int nLangID, nBookID, nUnitFrom, nPartFrom, nUnitTo, nPartTo;
 	CString strLangName, strBookName;
 	void Init();
-	int GetLessonPartFrom() const {return nLessonFrom * 10 + nPartFrom;}
-	int GetLessonPartTo() const {return nLessonTo * 10 + nPartTo;}
-	CString GetBookLessonsDesc() const {
+	int GetUnitPartFrom() const {return nUnitFrom * 10 + nPartFrom;}
+	int GetUnitPartTo() const {return nUnitTo * 10 + nPartTo;}
+	CString GetBookUnitsDesc() const {
 		CString str;
-		if(GetLessonPartFrom() == GetLessonPartTo())
-			str.Format(_T("%s %d:%d"), strBookName, nLessonFrom, nPartFrom);
+		if(GetUnitPartFrom() == GetUnitPartTo())
+			str.Format(_T("%s %d:%d"), strBookName, nUnitFrom, nPartFrom);
 		else
-			str.Format(_T("%s %d:%d--%d:%d"), strBookName, nLessonFrom, nPartFrom, nLessonTo, nPartTo);
+			str.Format(_T("%s %d:%d--%d:%d"), strBookName, nUnitFrom, nPartFrom, nUnitTo, nPartTo);
 		return str;
 	}
 	CString GetLangDesc() const {
@@ -91,7 +91,7 @@ class CLollyMixin
 {
 public:
 	CADODatabase m_db;
-	SLangBookLessonSettings m_lblSettings;
+	SLangBookUnitSettings m_lbuSettings;
 	CAutoFont m_defFont;
 	static const CString m_strNoTrans;
 	CImageList m_imglstDictTypes;

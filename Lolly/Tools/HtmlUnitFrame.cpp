@@ -1,28 +1,28 @@
-// HtmlLessonFrame.cpp : implementation file
+// HtmlUnitFrame.cpp : implementation file
 //
 
 #include "stdafx.h"
 #include "Lolly.h"
-#include "HtmlLessonFrame.h"
+#include "HtmlUnitFrame.h"
 #include "StdioFileEx.h"
 
 
-// CHtmlLessonFrame
+// CHtmlUnitFrame
 
-IMPLEMENT_DYNCREATE(CHtmlLessonFrame, CLollyFrame)
+IMPLEMENT_DYNCREATE(CHtmlUnitFrame, CLollyFrame)
 
-CHtmlLessonFrame::CHtmlLessonFrame()
+CHtmlUnitFrame::CHtmlUnitFrame()
 	: m_pView(NULL)
 {
-	m_nToolBarID = IDR_TOOLBAR_HTMLLESSON;
+	m_nToolBarID = IDR_TOOLBAR_HTMLUNIT;
 }
 
-CHtmlLessonFrame::~CHtmlLessonFrame()
+CHtmlUnitFrame::~CHtmlUnitFrame()
 {
 }
 
 
-BEGIN_MESSAGE_MAP(CHtmlLessonFrame, CLollyFrame)
+BEGIN_MESSAGE_MAP(CHtmlUnitFrame, CLollyFrame)
 	ON_WM_CREATE()
 	ON_COMMAND(ID_TB_OPEN, OnOpen)
 	ON_COMMAND(ID_TB_SAVE, OnSave)
@@ -35,10 +35,10 @@ BEGIN_MESSAGE_MAP(CHtmlLessonFrame, CLollyFrame)
 END_MESSAGE_MAP()
 
 
-// CHtmlLessonFrame message handlers
+// CHtmlUnitFrame message handlers
 
 
-int CHtmlLessonFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
+int CHtmlUnitFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CLollyFrame::OnCreate(lpCreateStruct) == -1)
 		return -1;
@@ -47,7 +47,7 @@ int CHtmlLessonFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-LRESULT CHtmlLessonFrame::OnToolbarReset( WPARAM wParam, LPARAM lParam )
+LRESULT CHtmlUnitFrame::OnToolbarReset( WPARAM wParam, LPARAM lParam )
 {
 	if(wParam == m_nToolBarID){
 		m_wndToolBar.ReplaceButton(ID_TB_HL_FILENAME, CMFCToolBarLabelButton(ID_TB_HL_FILENAME));
@@ -56,14 +56,14 @@ LRESULT CHtmlLessonFrame::OnToolbarReset( WPARAM wParam, LPARAM lParam )
 	return 0;
 }
 
-CString CHtmlLessonFrame::GetFrameText() const
+CString CHtmlUnitFrame::GetFrameText() const
 {
 	CString str;
-	str.Format(_T("Html Lesson"));
+	str.Format(_T("Html Unit"));
 	return str;
 }
 
-void CHtmlLessonFrame::OnOpen()
+void CHtmlUnitFrame::OnOpen()
 {
 	CFileDialog dlg(TRUE);
 	if(dlg.DoModal() != IDOK) return;
@@ -73,34 +73,34 @@ void CHtmlLessonFrame::OnOpen()
 	m_pView->Navigate2(m_strFileName);
 }
 
-void CHtmlLessonFrame::OnSave()
+void CHtmlUnitFrame::OnSave()
 {
 	//m_pView->SaveAs(NULL);
 	m_pView->SaveAs(m_strFileName);
 }
 
-void CHtmlLessonFrame::OnSetBack1()
+void CHtmlUnitFrame::OnSetBack1()
 {
 	m_pView->SetBackColor(_T("#FFFF00"));
 }
 
-void CHtmlLessonFrame::OnSetBack2()
+void CHtmlUnitFrame::OnSetBack2()
 {
 	m_pView->SetBackColor(_T("#66FF66"));
 }
 
-void CHtmlLessonFrame::OnRemoveFormat()
+void CHtmlUnitFrame::OnRemoveFormat()
 {
 	m_pView->RemoveFormat();
 }
 
-void CHtmlLessonFrame::OnSpeak()
+void CHtmlUnitFrame::OnSpeak()
 {
 	m_pView->Copy();
 	AfxGetMainWnd()->PostMessage(WM_COMMAND, ID_TTS_SPEAK);
 }
 
-void CHtmlLessonFrame::OnClose()
+void CHtmlUnitFrame::OnClose()
 {
 	if(m_pView->GetIsDirty() == S_OK)
 		OnSave();

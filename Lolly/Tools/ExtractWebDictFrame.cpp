@@ -11,7 +11,7 @@
 IMPLEMENT_DYNCREATE(CExtractWebDictFrame, CLollyFrame)
 
 CExtractWebDictFrame::CExtractWebDictFrame()
-	: m_lblSettings(theApp.m_lblSettings)
+	: m_lbuSettings(theApp.m_lbuSettings)
 	, m_nWordIndex(0)
 	, m_bOverwrite(false)
 	, m_rsWord(&theApp.m_db)
@@ -56,10 +56,10 @@ int CExtractWebDictFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		DLCTL_NO_CLIENTPULL);
 
 	CString sql;
-	sql.Format(_T("SELECT * FROM AUTOCORRECT WHERE LANGID=%d"), m_lblSettings.nLangID);
+	sql.Format(_T("SELECT * FROM AUTOCORRECT WHERE LANGID=%d"), m_lbuSettings.nLangID);
 	m_rsAutoCorrect.Open(sql);
 
-	m_pedtLang->SetContents(m_lblSettings.strLangName);
+	m_pedtLang->SetContents(m_lbuSettings.strLangName);
 	return 0;
 }
 
@@ -108,7 +108,7 @@ void CExtractWebDictFrame::Init(const vector<CString>& vstrWords, LPCTSTR pszDic
 
 	CString sql;
 	sql.Format(_T("SELECT * FROM DICTALL WHERE LANGID=%d AND DICTNAME='%s'"),
-		m_lblSettings.nLangID, pszDict);
+		m_lbuSettings.nLangID, pszDict);
 	m_rsDict.Open(sql);
 
 	GetNextWord();

@@ -6,13 +6,13 @@
 #include <wininet.h>
 #include "MainFrm.h"
 #include "WebBrowserFrame.h"
-#include "WordsLessonsFrame.h"
+#include "WordsUnitsFrame.h"
 #include "WordsLangFrame.h"
 #include "WordsAtWillFrame.h"
 #include "WordsBooksFrame.h"
-#include "PhrasesLessonsFrame.h"
+#include "PhrasesUnitsFrame.h"
 #include "PhrasesLangFrame.h"
-#include "WordsLessonsEBFrame.h"
+#include "WordsUnitsEBFrame.h"
 #include "WordsAtWillEBFrame.h"
 #include "ExtractWebDictFrame.h"
 
@@ -44,13 +44,13 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(ID_WINDOW_CLOSEALL, &CMainFrame::OnWindowCloseAll)
 	ON_COMMAND_RANGE(FIRST_FAVORITE_COMMAND, LAST_FAVORITE_COMMAND, &CMainFrame::OnFavorite)
 	ON_WM_HOTKEY()
-	ON_COMMAND(ID_LEARN_WORDS_LESSONS, &CMainFrame::OnWindowNextWordsLessons)
+	ON_COMMAND(ID_LEARN_WORDS_UNITS, &CMainFrame::OnWindowNextWordsUnits)
 	ON_COMMAND(ID_LEARN_WORDS_LANG, &CMainFrame::OnWindowNextWordsLang)
 	ON_COMMAND(ID_LEARN_WORDS_ATWILL, &CMainFrame::OnWindowNextWordsAtWill)
 	ON_COMMAND(ID_LEARN_WORDS_BOOKS, &CMainFrame::OnWindowNextWordsBooks)
-	ON_COMMAND(ID_LEARN_PHRASES_LESSONS, &CMainFrame::OnWindowNextPhrasesLessons)
+	ON_COMMAND(ID_LEARN_PHRASES_UNITS, &CMainFrame::OnWindowNextPhrasesUnits)
 	ON_COMMAND(ID_LEARN_PHRASES_LANG, &CMainFrame::OnWindowNextPhrasesLang)
-	ON_COMMAND(ID_LEARN_WORDS_LESSONS_EB, &CMainFrame::OnWindowNextWordsLessonsEB)
+	ON_COMMAND(ID_LEARN_WORDS_UNITS_EB, &CMainFrame::OnWindowNextWordsUnitsEB)
 	ON_COMMAND(ID_LEARN_WORDS_ATWILL_EB, &CMainFrame::OnWindowNextWordsAtWillEB)
 	ON_COMMAND(ID_WINDOW_NEW_CURRENT, &CMainFrame::OnNewCurrentWindow)
 	ON_UPDATE_COMMAND_UI(ID_WINDOW_NEW_CURRENT, &CMainFrame::OnUpdateNewCurrentWindow)
@@ -538,9 +538,9 @@ void CMainFrame::FindOrCreateChild(CRuntimeClass* pRuntimeClass, UINT nID)
 		pWnd->MDIActivate();
 }
 
-void CMainFrame::OnWindowNextWordsLessons()
+void CMainFrame::OnWindowNextWordsUnits()
 {
-	FindOrCreateChild(RUNTIME_CLASS(CWordsLessonsFrame), ID_WINDOW_NEW_WORDS_LESSONS);
+	FindOrCreateChild(RUNTIME_CLASS(CWordsUnitsFrame), ID_WINDOW_NEW_WORDS_UNITS);
 }
 
 void CMainFrame::OnWindowNextWordsLang()
@@ -558,9 +558,9 @@ void CMainFrame::OnWindowNextWordsBooks()
 	FindOrCreateChild(RUNTIME_CLASS(CWordsBooksFrame), ID_WINDOW_NEW_WORDS_BOOKS);
 }
 
-void CMainFrame::OnWindowNextPhrasesLessons()
+void CMainFrame::OnWindowNextPhrasesUnits()
 {
-	FindOrCreateChild(RUNTIME_CLASS(CPhrasesLessonsFrame), ID_WINDOW_NEW_PHRASES_LESSONS);
+	FindOrCreateChild(RUNTIME_CLASS(CPhrasesUnitsFrame), ID_WINDOW_NEW_PHRASES_UNITS);
 }
 
 void CMainFrame::OnWindowNextPhrasesLang()
@@ -568,9 +568,9 @@ void CMainFrame::OnWindowNextPhrasesLang()
 	FindOrCreateChild(RUNTIME_CLASS(CPhrasesLangFrame), ID_WINDOW_NEW_PHRASES_LANG);
 }
 
-void CMainFrame::OnWindowNextWordsLessonsEB()
+void CMainFrame::OnWindowNextWordsUnitsEB()
 {
-	FindOrCreateChild(RUNTIME_CLASS(CWordsLessonsEBFrame), ID_WINDOW_NEW_WORDS_LESSONS_EB);
+	FindOrCreateChild(RUNTIME_CLASS(CWordsUnitsEBFrame), ID_WINDOW_NEW_WORDS_UNITS_EB);
 }
 
 void CMainFrame::OnWindowNextWordsAtWillEB()

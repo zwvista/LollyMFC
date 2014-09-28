@@ -1,16 +1,16 @@
 
-// WordsLessonsFrame.h : interface of the CWordsLessonsFrame class
+// WordsUnitsFrame.h : interface of the CWordsUnitsFrame class
 //
 
 #pragma once
 #include "WordsWebFrame.h"
 
-class CWordsLessonsFrame : public CWordsWebFrame
+class CWordsUnitsFrame : public CWordsWebFrame
 {
-	DECLARE_DYNCREATE(CWordsLessonsFrame)
+	DECLARE_DYNCREATE(CWordsUnitsFrame)
 public:
-	CWordsLessonsFrame();
-	virtual ~CWordsLessonsFrame();
+	CWordsUnitsFrame();
+	virtual ~CWordsUnitsFrame();
 
 // Generated message map functions
 protected:

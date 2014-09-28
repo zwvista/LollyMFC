@@ -34,7 +34,7 @@ CAuxAutoCorrectFrame::~CAuxAutoCorrectFrame()
 CString CAuxAutoCorrectFrame::GetSQL()
 {
 	CString sql;
-	sql.Format(_T("SELECT * FROM AUTOCORRECT WHERE LANGID=%d"), m_lblSettings.nLangID);
+	sql.Format(_T("SELECT * FROM AUTOCORRECT WHERE LANGID=%d"), m_lbuSettings.nLangID);
 	return sql;
 }
 
@@ -53,14 +53,14 @@ SDataGridColumnInfo* CAuxAutoCorrectFrame::GetDataGridColumnInfo()
 CString CAuxAutoCorrectFrame::GetFrameText() const
 {
 	CString str;
-	str.Format(_T("AutoCorrect (%s)"), m_lblSettings.GetLangDesc());
+	str.Format(_T("AutoCorrect (%s)"), m_lbuSettings.GetLangDesc());
 	return str;
 }
 
 void CAuxAutoCorrectFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRecords, EventStatusEnum *adStatus, struct _Recordset *pRecordset )
 {
 	if(adReason == adRsnUpdate && m_rs.GetEditMode() == adEditAdd){
-		m_rs.SetFieldValue(_T("LANGID"), m_lblSettings.nLangID);
+		m_rs.SetFieldValue(_T("LANGID"), m_lbuSettings.nLangID);
 		if(m_rs.GetFieldValueAsInt(_T("INDEX")) == 0)
 			m_rs.SetFieldValue(_T("INDEX"), m_wndGrid.GetNumberRows());
 	}

@@ -54,13 +54,13 @@ protected:
 	afx_msg void OnWindowCloseAll();
 	afx_msg void OnFavorite(UINT nID);
 	afx_msg void OnHotKey(UINT nHotKeyId, UINT nKey1, UINT nKey2);
-	afx_msg void OnWindowNextWordsLessons();
+	afx_msg void OnWindowNextWordsUnits();
 	afx_msg void OnWindowNextWordsLang();
 	afx_msg void OnWindowNextWordsAtWill();
 	afx_msg void OnWindowNextWordsBooks();
-	afx_msg void OnWindowNextPhrasesLessons();
+	afx_msg void OnWindowNextPhrasesUnits();
 	afx_msg void OnWindowNextPhrasesLang();
-	afx_msg void OnWindowNextWordsLessonsEB();
+	afx_msg void OnWindowNextWordsUnitsEB();
 	afx_msg void OnWindowNextWordsAtWillEB();
 	afx_msg void OnNewCurrentWindow();
 	afx_msg void OnUpdateNewCurrentWindow(CCmdUI* pCmdUI);

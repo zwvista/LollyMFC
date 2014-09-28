@@ -29,7 +29,7 @@ public:
 
 // Generated message map functions
 protected:
-	SLangBookLessonSettings m_lblSettings;
+	SLangBookUnitSettings m_lbuSettings;
 	CADORecordset2 m_rs;
 	CADORecordset2 m_rsAutoCorrect;
 	CMFCToolBarEditBoxButton2 *m_pedtRecordPos;

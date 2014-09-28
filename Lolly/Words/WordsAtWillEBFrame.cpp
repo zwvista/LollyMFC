@@ -59,7 +59,7 @@ SDataGridNewRecordInfo* CWordsAtWillEBFrame::GetDataGridNewRecordInfo()
 CString CWordsAtWillEBFrame::GetFrameText() const
 {
 	CString str;
-	str.Format(_T("Words At Will(EBWin) (%s)"), m_lblSettings.GetLangDesc());
+	str.Format(_T("Words At Will(EBWin) (%s)"), m_lbuSettings.GetLangDesc());
 	return str;
 }
 

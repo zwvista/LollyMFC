@@ -12,7 +12,7 @@ IMPLEMENT_DYNAMIC(CExtractWebDictOptionsDlg, CDialog)
 
 CExtractWebDictOptionsDlg::CExtractWebDictOptionsDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CExtractWebDictOptionsDlg::IDD, pParent)
-	, m_nLangID(theApp.m_lblSettings.nLangID)
+	, m_nLangID(theApp.m_lbuSettings.nLangID)
 	, m_bOverwriteDB(FALSE)
 	, m_rsWord(&theApp.m_db)
 	, m_rsDict(&theApp.m_db)
@@ -32,7 +32,7 @@ void CExtractWebDictOptionsDlg::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CExtractWebDictOptionsDlg, CDialog)
-	ON_CONTROL_RANGE(BN_CLICKED, IDC_BOOKLESSONS, IDC_LANG, OnWordsChanged)
+	ON_CONTROL_RANGE(BN_CLICKED, IDC_BOOKUNITS, IDC_LANG, OnWordsChanged)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_CHECKALLWORDS, IDC_UNCHECKSELECTEDDICTS, OnCheckSelected)
 	ON_BN_CLICKED(IDOK, &CExtractWebDictOptionsDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
@@ -44,16 +44,16 @@ BOOL CExtractWebDictOptionsDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	CheckDlgButton(IDC_BOOKLESSONS, BST_CHECKED);
-	SetDlgItemText(IDC_BOOKLESSONS, theApp.m_lblSettings.GetBookLessonsDesc());
-	SetDlgItemText(IDC_LANG, theApp.m_lblSettings.GetLangDesc());
+	CheckDlgButton(IDC_BOOKUNITS, BST_CHECKED);
+	SetDlgItemText(IDC_BOOKUNITS, theApp.m_lbuSettings.GetBookUnitsDesc());
+	SetDlgItemText(IDC_LANG, theApp.m_lbuSettings.GetLangDesc());
 
 	m_gdWord.AttachGrid(this, IDC_GRID_WORD);
 	m_gdWord.SetAllowAddNew(FALSE);
 	m_gdDict.AttachGrid(this, IDC_GRID_DICTNAME);
 	m_gdDict.SetAllowAddNew(FALSE);
 
-	OnWordsChanged(IDC_BOOKLESSONS);
+	OnWordsChanged(IDC_BOOKUNITS);
 
 	static SDataGridColumnInfo ci[] = {
 		{ _T("A"), _T(""), NULL, 30, 0, FALSE },
@@ -62,7 +62,7 @@ BOOL CExtractWebDictOptionsDlg::OnInitDialog()
 	};
 	CString sql;
 	sql.Format(_T("SELECT DICTNAME AS A, DICTNAME AS B FROM DICTALL WHERE LANGID=%d AND DICTTYPENAME='OFFLINE-ONLINE' ORDER BY DICTNAME"),
-		theApp.m_lblSettings.nLangID);
+		theApp.m_lbuSettings.nLangID);
 	m_gdDict.BindData(&m_rsDict, sql, ci);
 	OnCheckSelected(IDC_CHECKALLDICTS);
 
@@ -81,11 +81,11 @@ void CExtractWebDictOptionsDlg::OnWordsChanged( UINT nID )
 		{ NULL, NULL, NULL, 0, 0, TRUE },
 	};
 	CString sql;
-	if(nID == IDC_BOOKLESSONS)
-		sql.Format(_T("SELECT WORD AS A, WORD AS B FROM WORDSBOOK WHERE BOOKID=%d AND LESSON*10+PART>=%d AND LESSON*10+PART<=%d"),
-			theApp.m_lblSettings.nBookID, theApp.m_lblSettings.GetLessonPartFrom(), theApp.m_lblSettings.GetLessonPartTo());
+	if(nID == IDC_BOOKUNITS)
+		sql.Format(_T("SELECT WORD AS A, WORD AS B FROM WORDSBOOK WHERE BOOKID=%d AND UNIT*10+PART>=%d AND UNIT*10+PART<=%d"),
+			theApp.m_lbuSettings.nBookID, theApp.m_lbuSettings.GetUnitPartFrom(), theApp.m_lbuSettings.GetUnitPartTo());
 	else
-		sql.Format(_T("SELECT WORD AS A, WORD AS B FROM WORDSLANG WHERE LANGID=%d"), theApp.m_lblSettings.nLangID);
+		sql.Format(_T("SELECT WORD AS A, WORD AS B FROM WORDSLANG WHERE LANGID=%d"), theApp.m_lbuSettings.nLangID);
 	sql += _T(" ORDER BY WORD");
 	m_gdWord.BindData(&m_rsWord, sql, ci);
 	OnCheckSelected(IDC_CHECKALLWORDS);

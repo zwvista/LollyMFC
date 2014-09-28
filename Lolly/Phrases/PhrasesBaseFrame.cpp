@@ -46,7 +46,7 @@ LRESULT CPhrasesBaseFrame::OnLblSettingsChanged(WPARAM wParam, LPARAM lParam)
 					CString(v.second.get<wstring>(_T("<xmlattr>.after")).c_str())));
 	};
 
-	GetReplacement(m_lblSettings.nLangID, m_vReplacement);
+	GetReplacement(m_lbuSettings.nLangID, m_vReplacement);
 	GetReplacement(0, m_vReplacementChn);
 
 	return 0;
@@ -113,7 +113,7 @@ void CPhrasesBaseFrame::SpeakPhraseTrans( bool bPhrase, bool bTrans )
 			}
 			strPhrase = wstr.c_str();
 		}
-		strXml += theApp.GetVoiceXml(m_lblSettings.nLangID, strPhrase);
+		strXml += theApp.GetVoiceXml(m_lbuSettings.nLangID, strPhrase);
 	}
 	if(bTrans){
 		auto strTranslation = m_rs.GetFieldValueAsString(_T("TRANSLATION"));

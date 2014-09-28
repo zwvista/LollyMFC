@@ -36,16 +36,16 @@ CString CPhrasesLangFrame::GetSQL()
 	CString sql;
 	switch(m_nFilterScope){
 	case 0:
-		sql.Format(_T("SELECT PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.LESSON, PHRASES.PART, PHRASES.[INDEX], PHRASES.PHRASE,")
+		sql.Format(_T("SELECT PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.[INDEX], PHRASES.PHRASE,")
 			_T("PHRASES.[TRANSLATION] FROM (PHRASES INNER JOIN BOOKS ON PHRASES.BOOKID = BOOKS.BOOKID)")
 			_T("WHERE (BOOKS.LANGID = %d) AND (PHRASES.PHRASE LIKE '%%%s%%')"),
-			m_lblSettings.nLangID, m_strFilter);
+			m_lbuSettings.nLangID, m_strFilter);
 		break;
 	case 1:
-		sql.Format(_T("SELECT PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.LESSON, PHRASES.PART, PHRASES.[INDEX], PHRASES.PHRASE,")
+		sql.Format(_T("SELECT PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.[INDEX], PHRASES.PHRASE,")
 			_T("PHRASES.[TRANSLATION] FROM (PHRASES INNER JOIN BOOKS ON PHRASES.BOOKID = BOOKS.BOOKID)")
 			_T("WHERE (BOOKS.LANGID = %d) AND (PHRASES.[TRANSLATION] LIKE '%%%s%%')"),
-			m_lblSettings.nLangID, m_strFilter);
+			m_lbuSettings.nLangID, m_strFilter);
 		break;
 	}
 	return sql;
@@ -54,8 +54,8 @@ CString CPhrasesLangFrame::GetSQL()
 SDataGridColumnInfo* CPhrasesLangFrame::GetDataGridColumnInfo()
 {
 	static SDataGridColumnInfo ci[] = {
-		{ _T("BOOKNAME"), _T("BOOKNAME"), _T("BOOKNAME, LESSON, PART, [INDEX]"), 2, 10, FALSE },
-		{ _T("LESSON"), _T("LESSON"), NULL, 75, 0, FALSE },
+		{ _T("BOOKNAME"), _T("BOOKNAME"), _T("BOOKNAME, UNIT, PART, [INDEX]"), 2, 10, FALSE },
+		{ _T("UNIT"), _T("UNIT"), NULL, 75, 0, FALSE },
 		{ _T("PART"), _T("PART"), NULL, 75, 0, FALSE },
 		{ _T("INDEX"), _T("INDEX"), NULL, 75, 0, FALSE },
 		{ _T("PHRASE"), _T("PHRASE"), _T("PHRASE"), 4, 10, TRUE },
@@ -68,7 +68,7 @@ SDataGridColumnInfo* CPhrasesLangFrame::GetDataGridColumnInfo()
 CString CPhrasesLangFrame::GetFrameText() const
 {
 	CString str;
-	str.Format(_T("Phrases (%s)"), m_lblSettings.GetLangDesc());
+	str.Format(_T("Phrases (%s)"), m_lbuSettings.GetLangDesc());
 	return str;
 }
 

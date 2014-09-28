@@ -37,21 +37,21 @@ CString CWordsBooksFrame::GetSQL()
 	CString sql;
 	switch(m_nFilterScope){
 	case 0:
-		sql.Format(_T("SELECT WORDSBOOK.ID, WORDSBOOK.BOOKID, WORDSBOOK.LESSON, WORDSBOOK.PART, ")
+		sql.Format(_T("SELECT WORDSBOOK.ID, WORDSBOOK.BOOKID, WORDSBOOK.UNIT, WORDSBOOK.PART, ")
 			_T("WORDSBOOK.[INDEX], WORDSBOOK.WORD, BOOKS.BOOKNAME, WORDSBOOK.[NOTE]  ")
 			_T("FROM (WORDSBOOK INNER JOIN BOOKS ON WORDSBOOK.BOOKID = BOOKS.BOOKID) ")
 			_T("WHERE (BOOKS.LANGID = %d) AND WORDSBOOK.WORD LIKE '%%%s%%'"),
-			m_lblSettings.nLangID, m_strFilter);
+			m_lbuSettings.nLangID, m_strFilter);
 		break;
 	case 1:
 		for(const CString& strDictTable : m_vstrOfflineDictTables){
 			CString str;
 			str.Format(
-				_T("SELECT ID, WORDSBOOK.BOOKID, BOOKNAME, LESSON, PART, [INDEX], WORDSBOOK.WORD, NOTE ")
+				_T("SELECT ID, WORDSBOOK.BOOKID, BOOKNAME, UNIT, PART, [INDEX], WORDSBOOK.WORD, NOTE ")
 				_T("FROM BOOKS INNER JOIN (WORDSBOOK INNER JOIN [%s] ")
 				_T("ON WORDSBOOK.WORD = [%s].WORD) ON BOOKS.BOOKID = WORDSBOOK.BOOKID ")
 				_T("WHERE LANGID = %d AND [TRANSLATION] LIKE '%%%s%%'%s"),
-				strDictTable, strDictTable, m_lblSettings.nLangID, m_strFilter, strUnion);
+				strDictTable, strDictTable, m_lbuSettings.nLangID, m_strFilter, strUnion);
 			sql += str;
 		}
 		sql = sql.Left(sql.GetLength() - strUnion.GetLength());
@@ -63,8 +63,8 @@ CString CWordsBooksFrame::GetSQL()
 SDataGridColumnInfo* CWordsBooksFrame::GetDataGridColumnInfo()
 {
 	static SDataGridColumnInfo ci[] = {
-		{ _T("BOOKNAME"), _T("BOOKNAME"), _T("BOOKNAME, LESSON, PART, [INDEX]"), 150, 0, FALSE },
-		{ _T("LESSON"), _T("LESSON"), NULL, 75, 0, TRUE },
+		{ _T("BOOKNAME"), _T("BOOKNAME"), _T("BOOKNAME, UNIT, PART, [INDEX]"), 150, 0, FALSE },
+		{ _T("UNIT"), _T("UNIT"), NULL, 75, 0, TRUE },
 		{ _T("PART"), _T("PART"), NULL, 75, 0, TRUE },
 		{ _T("INDEX"), _T("INDEX"), NULL, 75, 0, TRUE },
 		{ _T("WORD"), _T("WORD"), _T("WORD"), 1, 1, TRUE },
@@ -76,7 +76,7 @@ SDataGridColumnInfo* CWordsBooksFrame::GetDataGridColumnInfo()
 CString CWordsBooksFrame::GetFrameText() const
 {
 	CString str;
-	str.Format(_T("Words in Books (%s)"), m_lblSettings.GetLangDesc());
+	str.Format(_T("Words in Books (%s)"), m_lbuSettings.GetLangDesc());
 	return str;
 }
 

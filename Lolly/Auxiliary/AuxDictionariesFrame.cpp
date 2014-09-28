@@ -34,7 +34,7 @@ CAuxDictionariesFrame::~CAuxDictionariesFrame()
 CString CAuxDictionariesFrame::GetSQL()
 {
 	CString sql;
-	sql.Format(_T("SELECT * FROM DICTIONARIES WHERE LANGID=%d"), m_lblSettings.nLangID);
+	sql.Format(_T("SELECT * FROM DICTIONARIES WHERE LANGID=%d"), m_lbuSettings.nLangID);
 	return sql;
 }
 
@@ -59,7 +59,7 @@ SDataGridColumnInfo* CAuxDictionariesFrame::GetDataGridColumnInfo()
 CString CAuxDictionariesFrame::GetFrameText() const
 {
 	CString str;
-	str.Format(_T("Dictionaries (%s)"), m_lblSettings.GetLangDesc());
+	str.Format(_T("Dictionaries (%s)"), m_lbuSettings.GetLangDesc());
 	return str;
 }
 
@@ -68,7 +68,7 @@ void CAuxDictionariesFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRe
 	if(adReason == adRsnUpdate)
 		switch(m_rs.GetEditMode()){
 		case adEditAdd:
-			m_rs.SetFieldValue(_T("LANGID"), m_lblSettings.nLangID);
+			m_rs.SetFieldValue(_T("LANGID"), m_lbuSettings.nLangID);
 			break;
 		case adEditInProgress:
 			{

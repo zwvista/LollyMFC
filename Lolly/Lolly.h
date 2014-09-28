@@ -50,14 +50,14 @@ public:
 	void SetLangID(int nLangID);
 
 	afx_msg void OnAppAbout();
-	afx_msg void OnLearnSelectLessons();
-	afx_msg void OnLearnWordsLessons();
+	afx_msg void OnLearnSelectUnits();
+	afx_msg void OnLearnWordsUnits();
 	afx_msg void OnLearnWordsLang();
 	afx_msg void OnLearnWordsBooks();
 	afx_msg void OnLearnWordsAtWill();
-	afx_msg void OnLearnPhrasesLessons();
+	afx_msg void OnLearnPhrasesUnits();
 	afx_msg void OnLearnPhrasesLang();
-	afx_msg void OnLearnWordsLessonsEB();
+	afx_msg void OnLearnWordsUnitsEB();
 	afx_msg void OnLearnWordsAtWillEB();
 	afx_msg void OnAuxiliaryAutoCorrect();
 	afx_msg void OnAuxiliaryBooks();
@@ -69,7 +69,7 @@ public:
 	afx_msg void OnToolsWebBrowser();
 	afx_msg void OnToolsBlogPost();
 	afx_msg void OnToolsPicBook();
-	afx_msg void OnToolsHtmlLesson();
+	afx_msg void OnToolsHtmlUnit();
 	afx_msg void OnToolsAutoCorrectText();
 	afx_msg void OnToolsText2Post();
 	afx_msg void OnToolsTest();

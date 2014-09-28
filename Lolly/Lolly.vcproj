@@ -222,7 +222,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\HtmlLessonFrame.cpp"
+				RelativePath=".\HtmlUnitFrame.cpp"
 				>
 			</File>
 			<File
@@ -270,7 +270,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\PhrasesLessonsFrame.cpp"
+				RelativePath=".\PhrasesUnitsFrame.cpp"
 				>
 			</File>
 			<File
@@ -286,7 +286,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\SelectLessonsDlg.cpp"
+				RelativePath=".\SelectUnitsDlg.cpp"
 				>
 			</File>
 			<File
@@ -362,7 +362,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\WordsLessonsFrame.cpp"
+				RelativePath=".\WordsUnitsFrame.cpp"
 				>
 			</File>
 			<File
@@ -408,7 +408,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\HtmlLessonFrame.h"
+				RelativePath=".\HtmlUnitFrame.h"
 				>
 			</File>
 			<File
@@ -456,7 +456,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\PhrasesLessonsFrame.h"
+				RelativePath=".\PhrasesUnitsFrame.h"
 				>
 			</File>
 			<File
@@ -476,7 +476,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\SelectLessonsDlg.h"
+				RelativePath=".\SelectUnitsDlg.h"
 				>
 			</File>
 			<File
@@ -536,7 +536,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\WordsLessonsFrame.h"
+				RelativePath=".\WordsUnitsFrame.h"
 				>
 			</File>
 			<File
@@ -614,7 +614,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\res\ToolbarHtmlLesson.bmp"
+				RelativePath=".\res\ToolbarHtmlUnit.bmp"
 				>
 			</File>
 			<File
@@ -622,7 +622,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\res\ToolbarPhrasesLessons.bmp"
+				RelativePath=".\res\ToolbarPhrasesUnits.bmp"
 				>
 			</File>
 			<File
@@ -646,7 +646,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\res\ToolbarWordsLessons.bmp"
+				RelativePath=".\res\ToolbarWordsUnits.bmp"
 				>
 			</File>
 			<File

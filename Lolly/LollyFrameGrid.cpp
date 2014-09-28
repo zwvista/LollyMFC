@@ -77,13 +77,13 @@ void CLollyFrameGrid::LoadTables()
 	m_wndGrid.SetInitialSortCol(0);
 	m_wndGrid.BindData(&m_rs, GetSQL(), GetDataGridColumnInfo());
 	CString sql;
-	sql.Format(_T("SELECT * FROM AUTOCORRECT WHERE LANGID=%d"), m_lblSettings.nLangID);
+	sql.Format(_T("SELECT * FROM AUTOCORRECT WHERE LANGID=%d"), m_lbuSettings.nLangID);
 	m_rsAutoCorrect.Open(sql);
 }
 
 LRESULT CLollyFrameGrid::OnLblSettingsChanged(WPARAM wParam, LPARAM lParam)
 {
-	m_lblSettings = theApp.m_lblSettings;
+	m_lbuSettings = theApp.m_lbuSettings;
 	SendMessage(WM_COMMAND, ID_TB_REFRESH);
 	SetWindowText(GetFrameText());
 	return 0;

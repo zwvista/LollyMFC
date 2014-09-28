@@ -48,7 +48,7 @@ BOOL CAutoCorrectTextDlg::OnInitDialog()
 
 	m_rsLang.Open(_T("SELECT * FROM LANGUAGES WHERE LANGID > 0 ORDER BY LANGID"));
 	theApp.ComboBox_FillWithRS(m_cboLang, m_rsLang, _T("CHNNAME"), _T("LANGID"));
-	theApp.ComboBox_SelectByValue(m_cboLang, theApp.m_lblSettings.nLangID);
+	theApp.ComboBox_SelectByValue(m_cboLang, theApp.m_lbuSettings.nLangID);
 	OnCbnSelchangeComboLang();
 
 	return TRUE;  // return TRUE unless you set the focus to a control

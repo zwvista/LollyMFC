@@ -7,13 +7,13 @@
 #include "Lolly.h"
 #include "MainFrm.h"
 
-#include "WordsLessonsFrame.h"
+#include "WordsUnitsFrame.h"
 #include "WordsLangFrame.h"
 #include "WordsBooksFrame.h"
 #include "WordsAtWillFrame.h"
-#include "PhrasesLessonsFrame.h"
+#include "PhrasesUnitsFrame.h"
 #include "PhrasesLangFrame.h"
-#include "WordsLessonsEBFrame.h"
+#include "WordsUnitsEBFrame.h"
 #include "WordsAtWillEBFrame.h"
 #include "AuxAutoCorrectFrame.h"
 #include "AuxBooksFrame.h"
@@ -21,7 +21,7 @@
 #include "AuxPicBooksFrame.h"
 #include "AuxWebExtractFrame.h"
 #include "AuxWebTextFrame.h"
-#include "SelectLessonsDlg.h"
+#include "SelectUnitsDlg.h"
 #include "ExtractWebDictOptionsDlg.h"
 #include "ExtractWebDictFrame.h"
 #include "WebBrowserFrame.h"
@@ -30,7 +30,7 @@
 #include "AutoCorrectTextDlg.h"
 #include "Text2PostDlg.h"
 #include "PicBookFrame.h"
-#include "HtmlLessonFrame.h"
+#include "HtmlUnitFrame.h"
 #include "TestDlg.h"
 #include "OptionsDlg.h"
 
@@ -43,14 +43,14 @@
 
 BEGIN_MESSAGE_MAP(CLollyApp, CWinAppEx)
 	ON_COMMAND(ID_APP_ABOUT, &CLollyApp::OnAppAbout)
-	ON_COMMAND(ID_LEARN_SELECTLESSONS, &CLollyApp::OnLearnSelectLessons)
-	ON_COMMAND(ID_WINDOW_NEW_WORDS_LESSONS, &CLollyApp::OnLearnWordsLessons)
+	ON_COMMAND(ID_LEARN_SELECTUNITS, &CLollyApp::OnLearnSelectUnits)
+	ON_COMMAND(ID_WINDOW_NEW_WORDS_UNITS, &CLollyApp::OnLearnWordsUnits)
 	ON_COMMAND(ID_WINDOW_NEW_WORDS_LANG, &CLollyApp::OnLearnWordsLang)
 	ON_COMMAND(ID_WINDOW_NEW_WORDS_BOOKS, &CLollyApp::OnLearnWordsBooks)
 	ON_COMMAND(ID_WINDOW_NEW_WORDS_ATWILL, &CLollyApp::OnLearnWordsAtWill)
-	ON_COMMAND(ID_WINDOW_NEW_PHRASES_LESSONS, &CLollyApp::OnLearnPhrasesLessons)
+	ON_COMMAND(ID_WINDOW_NEW_PHRASES_UNITS, &CLollyApp::OnLearnPhrasesUnits)
 	ON_COMMAND(ID_WINDOW_NEW_PHRASES_LANG, &CLollyApp::OnLearnPhrasesLang)
-	ON_COMMAND(ID_WINDOW_NEW_WORDS_LESSONS_EB, &CLollyApp::OnLearnWordsLessonsEB)
+	ON_COMMAND(ID_WINDOW_NEW_WORDS_UNITS_EB, &CLollyApp::OnLearnWordsUnitsEB)
 	ON_COMMAND(ID_WINDOW_NEW_WORDS_ATWILL_EB, &CLollyApp::OnLearnWordsAtWillEB)
 	ON_COMMAND(ID_AUXILIARY_AUTOCORRECT, &CLollyApp::OnAuxiliaryAutoCorrect)
 	ON_COMMAND(ID_AUXILIARY_BOOKS, &CLollyApp::OnAuxiliaryBooks)
@@ -62,7 +62,7 @@ BEGIN_MESSAGE_MAP(CLollyApp, CWinAppEx)
 	ON_COMMAND(ID_TOOLS_WEBBROWSER, &CLollyApp::OnToolsWebBrowser)
 	ON_COMMAND(ID_TOOLS_BLOGPOST, &CLollyApp::OnToolsBlogPost)
 	ON_COMMAND(ID_TOOLS_PICTUREBOOK, &CLollyApp::OnToolsPicBook)
-	ON_COMMAND(ID_TOOLS_HTMLLESSON, &CLollyApp::OnToolsHtmlLesson)
+	ON_COMMAND(ID_TOOLS_HTMLUNIT, &CLollyApp::OnToolsHtmlUnit)
 	ON_COMMAND(ID_TOOLS_AUTOCORRECTTEXT, &CLollyApp::OnToolsAutoCorrectText)
 	ON_COMMAND(ID_TOOLS_TEXT2POST, &CLollyApp::OnToolsText2Post)
 	ON_COMMAND(ID_TOOLS_TEST, &CLollyApp::OnToolsTest)
@@ -166,11 +166,11 @@ BOOL CLollyApp::InitInstance()
 	//m_db.Open(_T("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=") + m_strAppDataFolder + _T("Lolly.mdb"));
 	CString strServerName = GetProfileString(_T("Settings"), _T("ServerName"), _T(""));
 	m_db.Open(_T("Driver={SQL Server};Server=") + strServerName + _T(";Database=Lolly;Uid=;Pwd=;"));
-	m_lblSettings.nLangID = GetProfileInt(_T("Settings"), _T("LangID"), 3);
+	m_lbuSettings.nLangID = GetProfileInt(_T("Settings"), _T("LangID"), 3);
 
 	InitVoices();
 
-	m_lblSettings.Init();
+	m_lbuSettings.Init();
 
 	// Initialize favorites:
 	m_Favorites.Load ();
@@ -264,11 +264,11 @@ CMDIChildWnd* CLollyApp::OnNewChild( CRuntimeClass* pClass )
 		::LoadAccelerators(m_hInstance, MAKEINTRESOURCE(IDR_MAINFRAME)));
 }
 
-void CLollyApp::OnLearnSelectLessons()
+void CLollyApp::OnLearnSelectUnits()
 {
-	CSelectLessonsDlg dlg;
+	CSelectUnitsDlg dlg;
 	if(dlg.DoModal() == IDOK){
-		m_lblSettings.Init();
+		m_lbuSettings.Init();
 		if(dlg.m_bActiveInclude){
 			CFrameWnd* pFrameWnd = ((CMDIFrameWnd*)AfxGetMainWnd())->GetActiveFrame();
 			if(pFrameWnd)
@@ -277,9 +277,9 @@ void CLollyApp::OnLearnSelectLessons()
 	}
 }
 
-void CLollyApp::OnLearnWordsLessons()
+void CLollyApp::OnLearnWordsUnits()
 {
-	OnNewChild(RUNTIME_CLASS(CWordsLessonsFrame));
+	OnNewChild(RUNTIME_CLASS(CWordsUnitsFrame));
 }
 
 void CLollyApp::OnLearnWordsLang()
@@ -297,9 +297,9 @@ void CLollyApp::OnLearnWordsAtWill()
 	OnNewChild(RUNTIME_CLASS(CWordsAtWillFrame));
 }
 
-void CLollyApp::OnLearnPhrasesLessons()
+void CLollyApp::OnLearnPhrasesUnits()
 {
-	OnNewChild(RUNTIME_CLASS(CPhrasesLessonsFrame));
+	OnNewChild(RUNTIME_CLASS(CPhrasesUnitsFrame));
 }
 
 void CLollyApp::OnLearnPhrasesLang()
@@ -307,9 +307,9 @@ void CLollyApp::OnLearnPhrasesLang()
 	OnNewChild(RUNTIME_CLASS(CPhrasesLangFrame));
 }
 
-void CLollyApp::OnLearnWordsLessonsEB()
+void CLollyApp::OnLearnWordsUnitsEB()
 {
-	OnNewChild(RUNTIME_CLASS(CWordsLessonsEBFrame));
+	OnNewChild(RUNTIME_CLASS(CWordsUnitsEBFrame));
 }
 
 void CLollyApp::OnLearnWordsAtWillEB()
@@ -375,9 +375,9 @@ void CLollyApp::OnToolsPicBook()
 	}
 }
 
-void CLollyApp::OnToolsHtmlLesson()
+void CLollyApp::OnToolsHtmlUnit()
 {
-	OnNewChild(RUNTIME_CLASS(CHtmlLessonFrame));
+	OnNewChild(RUNTIME_CLASS(CHtmlUnitFrame));
 }
 
 void CLollyApp::ExtractTranslation(const vector<CString>& vstrWords, const vector<CString>& vstrDicts, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl /* = NULL */)
@@ -417,17 +417,17 @@ void CLollyApp::OnToolsOptions()
 
 void CLollyApp::SetLangID( int nLangID )
 {
-	WriteProfileInt(_T("Settings"), _T("LangID"), m_lblSettings.nLangID = nLangID);
+	WriteProfileInt(_T("Settings"), _T("LangID"), m_lbuSettings.nLangID = nLangID);
 }
 
 void CLollyApp::OnTtsSpeak()
 {
-	Speak(m_lblSettings.nLangID, GetTextFromClipBoard());
+	Speak(m_lbuSettings.nLangID, GetTextFromClipBoard());
 }
 
 void CLollyApp::OnTtsStopSpeaking()
 {
-	Speak(m_lblSettings.nLangID, _T(""));
+	Speak(m_lbuSettings.nLangID, _T(""));
 }
 
 afx_msg void CLollyApp::OnTtsSpeakChinese()
@@ -442,5 +442,5 @@ void CLollyApp::OnTtsSpeakEnglish()
 
 void CLollyApp::OnUpdateTtsSpeak( CCmdUI* pCmdUI )
 {
-	pCmdUI->Enable(CanSpeak(m_lblSettings.nLangID));
+	pCmdUI->Enable(CanSpeak(m_lbuSettings.nLangID));
 }

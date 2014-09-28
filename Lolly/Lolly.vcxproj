@@ -164,10 +164,10 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <ClCompile Include="Phrases\NewPhrasesDlg.cpp" />
     <ClCompile Include="Phrases\PhrasesBaseFrame.cpp" />
     <ClCompile Include="Phrases\PhrasesLangFrame.cpp" />
-    <ClCompile Include="Phrases\PhrasesLessonsFrame.cpp" />
+    <ClCompile Include="Phrases\PhrasesUnitsFrame.cpp" />
     <ClCompile Include="ReindexDlg.cpp" />
     <ClCompile Include="SelectKanaDlg.cpp" />
-    <ClCompile Include="SelectLessonsDlg.cpp" />
+    <ClCompile Include="SelectUnitsDlg.cpp" />
     <ClCompile Include="SelectPicBookDlg.cpp" />
     <ClCompile Include="StartProcess.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -180,7 +180,7 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <ClCompile Include="Tools\ExtractWebDictFrame.cpp" />
     <ClCompile Include="Tools\ExtractWebDictGrid.cpp" />
     <ClCompile Include="Tools\ExtractWebDictOptionsDlg.cpp" />
-    <ClCompile Include="Tools\HtmlLessonFrame.cpp" />
+    <ClCompile Include="Tools\HtmlUnitFrame.cpp" />
     <ClCompile Include="Tools\Text2PostDlg.cpp" />
     <ClCompile Include="Tools\OptionsDlg.cpp" />
     <ClCompile Include="Tools\PicBookFrame.cpp" />
@@ -200,8 +200,8 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <ClCompile Include="Words\WordsEBFrame.cpp" />
     <ClCompile Include="Words\WordsEBView.cpp" />
     <ClCompile Include="Words\WordsLangFrame.cpp" />
-    <ClCompile Include="Words\WordsLessonsEBFrame.cpp" />
-    <ClCompile Include="Words\WordsLessonsFrame.cpp" />
+    <ClCompile Include="Words\WordsUnitsEBFrame.cpp" />
+    <ClCompile Include="Words\WordsUnitsFrame.cpp" />
     <ClCompile Include="Words\WordsWebFrame.cpp" />
     <ClCompile Include="Words\WordsWebView.cpp" />
   </ItemGroup>
@@ -229,11 +229,11 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <ClInclude Include="Phrases\NewPhrasesDlg.h" />
     <ClInclude Include="Phrases\PhrasesBaseFrame.h" />
     <ClInclude Include="Phrases\PhrasesLangFrame.h" />
-    <ClInclude Include="Phrases\PhrasesLessonsFrame.h" />
+    <ClInclude Include="Phrases\PhrasesUnitsFrame.h" />
     <ClInclude Include="ReindexDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SelectKanaDlg.h" />
-    <ClInclude Include="SelectLessonsDlg.h" />
+    <ClInclude Include="SelectUnitsDlg.h" />
     <ClInclude Include="SelectPicBookDlg.h" />
     <ClInclude Include="StartProcess.h" />
     <ClInclude Include="stdafx.h" />
@@ -244,7 +244,7 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <ClInclude Include="Tools\ExtractWebDictFrame.h" />
     <ClInclude Include="Tools\ExtractWebDictGrid.h" />
     <ClInclude Include="Tools\ExtractWebDictOptionsDlg.h" />
-    <ClInclude Include="Tools\HtmlLessonFrame.h" />
+    <ClInclude Include="Tools\HtmlUnitFrame.h" />
     <ClInclude Include="Tools\Text2PostDlg.h" />
     <ClInclude Include="Tools\OptionsDlg.h" />
     <ClInclude Include="Tools\PicBookFrame.h" />
@@ -263,8 +263,8 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <ClInclude Include="Words\WordsEBFrame.h" />
     <ClInclude Include="Words\WordsEBView.h" />
     <ClInclude Include="Words\WordsLangFrame.h" />
-    <ClInclude Include="Words\WordsLessonsEBFrame.h" />
-    <ClInclude Include="Words\WordsLessonsFrame.h" />
+    <ClInclude Include="Words\WordsUnitsEBFrame.h" />
+    <ClInclude Include="Words\WordsUnitsFrame.h" />
     <ClInclude Include="Words\WordsWebFrame.h" />
     <ClInclude Include="Words\WordsWebView.h" />
   </ItemGroup>
@@ -292,9 +292,9 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <None Include="res\ToolbarBooks.bmp" />
     <None Include="res\ToolbarDicts.bmp" />
     <None Include="res\ToolbarExtractWebDict.bmp" />
-    <None Include="res\ToolbarHtmlLesson.bmp" />
+    <None Include="res\ToolbarHtmlUnit.bmp" />
     <None Include="res\ToolbarPhrasesLang.bmp" />
-    <None Include="res\ToolbarPhrasesLessons.bmp" />
+    <None Include="res\ToolbarPhrasesUnits.bmp" />
     <None Include="res\ToolbarPicBook.bmp" />
     <None Include="res\ToolbarWebBrowser.bmp" />
     <None Include="res\ToolbarWordsAtWill.bmp" />
@@ -302,8 +302,8 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <None Include="res\ToolbarWordsEB.bmp" />
     <None Include="res\ToolbarWordsJapan.bmp" />
     <None Include="res\ToolbarWordsLang.bmp" />
-    <None Include="res\ToolbarWordsLessons.bmp" />
-    <None Include="res\ToolbarWordsLessonsEB.bmp" />
+    <None Include="res\ToolbarWordsUnits.bmp" />
+    <None Include="res\ToolbarWordsUnitsEB.bmp" />
     <None Include="res\ToolbarWPBlog.bmp" />
     <None Include="UserImages.bmp" />
     <None Include="res\writelarge.bmp" />

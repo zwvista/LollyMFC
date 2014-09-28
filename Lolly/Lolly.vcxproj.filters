@@ -63,7 +63,7 @@
     <ClCompile Include="SelectKanaDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SelectLessonsDlg.cpp">
+    <ClCompile Include="SelectUnitsDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SelectPicBookDlg.cpp">
@@ -123,7 +123,7 @@
     <ClCompile Include="Tools\ExtractWebDictOptionsDlg.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
-    <ClCompile Include="Tools\HtmlLessonFrame.cpp">
+    <ClCompile Include="Tools\HtmlUnitFrame.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
     <ClCompile Include="Tools\OptionsDlg.cpp">
@@ -168,10 +168,10 @@
     <ClCompile Include="Words\WordsLangFrame.cpp">
       <Filter>Words Files</Filter>
     </ClCompile>
-    <ClCompile Include="Words\WordsLessonsEBFrame.cpp">
+    <ClCompile Include="Words\WordsUnitsEBFrame.cpp">
       <Filter>Words Files</Filter>
     </ClCompile>
-    <ClCompile Include="Words\WordsLessonsFrame.cpp">
+    <ClCompile Include="Words\WordsUnitsFrame.cpp">
       <Filter>Words Files</Filter>
     </ClCompile>
     <ClCompile Include="Words\WordsWebFrame.cpp">
@@ -195,7 +195,7 @@
     <ClCompile Include="Phrases\PhrasesLangFrame.cpp">
       <Filter>Phrases Files</Filter>
     </ClCompile>
-    <ClCompile Include="Phrases\PhrasesLessonsFrame.cpp">
+    <ClCompile Include="Phrases\PhrasesUnitsFrame.cpp">
       <Filter>Phrases Files</Filter>
     </ClCompile>
     <ClCompile Include="Words\DictHtmlCtrl.cpp">
@@ -248,7 +248,7 @@
     <ClInclude Include="SelectKanaDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SelectLessonsDlg.h">
+    <ClInclude Include="SelectUnitsDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SelectPicBookDlg.h">
@@ -308,7 +308,7 @@
     <ClInclude Include="Tools\ExtractWebDictOptionsDlg.h">
       <Filter>Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Tools\HtmlLessonFrame.h">
+    <ClInclude Include="Tools\HtmlUnitFrame.h">
       <Filter>Tools</Filter>
     </ClInclude>
     <ClInclude Include="Tools\OptionsDlg.h">
@@ -350,10 +350,10 @@
     <ClInclude Include="Words\WordsLangFrame.h">
       <Filter>Words Files</Filter>
     </ClInclude>
-    <ClInclude Include="Words\WordsLessonsEBFrame.h">
+    <ClInclude Include="Words\WordsUnitsEBFrame.h">
       <Filter>Words Files</Filter>
     </ClInclude>
-    <ClInclude Include="Words\WordsLessonsFrame.h">
+    <ClInclude Include="Words\WordsUnitsFrame.h">
       <Filter>Words Files</Filter>
     </ClInclude>
     <ClInclude Include="Words\WordsWebFrame.h">
@@ -380,7 +380,7 @@
     <ClInclude Include="Phrases\PhrasesLangFrame.h">
       <Filter>Phrases Files</Filter>
     </ClInclude>
-    <ClInclude Include="Phrases\PhrasesLessonsFrame.h">
+    <ClInclude Include="Phrases\PhrasesUnitsFrame.h">
       <Filter>Phrases Files</Filter>
     </ClInclude>
     <ClInclude Include="Words\DictHtmlCtrl.h">
@@ -439,13 +439,13 @@
     <None Include="res\ToolbarExtractWebDict.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\ToolbarHtmlLesson.bmp">
+    <None Include="res\ToolbarHtmlUnit.bmp">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\ToolbarPhrasesLang.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\ToolbarPhrasesLessons.bmp">
+    <None Include="res\ToolbarPhrasesUnits.bmp">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\ToolbarPicBook.bmp">
@@ -463,7 +463,7 @@
     <None Include="res\ToolbarWordsLang.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\ToolbarWordsLessons.bmp">
+    <None Include="res\ToolbarWordsUnits.bmp">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="UserImages.bmp">
@@ -505,7 +505,7 @@
     <None Include="res\ToolbarBlogPost.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\ToolbarWordsLessonsEB.bmp">
+    <None Include="res\ToolbarWordsUnitsEB.bmp">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\ToolbarWordsEB.bmp">

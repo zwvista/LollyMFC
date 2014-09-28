@@ -1,4 +1,4 @@
-// HtmlLessonFrame.cpp : implementation file
+// HtmlUnitFrame.cpp : implementation file
 //
 
 #include "stdafx.h"

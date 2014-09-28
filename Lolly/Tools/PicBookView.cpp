@@ -54,7 +54,7 @@ void CPicBookView::OnInitialUpdate()
 	m_hwndView = ::FindWindowEx(m_hwndChildApp, NULL, _T("MSPaintView"), NULL);
 
 	CString sql;
-	sql.Format(_T("SELECT * FROM AUTOCORRECT WHERE LANGID=%d"), theApp.m_lblSettings.nLangID);
+	sql.Format(_T("SELECT * FROM AUTOCORRECT WHERE LANGID=%d"), theApp.m_lbuSettings.nLangID);
 	m_rsAutoCorrect.Open(sql);
 }
 

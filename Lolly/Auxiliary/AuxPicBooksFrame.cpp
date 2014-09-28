@@ -33,7 +33,7 @@ CAuxPicBooksFrame::~CAuxPicBooksFrame()
 CString CAuxPicBooksFrame::GetSQL()
 {
 	CString sql;
-	sql.Format(_T("SELECT * FROM PICBOOKS WHERE LANGID=%d"), m_lblSettings.nLangID);
+	sql.Format(_T("SELECT * FROM PICBOOKS WHERE LANGID=%d"), m_lbuSettings.nLangID);
 	return sql;
 }
 
@@ -51,14 +51,14 @@ SDataGridColumnInfo* CAuxPicBooksFrame::GetDataGridColumnInfo()
 CString CAuxPicBooksFrame::GetFrameText() const
 {
 	CString str;
-	str.Format(_T("Picture Books (%s)"), m_lblSettings.GetLangDesc());
+	str.Format(_T("Picture Books (%s)"), m_lbuSettings.GetLangDesc());
 	return str;
 }
 
 void CAuxPicBooksFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRecords, EventStatusEnum *adStatus, struct _Recordset *pRecordset )
 {
 	if(adReason == adRsnUpdate && m_rs.GetEditMode() == adEditAdd)
-		m_rs.SetFieldValue(_T("LANGID"), m_lblSettings.nLangID);
+		m_rs.SetFieldValue(_T("LANGID"), m_lbuSettings.nLangID);
 }
 
 void CAuxPicBooksFrame::OnDelete()

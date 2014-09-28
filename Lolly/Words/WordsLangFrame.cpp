@@ -38,7 +38,7 @@ CString CWordsLangFrame::GetSQL()
 	case 0:
 		sql.Format(_T("SELECT LANGID, WORD FROM WORDSLANG ")
 			_T("WHERE (LANGID = %d) AND (WORD LIKE '%%%s%%')"),
-			m_lblSettings.nLangID, m_strFilter);
+			m_lbuSettings.nLangID, m_strFilter);
 		break;
 	case 1:
 		for(const CString& strDictTable : m_vstrOfflineDictTables){
@@ -47,7 +47,7 @@ CString CWordsLangFrame::GetSQL()
 				_T("SELECT LANGID, WORDSLANG.WORD ")
 				_T("FROM WORDSLANG INNER JOIN [%s] ON WORDSLANG.WORD = [%s].WORD ")
 				_T("WHERE LANGID = %d AND [TRANSLATION] LIKE '%%%s%%'%s"),
-				strDictTable, strDictTable, m_lblSettings.nLangID, m_strFilter, strUnion);
+				strDictTable, strDictTable, m_lbuSettings.nLangID, m_strFilter, strUnion);
 			sql += str;
 		}
 		sql = sql.Left(sql.GetLength() - strUnion.GetLength());
@@ -68,7 +68,7 @@ SDataGridColumnInfo* CWordsLangFrame::GetDataGridColumnInfo()
 CString CWordsLangFrame::GetFrameText() const
 {
 	CString str;
-	str.Format(_T("Words (%s)"), m_lblSettings.GetLangDesc());
+	str.Format(_T("Words (%s)"), m_lbuSettings.GetLangDesc());
 	return str;
 }
 
@@ -77,7 +77,7 @@ void CWordsLangFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRecords,
 	if(adReason == adRsnUpdate)
 		switch(m_rs.GetEditMode()){
 		case adEditAdd:
-			m_rs.SetFieldValue(_T("LANGID"), m_lblSettings.nLangID);
+			m_rs.SetFieldValue(_T("LANGID"), m_lbuSettings.nLangID);
 			m_rs.SetFieldValue(_T("WORD"), theApp.AutoCorrect(
 				m_rs.GetFieldValueAsString(_T("WORD")), m_rsAutoCorrect));
 			break;

@@ -1,48 +1,48 @@
 
-// WordsLessonsFrame.cpp : implementation of the CWordsLessonsFrame class
+// WordsUnitsFrame.cpp : implementation of the CWordsUnitsFrame class
 //
 
 #include "stdafx.h"
 #include "Lolly.h"
 
-#include "WordsLessonsFrame.h"
+#include "WordsUnitsFrame.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-// CWordsLessonsFrame
+// CWordsUnitsFrame
 
-IMPLEMENT_DYNCREATE(CWordsLessonsFrame, CWordsWebFrame)
+IMPLEMENT_DYNCREATE(CWordsUnitsFrame, CWordsWebFrame)
 
-BEGIN_MESSAGE_MAP(CWordsLessonsFrame, CWordsWebFrame)
+BEGIN_MESSAGE_MAP(CWordsUnitsFrame, CWordsWebFrame)
 	ON_REGISTERED_MESSAGE(AFX_WM_RESETTOOLBAR, OnToolbarReset)
 END_MESSAGE_MAP()
 
-// CWordsLessonsFrame construction/destruction
+// CWordsUnitsFrame construction/destruction
 
-CWordsLessonsFrame::CWordsLessonsFrame()
+CWordsUnitsFrame::CWordsUnitsFrame()
 {
-	m_nToolBarID = IDR_TOOLBAR_WORDSLESSONS;
+	m_nToolBarID = IDR_TOOLBAR_WORDSUNITS;
 	m_strReindexItemFieldName = _T("WORD");
 }
 
-CWordsLessonsFrame::~CWordsLessonsFrame()
+CWordsUnitsFrame::~CWordsUnitsFrame()
 {
 }
 
-CString CWordsLessonsFrame::GetSQL()
+CString CWordsUnitsFrame::GetSQL()
 {
 	CString sql;
-	sql.Format(_T("SELECT * FROM WORDSBOOK WHERE BOOKID=%d AND LESSON*10+PART>=%d AND LESSON*10+PART<=%d"), 
-		m_lblSettings.nBookID, m_lblSettings.GetLessonPartFrom(), m_lblSettings.GetLessonPartTo());
+	sql.Format(_T("SELECT * FROM WORDSBOOK WHERE BOOKID=%d AND UNIT*10+PART>=%d AND UNIT*10+PART<=%d"), 
+		m_lbuSettings.nBookID, m_lbuSettings.GetUnitPartFrom(), m_lbuSettings.GetUnitPartTo());
 	return sql;
 }
 
-SDataGridColumnInfo* CWordsLessonsFrame::GetDataGridColumnInfo()
+SDataGridColumnInfo* CWordsUnitsFrame::GetDataGridColumnInfo()
 {
 	static SDataGridColumnInfo ci[] = {
-		{ _T("LESSON"), _T("LESSON"), _T("LESSON, PART, [INDEX]"), 75, 0, TRUE },
+		{ _T("UNIT"), _T("UNIT"), _T("UNIT, PART, [INDEX]"), 75, 0, TRUE },
 		{ _T("PART"), _T("PART"), NULL, 75, 0, TRUE },
 		{ _T("INDEX"), _T("INDEX"), NULL, 75, 0, TRUE },
 		{ _T("WORD"), _T("WORD"), _T("WORD"), 1, 1, TRUE },
@@ -51,7 +51,7 @@ SDataGridColumnInfo* CWordsLessonsFrame::GetDataGridColumnInfo()
 	return ci;
 }
 
-SDataGridNewRecordInfo* CWordsLessonsFrame::GetDataGridNewRecordInfo()
+SDataGridNewRecordInfo* CWordsUnitsFrame::GetDataGridNewRecordInfo()
 {
 	static SDataGridNewRecordInfo nri[] = {
 		{3, NULL}, {-1, NULL}
@@ -59,24 +59,24 @@ SDataGridNewRecordInfo* CWordsLessonsFrame::GetDataGridNewRecordInfo()
 	return nri;
 }
 
-CString CWordsLessonsFrame::GetFrameText() const
+CString CWordsUnitsFrame::GetFrameText() const
 {
 	CString str;
-	str.Format(_T("Words (%s)"), m_lblSettings.GetBookLessonsDesc());
+	str.Format(_T("Words (%s)"), m_lbuSettings.GetBookUnitsDesc());
 	return str;
 }
 
-void CWordsLessonsFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRecords, EventStatusEnum *adStatus, struct _Recordset *pRecordset )
+void CWordsUnitsFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRecords, EventStatusEnum *adStatus, struct _Recordset *pRecordset )
 {
 	if(adReason == adRsnUpdate){
 		m_eEditMode = m_rs.GetEditMode();
 		switch(m_eEditMode){
 		case adEditAdd:
-			m_rs.SetFieldValue(_T("BOOKID"), m_lblSettings.nBookID);
-			if(m_rs.GetFieldValueAsInt(_T("LESSON")) == 0)
-				m_rs.SetFieldValue(_T("LESSON"), m_lblSettings.nLessonTo);
+			m_rs.SetFieldValue(_T("BOOKID"), m_lbuSettings.nBookID);
+			if(m_rs.GetFieldValueAsInt(_T("UNIT")) == 0)
+				m_rs.SetFieldValue(_T("UNIT"), m_lbuSettings.nUnitTo);
 			if(m_rs.GetFieldValueAsInt(_T("PART")) == 0)
-				m_rs.SetFieldValue(_T("PART"), m_lblSettings.nPartTo);
+				m_rs.SetFieldValue(_T("PART"), m_lbuSettings.nPartTo);
 			if(m_rs.GetFieldValueAsInt(_T("INDEX")) == 0)
 				m_rs.SetFieldValue(_T("INDEX"), m_wndGrid.GetNumberRows());
 			m_strWord = theApp.AutoCorrect(
@@ -91,7 +91,7 @@ void CWordsLessonsFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRecor
 	}
 }
 
-void CWordsLessonsFrame::RecordChangeComplete( EventReasonEnum adReason, LONG cRecords, struct Error *pError, EventStatusEnum *adStatus, struct _Recordset *pRecordset )
+void CWordsUnitsFrame::RecordChangeComplete( EventReasonEnum adReason, LONG cRecords, struct Error *pError, EventStatusEnum *adStatus, struct _Recordset *pRecordset )
 {
 	if(adReason == adRsnUpdate)
 		switch(m_eEditMode){
@@ -115,41 +115,41 @@ void CWordsLessonsFrame::RecordChangeComplete( EventReasonEnum adReason, LONG cR
 		}
 }
 
-void CWordsLessonsFrame::InsertWordIfNeeded()
+void CWordsUnitsFrame::InsertWordIfNeeded()
 {
 	CADORecordset2 rs(&theApp.m_db);
 	CString sql;
 	sql.Format(_T("SELECT COUNT(*) FROM WORDSLANG WHERE LANGID=%d AND WORD=N'%s'"),
-		m_lblSettings.nLangID, DoubleApostrophe(m_strWord));
+		m_lbuSettings.nLangID, DoubleApostrophe(m_strWord));
 	rs.Open(sql);
 	if(rs.GetFieldValueAsInt(0) == 0){
 		sql.Format(_T("INSERT INTO WORDSLANG (LANGID, WORD) VALUES(%d, '%s')"),
-			m_lblSettings.nLangID, DoubleApostrophe(m_strWord));
+			m_lbuSettings.nLangID, DoubleApostrophe(m_strWord));
 		theApp.m_db.Execute(sql);
 	}
 }
 
-void CWordsLessonsFrame::DeleteWordIfNeeded()
+void CWordsUnitsFrame::DeleteWordIfNeeded()
 {
 	CADORecordset2 rs(&theApp.m_db);
 	CString sql;
 	sql.Format(_T("SELECT COUNT(*) FROM (BOOKS INNER JOIN WORDSBOOK ON BOOKS.BOOKID ")
 		_T(" = WORDSBOOK.BOOKID) WHERE (BOOKS.LANGID=%d) AND (WORDSBOOK.WORD=N'%s')"),
-		m_lblSettings.nLangID, DoubleApostrophe(m_strWord));
+		m_lbuSettings.nLangID, DoubleApostrophe(m_strWord));
 	rs.Open(sql);
 	if(rs.GetFieldValueAsInt(0) == 0){
 		CString strMsg;
 		strMsg.Format(_T("The word \"%s\" is about to be DELETED from the language \"%s\". Are you sure?"),
-			m_strWord, m_lblSettings.GetLangDesc());
+			m_strWord, m_lbuSettings.GetLangDesc());
 		if(MessageBox(strMsg, _T(""), MB_YESNO + MB_ICONQUESTION) == IDYES){
 			sql.Format(_T("DELETE FROM WORDSLANG WHERE LANGID=%d AND WORD=N'%s'"),
-				m_lblSettings.nLangID, DoubleApostrophe(m_strWord));
+				m_lbuSettings.nLangID, DoubleApostrophe(m_strWord));
 			theApp.m_db.Execute(sql);
 		}
 	}
 }
 
-LRESULT CWordsLessonsFrame::OnToolbarReset( WPARAM wParam, LPARAM lParam )
+LRESULT CWordsUnitsFrame::OnToolbarReset( WPARAM wParam, LPARAM lParam )
 {
 	CWordsWebFrame::OnToolbarReset(wParam, lParam);
 	if(wParam == m_nToolBarID)

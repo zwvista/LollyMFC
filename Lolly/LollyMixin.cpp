@@ -4,7 +4,7 @@
 
 const CString CLollyMixin::m_strNoTrans = _T("<p style=\"color: #0000FF; font-weight: bold\">No translations were found.</p>");
 
-void SLangBookLessonSettings::Init()
+void SLangBookUnitSettings::Init()
 {
 	CADORecordset2 rs(&theApp.m_db);
 	CString sql;
@@ -17,9 +17,9 @@ void SLangBookLessonSettings::Init()
 	sql.Format(_T("SELECT * FROM BOOKS WHERE BOOKID=%d"), nBookID);
 	rs.Open(sql);
 	strBookName = rs.GetFieldValueAsString(_T("BOOKNAME"));
-	nLessonFrom = rs.GetFieldValueAsInt(_T("LESSONFROM"));
+	nUnitFrom = rs.GetFieldValueAsInt(_T("UNITFROM"));
 	nPartFrom = rs.GetFieldValueAsInt(_T("PARTFROM"));
-	nLessonTo = rs.GetFieldValueAsInt(_T("LESSONTO"));
+	nUnitTo = rs.GetFieldValueAsInt(_T("UNITTO"));
 	nPartTo = rs.GetFieldValueAsInt(_T("PARTTO"));
 }
 

@@ -18,7 +18,7 @@ public:
 protected:
 	CLollyHtmlView* m_pView;
 
-	SLangBookLessonSettings m_lblSettings;
+	SLangBookUnitSettings m_lbuSettings;
 	vector<CString> m_vstrWords;
 	bool m_bOverwrite;
 	int m_nWordIndex;

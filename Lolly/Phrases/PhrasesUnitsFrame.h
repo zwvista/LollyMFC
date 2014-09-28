@@ -1,31 +1,16 @@
 
-// WordsLessonsEBFrame.h : interface of the CWordsLessonsEBFrame class
+// PhrasesUnitsFrame.h : interface of the CPhrasesUnitsFrame class
 //
 
 #pragma once
+#include "PhrasesBaseFrame.h"
 
-#include "WordsEBFrame.h"
-
-class CWordsEBView;
-
-class CWordsLessonsEBFrame : public CWordsEBFrame
+class CPhrasesUnitsFrame : public CPhrasesBaseFrame
 {
-	DECLARE_DYNCREATE(CWordsLessonsEBFrame)
+	DECLARE_DYNCREATE(CPhrasesUnitsFrame)
 public:
-	CWordsLessonsEBFrame();
-
-// Attributes
-public:
-
-// Operations
-public:
-
-// Overrides
-public:
-
-// Implementation
-public:
-	virtual ~CWordsLessonsEBFrame();
+	CPhrasesUnitsFrame();
+	virtual ~CPhrasesUnitsFrame();
 
 // Generated message map functions
 protected:
@@ -33,6 +18,7 @@ protected:
 	virtual SDataGridColumnInfo* GetDataGridColumnInfo();
 	virtual SDataGridNewRecordInfo* GetDataGridNewRecordInfo();
 	virtual CString GetFrameText() const;
+
 	virtual void WillChangeRecord(EventReasonEnum adReason, LONG cRecords, EventStatusEnum *adStatus, struct _Recordset *pRecordset);
 
 	afx_msg void OnDelete();

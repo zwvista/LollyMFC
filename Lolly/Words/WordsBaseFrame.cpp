@@ -54,7 +54,7 @@ void CWordsBaseFrame::OnMoveComplete()
 
 void CWordsBaseFrame::OnSpeak()
 {
-	theApp.Speak(m_lblSettings.nLangID, m_strWord);
+	theApp.Speak(m_lbuSettings.nLangID, m_strWord);
 }
 
 void CWordsBaseFrame::OnKeepSpeak()
@@ -65,12 +65,12 @@ void CWordsBaseFrame::OnKeepSpeak()
 
 void CWordsBaseFrame::OnUpdateSpeak( CCmdUI* pCmdUI )
 {
-	pCmdUI->Enable(theApp.CanSpeak(m_lblSettings.nLangID));
+	pCmdUI->Enable(theApp.CanSpeak(m_lbuSettings.nLangID));
 }
 
 void CWordsBaseFrame::OnUpdateKeepSpeak( CCmdUI* pCmdUI )
 {
-	pCmdUI->Enable(theApp.CanSpeak(m_lblSettings.nLangID));
+	pCmdUI->Enable(theApp.CanSpeak(m_lbuSettings.nLangID));
 	pCmdUI->SetCheck(m_bKeepSpeak);
 }
 
@@ -250,7 +250,7 @@ void CWordsBaseFrame::OnWordLevelChange( UINT nID )
 		if(nLevel != nNewLevel){
 			CString sql;
 			sql.Format(_T("UPDATE WORDSLANG SET LEVEL=%d WHERE LANGID=%d AND WORD=N'%s'"),
-				nNewLevel, m_lblSettings.nLangID, DoubleApostrophe(pszWord));
+				nNewLevel, m_lbuSettings.nLangID, DoubleApostrophe(pszWord));
 			m_rsWordLevel.Open(sql);
 			m_mapWord2Level[pszWord] = nNewLevel;
 		}
@@ -263,7 +263,7 @@ int CWordsBaseFrame::GetWordLevel( LPCTSTR pszWord )
 	if(m_mapWord2Level.count(pszWord) == 0){
 		CString sql;
 		sql.Format(_T("SELECT LEVEL FROM WORDSLANG WHERE LANGID=%d AND WORD=N'%s'"),
-			m_lblSettings.nLangID, DoubleApostrophe(pszWord));
+			m_lbuSettings.nLangID, DoubleApostrophe(pszWord));
 		m_rsWordLevel.Open(sql);
 		m_mapWord2Level[pszWord] = m_rsWordLevel.IsEof() ? 0 : m_rsWordLevel.GetFieldValueAsInt(_T("LEVEL"));
 	}

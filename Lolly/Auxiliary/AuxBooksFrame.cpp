@@ -33,7 +33,7 @@ CAuxBooksFrame::~CAuxBooksFrame()
 CString CAuxBooksFrame::GetSQL()
 {
 	CString sql;
-	sql.Format(_T("SELECT * FROM BOOKS WHERE LANGID=%d"), m_lblSettings.nLangID);
+	sql.Format(_T("SELECT * FROM BOOKS WHERE LANGID=%d"), m_lbuSettings.nLangID);
 	return sql;
 }
 
@@ -42,7 +42,7 @@ SDataGridColumnInfo* CAuxBooksFrame::GetDataGridColumnInfo()
 	static SDataGridColumnInfo ci[] = {
 		{ _T("BOOKID"), _T("BOOKID"), _T("BOOKID"), 100, 0, TRUE },
 		{ _T("BOOKNAME"), _T("BOOKNAME"), _T("BOOKNAME"), 300, 0, TRUE },
-		{ _T("NUMLESSONS"), _T("NUMLESSONS"), _T("NUMLESSONS"), 100, 0, TRUE },
+		{ _T("UNITSINBOOK"), _T("UNITSINBOOK"), _T("UNITSINBOOK"), 100, 0, TRUE },
 		{ _T("PARTS"), _T("PARTS"), _T("PARTS"), 300, 0, TRUE },
 		{ NULL, NULL, NULL, 0, 0, TRUE },
 	};
@@ -52,14 +52,14 @@ SDataGridColumnInfo* CAuxBooksFrame::GetDataGridColumnInfo()
 CString CAuxBooksFrame::GetFrameText() const
 {
 	CString str;
-	str.Format(_T("Books (%s)"), m_lblSettings.GetLangDesc());
+	str.Format(_T("Books (%s)"), m_lbuSettings.GetLangDesc());
 	return str;
 }
 
 void CAuxBooksFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRecords, EventStatusEnum *adStatus, struct _Recordset *pRecordset )
 {
 	if(adReason == adRsnUpdate && m_rs.GetEditMode() == adEditAdd)
-		m_rs.SetFieldValue(_T("LANGID"), m_lblSettings.nLangID);
+		m_rs.SetFieldValue(_T("LANGID"), m_lbuSettings.nLangID);
 }
 
 void CAuxBooksFrame::OnDelete()
