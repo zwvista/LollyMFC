@@ -41,7 +41,7 @@ CString CAuxAutoCorrectFrame::GetSQL()
 SDataGridColumnInfo* CAuxAutoCorrectFrame::GetDataGridColumnInfo()
 {
 	static SDataGridColumnInfo ci[] = {
-		{ _T("INDEX"), _T("INDEX"), _T("[INDEX]"), 100, 0, TRUE },
+		{ _T("ORD"), _T("ORD"), _T("ORD"), 100, 0, TRUE },
 		{ _T("INPUT"), _T("INPUT"), _T("INPUT"), 100, 0, TRUE },
 		{ _T("EXTENDED"), _T("EXTENDED"), _T("EXTENDED"), 100, 0, TRUE },
 		{ _T("BASIC"), _T("BASIC"), _T("BASIC"), 100, 0, TRUE },
@@ -61,8 +61,8 @@ void CAuxAutoCorrectFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRec
 {
 	if(adReason == adRsnUpdate && m_rs.GetEditMode() == adEditAdd){
 		m_rs.SetFieldValue(_T("LANGID"), m_lbuSettings.nLangID);
-		if(m_rs.GetFieldValueAsInt(_T("INDEX")) == 0)
-			m_rs.SetFieldValue(_T("INDEX"), m_wndGrid.GetNumberRows());
+		if(m_rs.GetFieldValueAsInt(_T("ORD")) == 0)
+			m_rs.SetFieldValue(_T("ORD"), m_wndGrid.GetNumberRows());
 	}
 }
 

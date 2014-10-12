@@ -42,9 +42,9 @@ CString CWordsUnitsFrame::GetSQL()
 SDataGridColumnInfo* CWordsUnitsFrame::GetDataGridColumnInfo()
 {
 	static SDataGridColumnInfo ci[] = {
-		{ _T("UNIT"), _T("UNIT"), _T("UNIT, PART, [INDEX]"), 75, 0, TRUE },
+		{ _T("UNIT"), _T("UNIT"), _T("UNIT, PART, ORD"), 75, 0, TRUE },
 		{ _T("PART"), _T("PART"), NULL, 75, 0, TRUE },
-		{ _T("INDEX"), _T("INDEX"), NULL, 75, 0, TRUE },
+		{ _T("ORD"), _T("ORD"), NULL, 75, 0, TRUE },
 		{ _T("WORD"), _T("WORD"), _T("WORD"), 1, 1, TRUE },
 		{ NULL, NULL, NULL, 0, 0, TRUE },
 	};
@@ -77,8 +77,8 @@ void CWordsUnitsFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRecords
 				m_rs.SetFieldValue(_T("UNIT"), m_lbuSettings.nUnitTo);
 			if(m_rs.GetFieldValueAsInt(_T("PART")) == 0)
 				m_rs.SetFieldValue(_T("PART"), m_lbuSettings.nPartTo);
-			if(m_rs.GetFieldValueAsInt(_T("INDEX")) == 0)
-				m_rs.SetFieldValue(_T("INDEX"), m_wndGrid.GetNumberRows());
+			if(m_rs.GetFieldValueAsInt(_T("ORD")) == 0)
+				m_rs.SetFieldValue(_T("ORD"), m_wndGrid.GetNumberRows());
 			m_strWord = theApp.AutoCorrect(
 				m_rs.GetFieldValueAsString(_T("WORD")), m_rsAutoCorrect);
 			m_rs.SetFieldValue(_T("WORD"), m_strWord);

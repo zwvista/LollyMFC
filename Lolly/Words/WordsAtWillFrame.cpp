@@ -35,14 +35,14 @@ CWordsAtWillFrame::~CWordsAtWillFrame()
 CString CWordsAtWillFrame::GetSQL()
 {
 	CString sql;
-	sql.Format(_T("SELECT [INDEX], WORD FROM WORDSBOOK WHERE ID = -1"));
+	sql.Format(_T("SELECT ORD, WORD FROM WORDSBOOK WHERE ID = -1"));
 	return sql;
 }
 
 SDataGridColumnInfo* CWordsAtWillFrame::GetDataGridColumnInfo()
 {
 	static SDataGridColumnInfo ci[] = {
-		{ _T("INDEX"), _T("INDEX"), _T("[INDEX]"), 75, 0, TRUE },
+		{ _T("ORD"), _T("ORD"), _T("ORD"), 75, 0, TRUE },
 		{ _T("WORD"), _T("WORD"), _T("WORD"), 1, 1, TRUE },
 		{ NULL, NULL, NULL, 0, 0, TRUE },
 	};
@@ -69,8 +69,8 @@ void CWordsAtWillFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRecord
 	if(adReason == adRsnUpdate)
 		switch(m_rs.GetEditMode()){
 		case adEditAdd:
-			if(m_rs.GetFieldValueAsInt(_T("INDEX")) == 0)
-				m_rs.SetFieldValue(_T("INDEX"), m_wndGrid.GetNumberRows());
+			if(m_rs.GetFieldValueAsInt(_T("ORD")) == 0)
+				m_rs.SetFieldValue(_T("ORD"), m_wndGrid.GetNumberRows());
 			m_strWord = theApp.AutoCorrect(
 				m_rs.GetFieldValueAsString(_T("WORD")), m_rsAutoCorrect);
 			m_rs.SetFieldValue(_T("WORD"), m_strWord);

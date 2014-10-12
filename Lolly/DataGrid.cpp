@@ -46,7 +46,7 @@ void CDataGrid::BindData(CADORecordset2* pRS, LPCTSTR pszSQL, SDataGridColumnInf
 	m_nNumCols = 0;
 	m_ci = ci;
 	while(m_ci->pszFieldName){
-		if(!_tcscmp(m_ci->pszFieldName, _T("INDEX")))
+		if(!_tcscmp(m_ci->pszFieldName, _T("ORD")))
 			m_nIndexCol = m_nNumCols;
 		m_ci++, m_nNumCols++;
 	}

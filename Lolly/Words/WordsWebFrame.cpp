@@ -264,7 +264,7 @@ void CWordsWebFrame::LoadDicts()
 			if(strDictGroup == DICT_WEB)
 				sql2 = sql + _T("AND DICTTYPENAME = 'WEB' ORDER BY DICTNAME");
 			else
-				sql2.Format(_T("%sAND DICTTYPENAME = '%s' ORDER BY [INDEX]"), sql, strDictType);
+				sql2.Format(_T("%sAND DICTTYPENAME = '%s' ORDER BY ORD"), sql, strDictType);
 			rsDict.Open(sql2);
 			if(rsDict.GetRecordCount() != 0)
 				for(rsDict.MoveFirst(); !rsDict.IsEof(); rsDict.MoveNext()){

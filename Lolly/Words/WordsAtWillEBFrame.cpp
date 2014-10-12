@@ -33,14 +33,14 @@ CWordsAtWillEBFrame::~CWordsAtWillEBFrame()
 CString CWordsAtWillEBFrame::GetSQL()
 {
 	CString sql;
-	sql.Format(_T("SELECT [INDEX], WORD, NOTE FROM WORDSBOOK WHERE ID = -1"));
+	sql.Format(_T("SELECT ORD, WORD, NOTE FROM WORDSBOOK WHERE ID = -1"));
 	return sql;
 }
 
 SDataGridColumnInfo* CWordsAtWillEBFrame::GetDataGridColumnInfo()
 {
 	static SDataGridColumnInfo ci[] = {
-		{ _T("INDEX"), _T("INDEX"), _T("[INDEX]"), 75, 0, TRUE },
+		{ _T("ORD"), _T("ORD"), _T("ORD"), 75, 0, TRUE },
 		{ _T("WORD"), _T("WORD"), _T("WORD"), 1, 2, TRUE },
 		{ _T("NOTE"), _T("NOTE"), _T("NOTE"), 1, 2, TRUE },
 		{ NULL, NULL, NULL, 0, 0, TRUE },
@@ -68,8 +68,8 @@ void CWordsAtWillEBFrame::WillChangeRecord( EventReasonEnum adReason, LONG cReco
 	if(adReason == adRsnUpdate)
 		switch(m_rs.GetEditMode()){
 		case adEditAdd:
-			if(m_rs.GetFieldValueAsInt(_T("INDEX")) == 0)
-				m_rs.SetFieldValue(_T("INDEX"), m_wndGrid.GetNumberRows());
+			if(m_rs.GetFieldValueAsInt(_T("ORD")) == 0)
+				m_rs.SetFieldValue(_T("ORD"), m_wndGrid.GetNumberRows());
 			break;
 		}
 }

@@ -41,7 +41,7 @@ CString CAuxDictionariesFrame::GetSQL()
 SDataGridColumnInfo* CAuxDictionariesFrame::GetDataGridColumnInfo()
 {
 	static SDataGridColumnInfo ci[] = {
-		{ _T("INDEX"), _T("INDEX"), _T("[INDEX]"), 50, 0, TRUE },
+		{ _T("ORD"), _T("ORD"), _T("ORD"), 50, 0, TRUE },
 		{ _T("DICTTYPEID"), _T("DICTTYPE"), NULL, 100, 0, TRUE },
 		{ _T("DICTNAME"), _T("DICTNAME"), _T("DICTNAME"), 100, 0, TRUE },
 		{ _T("LANGIDTO"), _T("LANGTO"), NULL, 100, 0, TRUE },

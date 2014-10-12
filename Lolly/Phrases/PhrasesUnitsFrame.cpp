@@ -42,9 +42,9 @@ CString CPhrasesUnitsFrame::GetSQL()
 SDataGridColumnInfo* CPhrasesUnitsFrame::GetDataGridColumnInfo()
 {
 	static SDataGridColumnInfo ci[] = {
-		{ _T("UNIT"), _T("UNIT"), _T("UNIT, PART, [INDEX]"), 75, 0, TRUE },
+		{ _T("UNIT"), _T("UNIT"), _T("UNIT, PART, ORD"), 75, 0, TRUE },
 		{ _T("PART"), _T("PART"), NULL, 75, 0, TRUE },
-		{ _T("INDEX"), _T("INDEX"), NULL, 75, 0, TRUE },
+		{ _T("ORD"), _T("ORD"), NULL, 75, 0, TRUE },
 		{ _T("PHRASE"), _T("PHRASE"), _T("PHRASE"), 1, 2, TRUE },
 		{ _T("TRANSLATION"), _T("TRANSLATION"), _T("[TRANSLATION]"), 1, 2, TRUE },
 		{ NULL, NULL, NULL, 0, 0, TRUE },
@@ -77,8 +77,8 @@ void CPhrasesUnitsFrame::WillChangeRecord( EventReasonEnum adReason, LONG cRecor
 				m_rs.SetFieldValue(_T("UNIT"), m_lbuSettings.nUnitTo);
 			if(m_rs.GetFieldValueAsInt(_T("PART")) == 0)
 				m_rs.SetFieldValue(_T("PART"), m_lbuSettings.nPartTo);
-			if(m_rs.GetFieldValueAsInt(_T("INDEX")) == 0)
-				m_rs.SetFieldValue(_T("INDEX"), m_wndGrid.GetNumberRows());
+			if(m_rs.GetFieldValueAsInt(_T("ORD")) == 0)
+				m_rs.SetFieldValue(_T("ORD"), m_wndGrid.GetNumberRows());
 			m_rs.SetFieldValue(_T("PHRASE"), theApp.AutoCorrect(
 				m_rs.GetFieldValueAsString(_T("PHRASE")), m_rsAutoCorrect));
 			break;

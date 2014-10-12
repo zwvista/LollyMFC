@@ -68,7 +68,7 @@ void CReindexDlg::OnOK()
 		int n = m_lstItems.GetItemData(i);
 		m_rs.Move(n, CADORecordset2::bmFirst);
 		m_rs.Edit();
-		m_rs.SetFieldValue(_T("INDEX"), i + 1);
+		m_rs.SetFieldValue(_T("ORD"), i + 1);
 		m_rs.Update();
 	}
 
