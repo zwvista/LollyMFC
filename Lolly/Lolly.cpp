@@ -163,9 +163,9 @@ BOOL CLollyApp::InitInstance()
 	read_xml(wstringstream((LPCTSTR)strConfig), m_ptConfig);
 	m_ptConfig = m_ptConfig.get_child(_T("configuration"));
 
-	//m_db.Open(_T("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=") + m_strAppDataFolder + _T("Lolly.mdb"));
-	CString strServerName = GetProfileString(_T("Settings"), _T("ServerName"), _T(""));
-	m_db.Open(_T("Driver={SQL Server};Server=") + strServerName + _T(";Database=Lolly;Uid=;Pwd=;"));
+    CString strConnection;
+    strConnection.Format(_T("Driver=SQLite3 ODBC Driver;Database=%sLolly.db;"), m_strAppDataFolder);
+	m_db.Open(strConnection);
 	m_lbuSettings.nLangID = GetProfileInt(_T("Settings"), _T("LangID"), 3);
 
 	InitVoices();
