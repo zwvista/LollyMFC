@@ -39,11 +39,6 @@ LRESULT CPhrasesBaseFrame::OnLblSettingsChanged(WPARAM wParam, LPARAM lParam)
 	CLollyFrameGridOnly::OnLblSettingsChanged(wParam, lParam);
 
 	auto GetReplacement = [](int nLangID, vector<pair<CString, CString>>& replacement){
-		for(const auto& v : theApp.GetConfig(nLangID))
-			if(v.first == _T("phraseReplace"))
-				replacement.push_back(make_pair(
-					CString(v.second.get<wstring>(_T("<xmlattr>.before")).c_str()),
-					CString(v.second.get<wstring>(_T("<xmlattr>.after")).c_str())));
 	};
 
 	GetReplacement(m_lbuSettings.nLangID, m_vReplacement);

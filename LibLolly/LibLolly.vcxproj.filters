@@ -304,12 +304,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="DllLolly.rc">
+    <ResourceCompile Include="LibLolly.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ReadMe.txt" />
-    <None Include="DllLolly.vcproj" />
   </ItemGroup>
 </Project>

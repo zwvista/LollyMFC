@@ -7,85 +7,8 @@
 #include "FavoritesManager.h"
 #include "WndResizer.h"
 #include "StdioFileEx.h"
-
-struct SLangBookUnitSettings
-{
-	int nLangID, nBookID, nUnitFrom, nPartFrom, nUnitTo, nPartTo;
-	CString strLangName, strBookName;
-	void Init();
-	int GetUnitPartFrom() const {return nUnitFrom * 10 + nPartFrom;}
-	int GetUnitPartTo() const {return nUnitTo * 10 + nPartTo;}
-	CString GetBookUnitsDesc() const {
-		CString str;
-		if(GetUnitPartFrom() == GetUnitPartTo())
-			str.Format(_T("%s %d:%d"), strBookName, nUnitFrom, nPartFrom);
-		else
-			str.Format(_T("%s %d:%d--%d:%d"), strBookName, nUnitFrom, nPartFrom, nUnitTo, nPartTo);
-		return str;
-	}
-	CString GetLangDesc() const {
-		CString str;
-		str.Format(_T("%s"), strLangName);
-		return str;
-	}
-};
-
-struct SDataGridNewRecordInfo
-{
-	int nCol;
-	LPCTSTR lpszText;
-};
-
-enum EDictImage
-{
-	DICTIMAGE_OFFLINEALL, // 0
-	DICTIMAGE_OFFLINE, // 1
-	DICTIMAGE_ONLINEALL = DICTIMAGE_OFFLINE + 9, // 10
-	DICTIMAGE_ONLINE, // 11
-	DICTIMAGE_LIVEALL = DICTIMAGE_ONLINE + 9, // 20
-	DICTIMAGE_LIVE, // 21
-	DICTIMAGE_CUSTOM = DICTIMAGE_LIVE + 9, // 30
-	DICTIMAGE_LOCAL, // 31
-	DICTIMAGE_SPECIAL, // 32
-	DICTIMAGE_CONJUGATOR, // 33
-	DICTIMAGE_WEB, // 34
-};
-
-typedef pair<CString, CString> DictInfo;
-
-#define DICT_DEFAULT _T("DEFAULT")
-#define DICT_ONLINE _T("Online")
-#define DICT_ONLINEALL _T("ONLINE")
-#define DICT_LINGOES _T("Lingoes")
-#define DICT_LINGOESALL _T("LINGOES")
-#define DICT_WEB _T("Web")
-#define DICT_OFFLINE _T("Offline")
-#define DICT_OFFLINEALL _T("OFFLINE")
-#define DICT_LIVE _T("Live")
-#define DICT_LIVEALL _T("LIVE")
-
-inline CString DoubleApostrophe(LPCTSTR psz)
-{
-	CString str = psz; 
-	str.Replace(_T("'"), _T("''")); 
-	return str; 
-}
-CString ReadAllTextFromFile(LPCTSTR pszFileName);
-void SplitString(const CString& str, LPCTSTR pszDelim, vector<CString>& vstrs);
-CString GetTextFromClipBoard();
-void CopyTextToClipBoard(const CString& strText);
-CString GetDocumentText(CHtmlView* pView);
-CString GetDocumentTitle(CHtmlView* pView);
-inline CString HtmlEncode(CString strText)
-{
-	strText.Replace(_T("&"), _T("&amp;"));
-	strText.Replace(_T("<"), _T("&lt;"));
-	strText.Replace(_T(">"), _T("&gt;"));
-	strText.Replace(_T("\""), _T("&quot;"));
-	strText.Replace(_T("'"), _T("&apos;"));
-	return strText;
-}
-CString ExtractFromHtml(LPCTSTR pszText, LPCTSTR pszTransform, LPCTSTR pszDefault = _T(""));
+#include "LollyCommon.h"
+#include "DictConfig.h"
 
 class CLollyMixin
 {
@@ -98,7 +21,7 @@ public:
 	CLingoes m_objLingoes;
 	CFrhelper m_objFrhelper;
 	CString m_strAppDataFolder, m_strAppDataFolderInHtml, m_strJS;
-	wptree m_ptConfig;
+    CDictConfig m_objConfig;
 	CString m_strXmlNotepadExe, m_strEBWinExe;
 	CString m_strLingoesClassName, m_strLingoesWindowName;
 	CFavoritesManager	m_Favorites;
@@ -119,9 +42,6 @@ public:
 	void Speak(LPCTSTR psz, bool bPurge = true) {Speak(0, psz, bPurge);}
 	void Speak(int nLangID, LPCTSTR psz, bool bPurge = true);
 	bool CanSpeak(int nLangID);
-
-	wptree GetConfig(int nLangID);
-	wptree GetConfigDicts(int nLangID);
 protected:
 	vector<CAdapt<CComPtr<ISpVoice> > > m_vcpVoices;
 	vector<CString> m_vstrVoiceNames;

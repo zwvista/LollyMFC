@@ -147,8 +147,10 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <ClCompile Include="Auxiliary\AuxPicBooksFrame.cpp" />
     <ClCompile Include="Auxiliary\AuxWebExtractFrame.cpp" />
     <ClCompile Include="Auxiliary\AuxWebTextFrame.cpp" />
+    <ClCompile Include="ConfigDictDlg.cpp" />
     <ClCompile Include="DataGrid.cpp" />
     <ClCompile Include="DataGridView.cpp" />
+    <ClCompile Include="DictConfig.cpp" />
     <ClCompile Include="EditTransDlg.cpp" />
     <ClCompile Include="FilterDlg.cpp" />
     <ClCompile Include="Frhelper.cpp" />
@@ -212,13 +214,16 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <ClInclude Include="Auxiliary\AuxPicBooksFrame.h" />
     <ClInclude Include="Auxiliary\AuxWebExtractFrame.h" />
     <ClInclude Include="Auxiliary\AuxWebTextFrame.h" />
+    <ClInclude Include="ConfigDictDlg.h" />
     <ClInclude Include="DataGrid.h" />
     <ClInclude Include="DataGridView.h" />
+    <ClInclude Include="DictConfig.h" />
     <ClInclude Include="EditTransDlg.h" />
     <ClInclude Include="FilterDlg.h" />
     <ClInclude Include="Frhelper.h" />
     <ClInclude Include="HTMLEdView.h" />
     <ClInclude Include="Lolly.h" />
+    <ClInclude Include="LollyCommon.h" />
     <ClInclude Include="LollyFrame.h" />
     <ClInclude Include="LollyFrameGrid.h" />
     <ClInclude Include="LollyFrameGridOnly.h" />
@@ -313,7 +318,7 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <ResourceCompile Include="Lolly.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LibLolly\DllLolly.vcxproj">
+    <ProjectReference Include="..\LibLolly\LibLolly.vcxproj">
       <Project>{05dc9c7c-4391-4623-905d-a682f87ed5b7}</Project>
     </ProjectReference>
   </ItemGroup>

@@ -32,8 +32,6 @@ public:
 protected:
 	CWordsWebView* m_pView;
 	CDictHtmlCtrl* m_pDictHtmlCtrl;
-	vector<CString> m_vstrOfflineDicts, m_vstrOfflineDictTables, m_vstrLingoesDicts;
-	map<CString, vector<DictInfo>> m_mapCustomDicts;
 	set<int> m_setDictsInUse;
 
 	void UpdateHtml(shared_ptr<CDictHtmlCtrl>& pDictHtmlCtrl);

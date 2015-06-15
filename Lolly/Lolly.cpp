@@ -159,9 +159,7 @@ BOOL CLollyApp::InitInstance()
 
 	m_strJS = ReadAllTextFromFile(m_strAppDataFolder + "Lolly.js");
 
-	CString strConfig = ReadAllTextFromFile(m_strAppDataFolder + "Lolly.config");
-	read_xml(wstringstream((LPCTSTR)strConfig), m_ptConfig);
-	m_ptConfig = m_ptConfig.get_child(_T("configuration"));
+    m_objConfig.Load(m_strAppDataFolder + "Lolly.config");
 
     CString strConnection;
     strConnection.Format(_T("Driver=SQLite3 ODBC Driver;Database=%sLolly.db;"), m_strAppDataFolder);

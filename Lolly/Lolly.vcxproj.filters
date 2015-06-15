@@ -207,6 +207,12 @@
     <ClCompile Include="Frhelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ConfigDictDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DictConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataGrid.h">
@@ -390,6 +396,15 @@
       <Filter>Words Files</Filter>
     </ClInclude>
     <ClInclude Include="Frhelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDictDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DictConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LollyCommon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

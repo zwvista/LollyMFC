@@ -15,7 +15,6 @@ public:
 // Generated message map functions
 protected:
 	bool m_bKeepSpeak, m_bKeepSpeakTrans;
-	vector<pair<CString, CString>> m_vReplacement, m_vReplacementChn;
 
 	void SpeakPhraseTrans(bool bPhrase, bool bTrans);
 

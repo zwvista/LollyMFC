@@ -35,7 +35,6 @@ protected:
 	CString m_strKana;
 	bool m_bLookupByKana;
 	bool m_bIsFindingKana;
-	vector<CString> m_vstrDicts;
 
 	void UpdateEBView();
 

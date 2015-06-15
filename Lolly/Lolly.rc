@@ -80,7 +80,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
-IDR_TOOLBAR_WORDSUNITS BITMAP                  "res\\ToolbarWordsUnits.bmp"
+IDR_TOOLBAR_WORDSUNITS  BITMAP                  "res\\ToolbarWordsUnits.bmp"
 IDR_TOOLBAR_WORDSLANG   BITMAP                  "res\\ToolbarWordsLang.bmp"
 IDR_TOOLBAR_WORDSBOOKS  BITMAP                  "res\\ToolbarWordsBooks.bmp"
 IDR_TOOLBAR_PHRASESUNITS BITMAP                  "res\\ToolbarPhrasesUnits.bmp"
@@ -98,7 +98,7 @@ IDR_TOOLBAR_WORDSEB     BITMAP                  "res\\ToolbarWordsEB.bmp"
 IDR_TOOLBAR_WORDSATWILL BITMAP                  "res\\ToolbarWordsAtWill.bmp"
 IDR_TOOLBAR_WEBBROWSER  BITMAP                  "res\\ToolbarWebBrowser.bmp"
 IDR_TOOLBAR_PICBOOK     BITMAP                  "res\\ToolbarPicBook.bmp"
-IDR_TOOLBAR_HTMLUNIT  BITMAP                  "res\\ToolbarHtmlUnit.bmp"
+IDR_TOOLBAR_HTMLUNIT    BITMAP                  "res\\ToolbarHtmlUnit.bmp"
 IDR_TOOLBAR_BLOGPOST    BITMAP                  "res\\ToolbarBlogPost.bmp"
 IDB_RECORD_MARKERS      BITMAP                  "res\\markers.bmp"
 IDB_WRITESMALL          BITMAP                  "res\\writesmall.bmp"
@@ -625,17 +625,17 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "&Learn"
     BEGIN
-        MENUITEM "Select Units...",           ID_LEARN_SELECTUNITS
+        MENUITEM "Select Units...",             ID_LEARN_SELECTUNITS
         MENUITEM SEPARATOR
-        MENUITEM "Words in Units",            ID_LEARN_WORDS_UNITS
+        MENUITEM "Words in Units",              ID_LEARN_WORDS_UNITS
         MENUITEM "Words in Language",           ID_LEARN_WORDS_LANG
         MENUITEM "Words at Will",               ID_LEARN_WORDS_ATWILL
         MENUITEM "Words in Books",              ID_LEARN_WORDS_BOOKS
         MENUITEM SEPARATOR
-        MENUITEM "Phrases in Units",          ID_LEARN_PHRASES_UNITS
+        MENUITEM "Phrases in Units",            ID_LEARN_PHRASES_UNITS
         MENUITEM "Phrases in Language",         ID_LEARN_PHRASES_LANG
         MENUITEM SEPARATOR
-        MENUITEM "Words in Units(EBWin)",     ID_LEARN_WORDS_UNITS_EB
+        MENUITEM "Words in Units(EBWin)",       ID_LEARN_WORDS_UNITS_EB
         MENUITEM "Words at Will(EBWin)",        ID_LEARN_WORDS_ATWILL_EB
         MENUITEM SEPARATOR
         MENUITEM "E&xit",                       ID_APP_EXIT
@@ -655,7 +655,7 @@ BEGIN
         MENUITEM "Web Browser",                 ID_TOOLS_WEBBROWSER
         MENUITEM "Blog Post",                   ID_TOOLS_BLOGPOST
         MENUITEM "Picture Book",                ID_TOOLS_PICTUREBOOK
-        MENUITEM "Html Unit",                 ID_TOOLS_HTMLUNIT
+        MENUITEM "Html Unit",                   ID_TOOLS_HTMLUNIT
         MENUITEM SEPARATOR
         MENUITEM "AutoCorrect Text...",         ID_TOOLS_AUTOCORRECTTEXT
         MENUITEM "Text to Post...",             ID_TOOLS_TEXT2POST
@@ -705,15 +705,15 @@ BEGIN
         BEGIN
             MENUITEM "Current Window",              ID_WINDOW_NEW_CURRENT
             MENUITEM SEPARATOR
-            MENUITEM "Words in Units",            ID_WINDOW_NEW_WORDS_UNITS
+            MENUITEM "Words in Units",              ID_WINDOW_NEW_WORDS_UNITS
             MENUITEM "Words in Language",           ID_WINDOW_NEW_WORDS_LANG
             MENUITEM "Words at Will",               ID_WINDOW_NEW_WORDS_ATWILL
             MENUITEM "Words in Books",              ID_WINDOW_NEW_WORDS_BOOKS
             MENUITEM SEPARATOR
-            MENUITEM "Phrases in Units",          ID_WINDOW_NEW_PHRASES_UNITS
+            MENUITEM "Phrases in Units",            ID_WINDOW_NEW_PHRASES_UNITS
             MENUITEM "Phrases in Language",         ID_WINDOW_NEW_PHRASES_LANG
             MENUITEM SEPARATOR
-            MENUITEM "Words in Units(EBWin)",     ID_WINDOW_NEW_WORDS_UNITS_EB
+            MENUITEM "Words in Units(EBWin)",       ID_WINDOW_NEW_WORDS_UNITS_EB
             MENUITEM "Words at Will(EBWin)",        ID_WINDOW_NEW_WORDS_ATWILL_EB
         END
         MENUITEM "Close",                       ID_WINDOW_CLOSE
@@ -721,7 +721,7 @@ BEGIN
     END
     POPUP "&Help"
     BEGIN
-        MENUITEM "&About Lolly...",         ID_APP_ABOUT
+        MENUITEM "&About Lolly...",             ID_APP_ABOUT
     END
 END
 
@@ -755,12 +755,12 @@ IDR_MAINFRAME ACCELERATORS
 BEGIN
     "P",            ID_LEARN_PHRASES_LANG,  VIRTKEY, CONTROL, NOINVERT
     "O",            ID_LEARN_PHRASES_UNITS, VIRTKEY, CONTROL, NOINVERT
-    "S",            ID_LEARN_SELECTUNITS, VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_LEARN_SELECTUNITS,   VIRTKEY, CONTROL, NOINVERT
     "E",            ID_LEARN_WORDS_ATWILL,  VIRTKEY, CONTROL, NOINVERT
     "L",            ID_LEARN_WORDS_ATWILL_EB, VIRTKEY, CONTROL, NOINVERT
     "R",            ID_LEARN_WORDS_BOOKS,   VIRTKEY, CONTROL, NOINVERT
     "Q",            ID_LEARN_WORDS_LANG,    VIRTKEY, CONTROL, NOINVERT
-    "W",            ID_LEARN_WORDS_UNITS, VIRTKEY, CONTROL, NOINVERT
+    "W",            ID_LEARN_WORDS_UNITS,   VIRTKEY, CONTROL, NOINVERT
     "K",            ID_LEARN_WORDS_UNITS_EB, VIRTKEY, CONTROL, NOINVERT
     VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
     VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
@@ -774,7 +774,7 @@ BEGIN
     "I",            ID_TB_REINDEX,          VIRTKEY, SHIFT, CONTROL, NOINVERT
     "S",            ID_TB_SPEAK,            VIRTKEY, SHIFT, CONTROL, NOINVERT
     VK_F2,          ID_TOOLS_EXTRACTWEBDICT, VIRTKEY, NOINVERT
-    VK_F8,          ID_TOOLS_HTMLUNIT,    VIRTKEY, NOINVERT
+    VK_F8,          ID_TOOLS_HTMLUNIT,      VIRTKEY, NOINVERT
     VK_F4,          ID_TOOLS_PICTUREBOOK,   VIRTKEY, NOINVERT
     VK_F9,          ID_TOOLS_TEST,          VIRTKEY, NOINVERT
     VK_F3,          ID_TOOLS_WEBBROWSER,    VIRTKEY, NOINVERT
@@ -998,6 +998,26 @@ BEGIN
     EDITTEXT        IDC_EDIT_NEW_WORD,0,0,120,14,ES_AUTOHSCROLL
 END
 
+IDD_CONFIG_DICT DIALOGEX 0, 0, 309, 212
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_THICKFRAME
+CAPTION "Reindex"
+FONT 12, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,251,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,251,25,50,14
+    CONTROL         "",IDC_TREE1,"SysTreeView32",WS_BORDER | WS_HSCROLL | WS_TABSTOP,7,7,85,198
+    CONTROL         "",IDC_TREE2,"SysTreeView32",WS_BORDER | WS_HSCROLL | WS_TABSTOP,160,7,85,198
+    PUSHBUTTON      "Add Pile",IDCANCEL2,102,7,50,14
+    PUSHBUTTON      "Add Switch",IDCANCEL3,102,26,50,14
+    PUSHBUTTON      "Add All",IDCANCEL4,102,45,50,14
+    PUSHBUTTON      "Clear",IDCANCEL5,102,66,50,14
+    PUSHBUTTON      "Remove",IDCANCEL6,102,88,50,14
+    PUSHBUTTON      "Top",IDCANCEL7,102,107,50,14
+    PUSHBUTTON      "Up",IDCANCEL8,102,126,50,14
+    PUSHBUTTON      "Down",IDCANCEL9,102,147,50,14
+    PUSHBUTTON      "Bottom",IDCANCEL10,103,168,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1161,6 +1181,14 @@ BEGIN
     IDD_DATAGRID_FORM, DIALOG
     BEGIN
     END
+
+    IDD_CONFIG_DICT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 301
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 205
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -1230,6 +1258,17 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_CONFIG_DICT AFX_DIALOG_LAYOUT
+BEGIN
+    0x0000
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
@@ -1241,7 +1280,7 @@ END
 STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "Lolly"
-    IDR_LollyTYPE       "\nLolly\nLolly"
+    IDR_LollyTYPE           "\nLolly\nLolly"
     IDS_WINDOWS_MANAGER     "&Windows..."
 END
 

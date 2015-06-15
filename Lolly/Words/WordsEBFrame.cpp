@@ -138,10 +138,6 @@ void CWordsEBFrame::OnUpdateAvailableDicts( CCmdUI* pCmdUI )
 
 void CWordsEBFrame::LoadDicts()
 {
-	auto ptDicts = theApp.GetConfigDicts(m_lbuSettings.nLangID);
-	for(const auto& v : ptDicts)
-		if(v.first == _T("ebwin"))
-			m_vstrDicts.push_back(v.second.data().c_str());
 
 	m_wndToolBarDicts.RemoveAllButtons();
 

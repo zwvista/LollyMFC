@@ -361,15 +361,3 @@ CString ReadAllTextFromFile(LPCTSTR pszFileName)
 	strText.TrimRight(_T("\r\n"));
 	return strText;
 }
-
-wptree CLollyMixin::GetConfig(int nLangID)
-{
-	return boost::find_if(m_ptConfig, [=](const wptree::value_type& v){
-		return v.first == _T("language") && v.second.get<int>(_T("<xmlattr>.id")) == nLangID;
-	})->second;
-}
-
-wptree CLollyMixin::GetConfigDicts(int nLangID)
-{
-	return GetConfig(nLangID).get_child(_T("dictionaries"));
-}

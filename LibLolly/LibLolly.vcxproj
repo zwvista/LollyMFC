@@ -16,7 +16,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{05DC9C7C-4391-4623-905D-A682F87ED5B7}</ProjectGuid>
-    <RootNamespace>DllLolly</RootNamespace>
+    <RootNamespace>LibLolly</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>LibLolly</ProjectName>
   </PropertyGroup>
@@ -194,18 +194,14 @@
     <ClInclude Include="WndResizer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="DllLolly.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DllLolly.vcproj" />
-    <None Include="ReadMe.txt" />
+    <ResourceCompile Include="LibLolly.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties RESOURCE_FILE="DllLolly.rc" />
+      <UserProperties RESOURCE_FILE="LibLolly.rc" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

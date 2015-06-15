@@ -4,6 +4,15 @@
 //
 #define IDC_BUTTON_COPY                 3
 #define IDC_BUTTON_COPYTEXT             3
+#define IDCANCEL2                       3
+#define IDCANCEL3                       4
+#define IDCANCEL4                       5
+#define IDCANCEL5                       6
+#define IDCANCEL6                       7
+#define IDCANCEL7                       8
+#define IDCANCEL8                       9
+#define IDCANCEL9                       10
+#define IDCANCEL10                      11
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDD_MFCAPPLICATION1_FORM        101
@@ -22,7 +31,7 @@
 #define IDS_TOOLBAR_CUSTOMIZE           125
 #define ID_VIEW_CUSTOMIZE               126
 #define IDR_MAINFRAME                   128
-#define IDR_LollyTYPE               130
+#define IDR_LollyTYPE                   130
 #define ID_WINDOW_MANAGER               131
 #define IDS_WINDOWS_MANAGER             132
 #define IDR_WINDOWS_MENU                152
@@ -39,7 +48,7 @@
 #define ID_VIEW_APPLOOK_VS_2008         219
 #define ID_VIEW_APPLOOK_WINDOWS_7       220
 #define IDS_EDIT_MENU                   306
-#define IDD_SELECT_UNITS              310
+#define IDD_SELECT_UNITS                310
 #define IDD_EXTRACT_WEB_DICT_OPTIONS    313
 #define IDD_OPTIONS                     314
 #define IDB_RECORD_MARKERS              314
@@ -48,23 +57,24 @@
 #define IDD_EDIT_TRANS                  318
 #define IDD_TEST                        319
 #define IDD_NEW_WORDS                   320
-#define IDR_TOOLBAR_WORDSUNITS        321
+#define IDR_TOOLBAR_WORDSUNITS          321
 #define IDD_NEW_PHRASES                 321
 #define IDR_TOOLBAR_WORDSLANG           322
 #define IDD_FILTER                      322
 #define IDR_TOOLBAR_WORDSBOOKS          323
 #define IDD_REINDEX                     323
-#define IDR_TOOLBAR_PHRASESUNITS      324
+#define IDR_TOOLBAR_PHRASESUNITS        324
 #define IDD_AUTOCORRECT_TEXT            324
 #define IDR_TOOLBAR_PHRASESLANG         325
 #define IDD_TEXT_TO_POST                325
 #define IDR_TOOLBAR_AUXBOOKS            326
+#define IDD_CONFIG_DICT                 326
 #define IDR_TOOLBAR_AUXAUTOCORRECT      327
 #define IDR_TOOLBAR_EXTRACTWEBDICT      328
 #define IDR_TOOLBAR_WORDSEB             329
 #define IDR_TOOLBAR_WEBBROWSER          330
 #define IDR_TOOLBAR_PICBOOK             331
-#define IDR_TOOLBAR_HTMLUNIT          332
+#define IDR_TOOLBAR_HTMLUNIT            332
 #define IDR_TOOLBAR_WORDSATWILL         333
 #define IDR_TOOLBAR_BLOGPOST            334
 #define IDR_TOOLBAR_DICTS               335
@@ -194,17 +204,17 @@
 #define IDC_GRID_WORD                   1000
 #define IDC_GRID_DICTNAME               1001
 #define IDC_COMBO_BOOK                  1002
-#define IDC_EDIT_UNITFROM             1003
-#define IDC_SPIN_UNITFROM             1004
-#define IDC_EDIT_UNITTO               1005
-#define IDC_SPIN_UNITTO               1006
+#define IDC_EDIT_UNITFROM               1003
+#define IDC_SPIN_UNITFROM               1004
+#define IDC_EDIT_UNITTO                 1005
+#define IDC_SPIN_UNITTO                 1006
 #define IDC_CHECK_ACTIVEINCLUDE         1007
-#define IDC_STATIC_UNITINALLFROM      1008
+#define IDC_STATIC_UNITINALLFROM        1008
 #define IDC_COMBO_PARTFROM              1009
-#define IDC_BOOKUNITS                 1010
+#define IDC_BOOKUNITS                   1010
 #define IDC_COMBO_PARTTO                1010
 #define IDC_LANG                        1011
-#define IDC_STATIC_UNITINALLTO        1011
+#define IDC_STATIC_UNITINALLTO          1011
 #define IDC_CHECKALLWORDS               1012
 #define IDC_UNCHECKALLWORDS             1013
 #define IDC_CHECKSELECTEDWORDS          1014
@@ -248,6 +258,8 @@
 #define IDC_COMBO_PARAGRAPH_END         1057
 #define IDC_EDIT1                       1058
 #define IDC_EDIT_NEW_WORD               1058
+#define IDC_TREE1                       1059
+#define IDC_TREE2                       1060
 #define ID_WRITE_PASTEASHYPERLINK       32770
 #define ID_AUXILIARY_AUTOCORRECT        32772
 #define ID_AUXILIARY_BOOKS              32773
@@ -255,13 +267,13 @@
 #define ID_AUXILIARY_PICBOOKS           32775
 #define ID_AUXILIARY_WEBEXTRACT         32776
 #define ID_AUXILIARY_WEBTEXT            32777
-#define ID_LEARN_WORDS_UNITS          32800
+#define ID_LEARN_WORDS_UNITS            32800
 #define ID_LEARN_WORDS_LANG             32801
 #define ID_LEARN_WORDS_BOOKS            32802
-#define ID_LEARN_PHRASES_UNITS        32803
+#define ID_LEARN_PHRASES_UNITS          32803
 #define ID_LEARN_PHRASES_LANG           32804
 #define ID_WINDOW_CLOSEALL              32805
-#define ID_LEARN_SELECTUNITS          32806
+#define ID_LEARN_SELECTUNITS            32806
 #define ID_TOOLS_EXTRACTWEBDICT         32807
 #define ID_LEARN_WORDS_ATWILL           32808
 #define ID_WORDHTML_PREVDICT            32809
@@ -271,7 +283,7 @@
 #define ID_TOOLS_OPTIONS                32813
 #define ID_TOOLS_WEBBROWSER             32822
 #define ID_TOOLS_PICTUREBOOK            32825
-#define ID_TOOLS_HTMLUNIT             32842
+#define ID_TOOLS_HTMLUNIT               32842
 #define ID_FAVORITS_DUMMY               32846
 #define ID_WINDOW_CLOSE                 32847
 #define ID_TOOLS_TEST                   32848
@@ -279,10 +291,10 @@
 #define ID_TTS_STOPSPEAKING             32851
 #define ID_TTS_SPEAKENGLISH             32855
 #define ID_TTS_SPEAKCHINESE             32856
-#define ID_WINDOW_NEW_WORDS_UNITS     32860
+#define ID_WINDOW_NEW_WORDS_UNITS       32860
 #define ID_WINDOW_NEW_WORDS_LANG        32861
 #define ID_WINDOW_NEW_WORDS_BOOKS       32862
-#define ID_WINDOW_NEW_PHRASES_UNITS   32863
+#define ID_WINDOW_NEW_PHRASES_UNITS     32863
 #define ID_WINDOW_NEW_PHRASES_LANG      32864
 #define ID_TOOLS_AUTOCORRECTTEXT        32885
 #define ID_WINDOW_NEXT                  32898
@@ -291,10 +303,10 @@
 #define ID_TOOLS_BLOGPOST               32910
 #define ID_TOOLS_TEXT2POST              32911
 #define ID_WINDOW_NEXTWINDOWS           32912
-#define ID_LEARN_WORDS_UNITS_EB       32913
+#define ID_LEARN_WORDS_UNITS_EB         32913
 #define ID_LEARN_WORDS_ATWILL_EB        32914
-#define ID_WINDOW_WORDS_UNITS_EB      32915
-#define ID_WINDOW_NEW_WORDS_UNITS_EB  32916
+#define ID_WINDOW_WORDS_UNITS_EB        32915
+#define ID_WINDOW_NEW_WORDS_UNITS_EB    32916
 #define ID_WINDOW_NEW_WORDS_ATWILL_EB   32917
 #define ID_ACCELERATOR32920             32920
 #define ID_NEWWINDOW_CURRENTWINDOW      32921
@@ -304,9 +316,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        341
+#define _APS_NEXT_RESOURCE_VALUE        342
 #define _APS_NEXT_COMMAND_VALUE         32925
-#define _APS_NEXT_CONTROL_VALUE         1059
+#define _APS_NEXT_CONTROL_VALUE         1060
 #define _APS_NEXT_SYMED_VALUE           337
 #endif
 #endif
