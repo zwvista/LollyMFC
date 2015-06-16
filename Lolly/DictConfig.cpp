@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Lolly.h"
-#include "LollyCommon.h"
 #include "DictConfig.h"
 
 void CDictConfig::Load(LPCTSTR lpszURI)
@@ -34,11 +33,11 @@ CDictLangConfig::CDictLangConfig(const wptree& ptLang, const map<CString, wptree
                 CString(v.second.get<wstring>(_T("<xmlattr>.before")).c_str()),
                 CString(v.second.get<wstring>(_T("<xmlattr>.after")).c_str()));
 
-    auto& ptDicts = ptLang.get_child(_T("dictionaries"));
-    if(ptDicts.empty()) return;
+    auto& ptDicts = ptLang.get_child_optional(_T("dictionaries"));
+    if(!ptDicts) return;
 
     // ebwin
-    for(const auto& v : ptDicts)
+    for(auto& v : *ptDicts)
         if(v.first == _T("ebwin"))
             m_vstrDictsEBWin.push_back(v.second.data().c_str());
 
@@ -49,9 +48,9 @@ CDictLangConfig::CDictLangConfig(const wptree& ptLang, const map<CString, wptree
 
         int nImageIndex = nDictImage;
         for(auto& strDictName : vstrDictNames){
-            CUIDictItem objItem(strDictName, strGroupName, (EDictImage)nImageIndex);
-            vobjItems.push_back(objItem);
-            m_mapDictItems[strGroupName + strDictName] = objItem;
+            auto pItem = make_shared<CUIDictItem>(strDictName, strGroupName, (EDictImage)nImageIndex);
+            vobjItems.push_back(pItem);
+            m_mapDictItems[strGroupName + strDictName] = pItem;
             if(nDictImage == DICTIMAGE_ONLINE || nDictImage == DICTIMAGE_OFFLINE || nDictImage == DICTIMAGE_LIVE)
                 ++nImageIndex;
         }
@@ -60,7 +59,7 @@ CDictLangConfig::CDictLangConfig(const wptree& ptLang, const map<CString, wptree
     // group
     CString sql;
     sql.Format(_T("SELECT * FROM DICTALL WHERE LANGID=%d "), nLangID);
-    for(const auto& v : ptDicts)
+    for(auto& v : *ptDicts)
         if(v.first == _T("group")){
             CString strGroupName = v.second.data().c_str();
             auto& ptGroupInfo = mapDictGroupInfo.at(strGroupName);
@@ -87,7 +86,7 @@ CDictLangConfig::CDictLangConfig(const wptree& ptLang, const map<CString, wptree
 
     // lingoes + special
     vector<CString> vstrSpecialDicts;
-    for(const auto& v : ptDicts)
+    for(auto& v : *ptDicts)
         if(v.first == _T("lingoes"))
             m_vstrDictsLingoes.push_back(v.second.data().c_str());
         else if(v.first == _T("special"))
@@ -99,27 +98,27 @@ CDictLangConfig::CDictLangConfig(const wptree& ptLang, const map<CString, wptree
 
     // custom
     vector<CString> vstrDictNamesCustom;
-    for(const auto& v : ptDicts)
+    for(auto& v : *ptDicts)
         if(v.first == _T("custom")){
             auto& ptCustom = v.second;
             CString strDictNameCustom = ptCustom.get<wstring>(_T("<xmlattr>.name")).c_str();
             CString strDictTypeCustom = ptCustom.get<wstring>(_T("<xmlattr>.type")).c_str();
             vstrDictNamesCustom.push_back(strDictNameCustom);
             auto& vDicts = m_mapDictsCustom[strDictNameCustom];
-            vector<CUIDictItem> items;
+            vector<shared_ptr<CUIDictItem>> vpItems;
             for(const auto& v2 : ptCustom)
                 if(v2.first == _T("dict")){
                     CString strDictName = v2.second.data().c_str();
                     CString strDictType = v2.second.get<wstring>(_T("<xmlattr>.type")).c_str();
-                    vector<CUIDictItem> items2 =
+                    auto vpItems2 =
                         strDictName == DICT_OFFLINEALL ? m_mapDictGroups.at(DICT_OFFLINE) :
                         strDictName == DICT_ONLINEALL ? m_mapDictGroups.at(DICT_ONLINE) :
                         strDictName == DICT_LIVEALL ? m_mapDictGroups.at(DICT_LIVE) :
-                        vector<CUIDictItem>{m_mapDictItems.at(strDictType + strDictName)};
-                    items.insert(items.end(), items2.begin(), items2.end());
+                        vector<shared_ptr<CUIDictItem>>{m_mapDictItems.at(strDictType + strDictName)};
+                    vpItems.insert(vpItems.end(), vpItems2.begin(), vpItems2.end());
                 }
             m_mapDictsCustom[strDictNameCustom] = shared_ptr<CUIDict>(
-                new CUIDictCollection(strDictTypeCustom == _T("Pile"), strDictNameCustom, items));
+                new CUIDictCollection(strDictTypeCustom == _T("Pile"), strDictNameCustom, vpItems));
         }
     AddDictGroup(DICTIMAGE_CUSTOM, _T("Custom"), vstrDictNamesCustom);
     m_rsDict.Open(sql);

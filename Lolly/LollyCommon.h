@@ -86,14 +86,12 @@ CString ExtractFromHtml(LPCTSTR pszText, LPCTSTR pszTransform, LPCTSTR pszDefaul
 class CUIDict
 {
 public:
-    CUIDict(){}
     virtual ~CUIDict(){}
 };
 
 class CUIDictItem : public CUIDict
 {
 public:
-    CUIDictItem(){}
     CUIDictItem(const CString& n, const CString& t, EDictImage e)
         : m_strName(n), m_strType(t), m_ImageIndex(e) {}
 
@@ -105,11 +103,10 @@ public:
 class CUIDictCollection : public CUIDict
 {
 public:
-    CUIDictCollection(){}
-    CUIDictCollection(bool b, const CString& n, const vector<CUIDictItem>& i)
-        : m_bIsPile(b), m_strName(n), m_Items(i) {}
+    CUIDictCollection(bool b, const CString& n, const vector<shared_ptr<CUIDictItem>>& i)
+        : m_bIsPile(b), m_strName(n), m_vpItems(i) {}
 
     bool m_bIsPile;
     CString m_strName;
-    vector<CUIDictItem> m_Items;
+    vector<shared_ptr<CUIDictItem>> m_vpItems;
 };

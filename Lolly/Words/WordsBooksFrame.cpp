@@ -44,7 +44,7 @@ CString CWordsBooksFrame::GetSQL()
 			m_lbuSettings.nLangID, m_strFilter);
 		break;
 	case 1:
-		for(const CString& strDictTable : m_vstrOfflineDictTables){
+		for(const CString& strDictTable : m_pConfig->m_vstrDictTablesOffline){
 			CString str;
 			str.Format(
 				_T("SELECT ID, WORDSBOOK.BOOKID, BOOKNAME, UNIT, PART, ORD, WORDSBOOK.WORD, NOTE ")

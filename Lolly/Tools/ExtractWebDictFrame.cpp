@@ -97,11 +97,12 @@ void CExtractWebDictFrame::OnSize(UINT nType, int cx, int cy)
 	m_wndToolBar.CWnd::MoveWindow(0, 0, cx, ht);
 }
 
-void CExtractWebDictFrame::Init(const vector<CString>& vstrWords, LPCTSTR pszDict, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl /* = NULL */)
+void CExtractWebDictFrame::Init(const vector<CString>& vstrWords, LPCTSTR pszDict, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl /* = nullptr */, LPCTSTR pszIfrId /* = nullptr */)
 {
 	m_vstrWords = vstrWords;
 	m_bOverwrite = bOverwrite;
 	m_pDictHtmlCtrl = pDictHtmlCtrl;
+    m_strIfrId = pszIfrId;
 
 	m_pedtDict->SetContents(pszDict);
 	m_wndToolBar.AdjustSizeImmediate();
@@ -163,7 +164,7 @@ void CExtractWebDictFrame::ExtractWebDict()
 	if(m_pDictHtmlCtrl == NULL)
 		theApp.UpdateDictTable(m_pView, m_rsWord, m_rsDict, false);
 	else
-		m_pDictHtmlCtrl->UpdateLiveHtml(m_strWord, m_rsDict.GetFieldValueAsString(_T("DICTNAME")),
+		m_pDictHtmlCtrl->UpdateLiveHtml(m_strIfrId, m_strWord, m_rsDict.GetFieldValueAsString(_T("DICTNAME")),
 			theApp.ExtractFromWeb(m_pView, m_rsDict, theApp.m_strNoTrans));
 }
 

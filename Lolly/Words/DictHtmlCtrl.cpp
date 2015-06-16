@@ -214,7 +214,7 @@ bool CDictHtmlCtrl::CanExtractAndOverriteTranslation()
 
 bool CDictHtmlCtrl::CanExtractAndAppendTranslation()
 {
-    m_vDictItems.size() == 1 && m_vDictItems[0].m_strType == DICT_ONLINE;
+    return m_vDictItems.size() == 1 && m_vDictItems[0].m_strType == DICT_ONLINE;
 }
 
 bool CDictHtmlCtrl::DoDeleteTranslation(const CString& strWord)
@@ -290,7 +290,7 @@ bool CDictHtmlCtrl::DoExtractTranslation(const CString& strWord, bool bOverwrite
             strMsg += _T("\nwill be DELETED and EXTRACTED from the web again. Are you sure?");
             if(MessageBox(strMsg, _T(""), MB_YESNO + MB_ICONQUESTION) != IDYES) return false;
 
-            theApp.ExtractTranslation(vector<CString>(1, strWord), vstrDictsOffline, true);
+            theApp.ExtractTranslation({strWord}, vstrDictsOffline, true);
         }
     }
     return true;

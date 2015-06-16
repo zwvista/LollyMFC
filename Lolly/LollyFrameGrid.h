@@ -40,6 +40,7 @@ protected:
 	bool m_bTimerNavigate, m_bIsReindexing;
 	CMFCToolBarButton* m_pbtnNavigate;
 	CString m_strReindexItemFieldName;
+    const CDictLangConfig *m_pConfig, *m_pConfigChn;
 
 	virtual CString GetSQL() {return CString();}
 	virtual SDataGridColumnInfo* GetDataGridColumnInfo() {return NULL;}

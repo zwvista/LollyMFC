@@ -45,7 +45,7 @@ public:
 	virtual void LoadCustomState();
 	virtual void SaveCustomState();
 
-	void ExtractTranslation(const vector<CString>& vstrWords, const vector<CString>& vstrDicts, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl = NULL);
+	void ExtractTranslation(const vector<CString>& vstrWords, const vector<CString>& vstrDicts, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl = nullptr, LPCTSTR pszIfrId = nullptr);
 
 	void SetLangID(int nLangID);
 

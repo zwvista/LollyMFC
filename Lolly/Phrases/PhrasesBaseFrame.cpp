@@ -16,7 +16,6 @@
 IMPLEMENT_DYNCREATE(CPhrasesBaseFrame, CLollyFrameGridOnly)
 
 BEGIN_MESSAGE_MAP(CPhrasesBaseFrame, CLollyFrameGridOnly)
-	ON_MESSAGE(WM_LBLSETTINGS_CHANGED, OnLblSettingsChanged)
 	ON_COMMAND(ID_TB_SPEAK, OnSpeak)
 	ON_COMMAND(ID_TB_KEEPSPEAK, OnKeepSpeak)
 	ON_UPDATE_COMMAND_UI(ID_TB_KEEPSPEAK, OnUpdateKeepSpeak)
@@ -32,19 +31,6 @@ CPhrasesBaseFrame::CPhrasesBaseFrame()
 	: m_bKeepSpeak(false)
 	, m_bKeepSpeakTrans(false)
 {
-}
-
-LRESULT CPhrasesBaseFrame::OnLblSettingsChanged(WPARAM wParam, LPARAM lParam)
-{
-	CLollyFrameGridOnly::OnLblSettingsChanged(wParam, lParam);
-
-	auto GetReplacement = [](int nLangID, vector<pair<CString, CString>>& replacement){
-	};
-
-	GetReplacement(m_lbuSettings.nLangID, m_vReplacement);
-	GetReplacement(0, m_vReplacementChn);
-
-	return 0;
 }
 
 CPhrasesBaseFrame::~CPhrasesBaseFrame()
@@ -98,11 +84,11 @@ void CPhrasesBaseFrame::SpeakPhraseTrans( bool bPhrase, bool bTrans )
 	CString strXml;
 	if(bPhrase){
 		auto strPhrase = m_rs.GetFieldValueAsString(_T("PHRASE"));
-		if(!m_vReplacement.empty()){
-			wstring wstr = strPhrase;
+		if(m_pConfig->m_vReplacement.empty()){
+			wstring wstr = (LPCTSTR)strPhrase;
 			CString str1, str2;
-			for(const auto& kv : m_vReplacement){
-				str1.Format(_T("(\\W|^)(%s)(\\W|$)"), kv.first);
+			for(auto& kv : m_pConfig->m_vReplacement){
+				str1.Format(_T(R"((\W|^)(%s)(\W|$))"), kv.first);
 				str2.Format(_T("$1%s$3"), kv.second);
 				wstr = regex_replace(wstr, wregex(str1), wstring(str2));
 			}
@@ -112,7 +98,7 @@ void CPhrasesBaseFrame::SpeakPhraseTrans( bool bPhrase, bool bTrans )
 	}
 	if(bTrans){
 		auto strTranslation = m_rs.GetFieldValueAsString(_T("TRANSLATION"));
-		for(const auto& kv : m_vReplacementChn)
+		for(auto& kv : m_pConfigChn->m_vReplacement)
 			strTranslation.Replace(kv.first, kv.second);
 		strXml += theApp.GetVoiceXml(0, strTranslation);
 	}

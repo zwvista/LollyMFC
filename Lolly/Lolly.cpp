@@ -159,12 +159,12 @@ BOOL CLollyApp::InitInstance()
 
 	m_strJS = ReadAllTextFromFile(m_strAppDataFolder + "Lolly.js");
 
-    m_objConfig.Load(m_strAppDataFolder + "Lolly.config");
-
     CString strConnection;
     strConnection.Format(_T("Driver=SQLite3 ODBC Driver;Database=%sLolly.db;"), m_strAppDataFolder);
 	m_db.Open(strConnection);
 	m_lbuSettings.nLangID = GetProfileInt(_T("Settings"), _T("LangID"), 3);
+
+    m_objConfig.Load(m_strAppDataFolder + "Lolly.config");
 
 	InitVoices();
 
@@ -378,12 +378,12 @@ void CLollyApp::OnToolsHtmlUnit()
 	OnNewChild(RUNTIME_CLASS(CHtmlUnitFrame));
 }
 
-void CLollyApp::ExtractTranslation(const vector<CString>& vstrWords, const vector<CString>& vstrDicts, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl /* = NULL */)
+void CLollyApp::ExtractTranslation(const vector<CString>& vstrWords, const vector<CString>& vstrDicts, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl /* = nullptr */, LPCTSTR pszIfrId /* = nullptr */)
 {
 	for(const CString& strDict : vstrDicts){
 		CExtractWebDictFrame* pFrame = DYNAMIC_DOWNCAST(CExtractWebDictFrame,
 			OnNewChild(RUNTIME_CLASS(CExtractWebDictFrame)));
-		pFrame->Init(vstrWords, strDict, bOverwrite, pDictHtmlCtrl);
+		pFrame->Init(vstrWords, strDict, bOverwrite, pDictHtmlCtrl, pszIfrId);
 	}
 }
 

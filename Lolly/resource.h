@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ 偱惗惉偝傟偨僀儞僋儖乕僪 僼傽僀儖丅
-// Lolly.rc 偱巊梡
+// Microsoft Visual C++ 生成的包含文件。
+// 供 Lolly.rc 使用
 //
 #define IDC_BUTTON_COPY                 3
 #define IDC_BUTTON_COPYTEXT             3

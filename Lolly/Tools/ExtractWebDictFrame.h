@@ -13,7 +13,7 @@ public:
 	CExtractWebDictFrame();
 	virtual ~CExtractWebDictFrame();
 
-	void Init(const vector<CString>& vstrWords, LPCTSTR pszDict, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl = NULL);
+	void Init(const vector<CString>& vstrWords, LPCTSTR pszDict, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl = nullptr, LPCTSTR pszIfrId = nullptr);
 
 protected:
 	CLollyHtmlView* m_pView;
@@ -29,6 +29,7 @@ protected:
 	CADORecordset2 m_rsAutoCorrect;
 	enum {DIC_NAVIGATING, DIC_AUTOMATING, DIC_READY} m_eDicStatus;
 	CDictHtmlCtrl* m_pDictHtmlCtrl;
+    CString m_strIfrId;
 
 	void GetNextWord();
 	void GetNextDict();

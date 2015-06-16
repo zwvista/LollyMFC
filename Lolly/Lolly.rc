@@ -16,7 +16,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 擔杮岅 (擔杮) resources
+// 日语(日本) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
@@ -63,12 +63,12 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
-#endif    // 擔杮岅 (擔杮) resources
+#endif    // 日语(日本) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 塸岅 (暷崙) resources
+// 英语(美国) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
@@ -753,8 +753,8 @@ END
 
 IDR_MAINFRAME ACCELERATORS
 BEGIN
-    "P",            ID_LEARN_PHRASES_LANG,  VIRTKEY, CONTROL, NOINVERT
-    "O",            ID_LEARN_PHRASES_UNITS, VIRTKEY, CONTROL, NOINVERT
+    "I",            ID_LEARN_PHRASES_LANG,  VIRTKEY, CONTROL, NOINVERT
+    "U",            ID_LEARN_PHRASES_UNITS, VIRTKEY, CONTROL, NOINVERT
     "S",            ID_LEARN_SELECTUNITS,   VIRTKEY, CONTROL, NOINVERT
     "E",            ID_LEARN_WORDS_ATWILL,  VIRTKEY, CONTROL, NOINVERT
     "L",            ID_LEARN_WORDS_ATWILL_EB, VIRTKEY, CONTROL, NOINVERT
@@ -1406,7 +1406,7 @@ BEGIN
     ID_TB_KEEPSPEAK         "Keep speaking\nKeep speaking"
 END
 
-#endif    // 塸岅 (暷崙) resources
+#endif    // 英语(美国) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

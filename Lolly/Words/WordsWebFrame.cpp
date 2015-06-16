@@ -103,6 +103,8 @@ void CWordsWebFrame::OnUpdateEditTrans( CCmdUI* pCmdUI )
 
 void CWordsWebFrame::OnDeleteTrans()
 {
+    if(m_pDictHtmlCtrl->DoDeleteTranslation(m_strWord))
+        UpdateHtml();
 }
 
 void CWordsWebFrame::OnUpdateDeleteTrans( CCmdUI* pCmdUI )
@@ -123,7 +125,6 @@ void CWordsWebFrame::LoadDicts()
 
 	m_wndToolBarDicts.RemoveAllButtons();
 	AddDict(nIDDefault - ID_TB_DICTS_AVAILABLE + ID_TB_DICTS_OFFLINEALL, DICT_DEFAULT, DICTIMAGE_CUSTOM);
-	m_setDictsInUse.insert(nIDDefault);
 	SelectDict(0);
 }
 
@@ -131,29 +132,29 @@ void CWordsWebFrame::AddDict( UINT nID, LPCTSTR pszDict, EDictImage nImageIndex 
 {
 	CWordsBaseFrame::AddDict(nID, pszDict, nImageIndex);
 
-	auto pDictHtmlCtrl = make_shared<CDictHtmlCtrl>();
-	pDictHtmlCtrl->Create(CRect(), m_pView, 1234 + m_pView->m_vpDictHtmlCtrls.size(), WS_CHILD);
-	pDictHtmlCtrl->SetSilent(TRUE);
-	CRect rc;
-	m_pView->GetClientRect(rc);
-	m_pView->m_vpDictHtmlCtrls.push_back(pDictHtmlCtrl);
-	m_pView->SendMessage(WM_SIZE, 0, MAKELPARAM(rc.Width(), rc.Height()));
+	//auto pDictHtmlCtrl = make_shared<CDictHtmlCtrl>();
+	//pDictHtmlCtrl->Create(CRect(), m_pView, 1234 + m_pView->m_vpDictHtmlCtrls.size(), WS_CHILD);
+	//pDictHtmlCtrl->SetSilent(TRUE);
+	//CRect rc;
+	//m_pView->GetClientRect(rc);
+	//m_pView->m_vpDictHtmlCtrls.push_back(pDictHtmlCtrl);
+	//m_pView->SendMessage(WM_SIZE, 0, MAKELPARAM(rc.Width(), rc.Height()));
 
-	pDictHtmlCtrl->m_strDictName = pszDict;
-	if(nImageIndex >= DICTIMAGE_OFFLINE && nImageIndex < DICTIMAGE_OFFLINE + 9)
-		nImageIndex = DICTIMAGE_OFFLINE;
-	else if(nImageIndex >= DICTIMAGE_ONLINE && nImageIndex < DICTIMAGE_ONLINE + 9)
-		nImageIndex = DICTIMAGE_ONLINE;
-	else if(nImageIndex >= DICTIMAGE_LIVE && nImageIndex < DICTIMAGE_LIVE + 9)
-		nImageIndex = DICTIMAGE_LIVE;
-	pDictHtmlCtrl->m_nDictImage = nImageIndex;
+	//pDictHtmlCtrl->m_strDictName = pszDict;
+	//if(nImageIndex >= DICTIMAGE_OFFLINE && nImageIndex < DICTIMAGE_OFFLINE + 9)
+	//	nImageIndex = DICTIMAGE_OFFLINE;
+	//else if(nImageIndex >= DICTIMAGE_ONLINE && nImageIndex < DICTIMAGE_ONLINE + 9)
+	//	nImageIndex = DICTIMAGE_ONLINE;
+	//else if(nImageIndex >= DICTIMAGE_LIVE && nImageIndex < DICTIMAGE_LIVE + 9)
+	//	nImageIndex = DICTIMAGE_LIVE;
+	//pDictHtmlCtrl->m_nDictImage = nImageIndex;
 
-	CString sql;
-	sql.Format(_T("SELECT * FROM DICTALL WHERE LANGID=%d"), m_lbuSettings.nLangID);
-	pDictHtmlCtrl->m_rsDict.Open(sql);
-	pDictHtmlCtrl->FindDict(pszDict);
+	//CString sql;
+	//sql.Format(_T("SELECT * FROM DICTALL WHERE LANGID=%d"), m_lbuSettings.nLangID);
+	//pDictHtmlCtrl->m_rsDict.Open(sql);
+	//pDictHtmlCtrl->FindDict(pszDict);
 
-	UpdateHtml(pDictHtmlCtrl);
+	//UpdateHtml(pDictHtmlCtrl);
 }
 
 int CWordsWebFrame::RemoveDict( UINT nID )
@@ -193,7 +194,7 @@ void CWordsWebFrame::UpdateHtml()
 
 void CWordsWebFrame::OnTimer( UINT_PTR nIDEvent )
 {
-	if(m_pDictHtmlCtrl->m_nDictImage == DICTIMAGE_WEB || m_pDictHtmlCtrl->m_nDictImage == DICTIMAGE_ONLINE) return;
+	//if(m_pDictHtmlCtrl->m_nDictImage == DICTIMAGE_WEB || m_pDictHtmlCtrl->m_nDictImage == DICTIMAGE_ONLINE) return;
 	CWordsBaseFrame::OnTimer(nIDEvent);
 }
 

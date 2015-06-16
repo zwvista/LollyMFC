@@ -12,14 +12,15 @@ public:
     map<CString, shared_ptr<CUIDict>> m_mapDictsCustom;
     vector<CString> m_vstrDictsOffline, m_vstrDictTablesOffline;
     CADORecordset2 m_rsDict;
-    map<CString, vector<CUIDictItem>> m_mapDictGroups;
-    map<CString, CUIDictItem> m_mapDictItems;
+    map<CString, vector<shared_ptr<CUIDictItem>>> m_mapDictGroups;
+    map<CString, shared_ptr<CUIDictItem>> m_mapDictItems;
 };
 
 class CDictConfig
 {
 public:
     void Load(LPCTSTR lpszURI);
+    const CDictLangConfig& GetDictLangConfig(int nLangID) const { return m_mapLang2Config.at(nLangID); }
 private:
     map<int, CDictLangConfig> m_mapLang2Config;
 };

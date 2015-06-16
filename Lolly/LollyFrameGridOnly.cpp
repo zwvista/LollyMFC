@@ -47,7 +47,7 @@ int CLollyFrameGridOnly::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		m_wndGrid.SetGridDefault(&cell);
 	}
 
-	SendMessage(WM_LBLSETTINGS_CHANGED);
+	PostMessage(WM_LBLSETTINGS_CHANGED);
 
 	return 0;
 }

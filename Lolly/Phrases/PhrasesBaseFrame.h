@@ -20,7 +20,6 @@ protected:
 
 	virtual void OnMoveComplete();
 
-	afx_msg LRESULT OnLblSettingsChanged(WPARAM wParam, LPARAM lParam);
 	afx_msg void OnSpeak();
 	afx_msg void OnKeepSpeak();
 	afx_msg void OnUpdateKeepSpeak(CCmdUI* pCmdUI);

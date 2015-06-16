@@ -138,14 +138,13 @@ void CWordsEBFrame::OnUpdateAvailableDicts( CCmdUI* pCmdUI )
 
 void CWordsEBFrame::LoadDicts()
 {
-
 	m_wndToolBarDicts.RemoveAllButtons();
 
 	CMenu mnuDicts;
 	mnuDicts.CreateMenu();
 	int nID = ID_TB_DICTS_AVAILABLE;
 	int nImageIndex = DICTIMAGE_OFFLINE;
-	for(const CString strDictName : m_vstrDicts){
+	for(const CString strDictName : m_pConfig->m_vstrDictsEBWin){
 		AddDict(nID, strDictName, (EDictImage)nImageIndex);
 		m_mapDictID2Info[nID] = make_pair(strDictName, (EDictImage)nImageIndex++);
 		mnuDicts.AppendMenu(MF_STRING, (UINT_PTR)nID++, strDictName);
@@ -233,6 +232,6 @@ void CWordsEBFrame::OnAddComplete()
 
 void CWordsEBFrame::OnRefresh()
 {
-	m_vstrDicts.clear();
+	//m_vstrDicts.clear();
 	CWordsBaseFrame::OnRefresh();
 }
