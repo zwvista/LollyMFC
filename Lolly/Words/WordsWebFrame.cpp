@@ -7,7 +7,6 @@
 
 #include "WordsWebFrame.h"
 #include "DataGridView.h"
-#include "EditTransDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -30,8 +29,6 @@ BEGIN_MESSAGE_MAP(CWordsWebFrame, CWordsBaseFrame)
 	ON_UPDATE_COMMAND_UI(ID_TB_DELETE_TRANS, OnUpdateDeleteTrans)
 	ON_MESSAGE(WM_HTMLVIEW_DOCCOMPLETE, OnHtmlViewDocComplete)
 	ON_COMMAND(ID_TB_REFRESH, OnRefresh)
-	ON_COMMAND_RANGE(ID_TB_DICTS_AVAILABLE, ID_TB_DICTS_AVAILABLE + 50, OnAvailableDicts)
-	ON_UPDATE_COMMAND_UI_RANGE(ID_TB_DICTS_AVAILABLE, ID_TB_DICTS_AVAILABLE + 50, OnUpdateAvailableDicts)
 END_MESSAGE_MAP()
 
 // CWordsWebFrame construction/destruction
@@ -81,118 +78,36 @@ void CWordsWebFrame::OnDelete()
 
 void CWordsWebFrame::OnExtract(UINT nID)
 {
-	CString strMsg;
-	if(m_pDictHtmlCtrl->m_strDictName == DICT_DEFAULT){
-		if(!m_pDictHtmlCtrl->m_bEmptyTrans)
-			strMsg.Format(_T("ALL translations of the word \"%s\" are about to be DELETED ")
-				_T("and EXTRACTED from the web again. Are you sure?"), m_strWord);
-		if(strMsg.IsEmpty() || MessageBox(strMsg, _T(""), MB_YESNO + MB_ICONQUESTION) == IDYES)
-			theApp.ExtractTranslation(vector<CString>(1, m_strWord), m_vstrOfflineDicts, true);
-	}
-	else{
-		if(m_pDictHtmlCtrl->m_nDictImage == DICTIMAGE_ONLINE){
-			strMsg.Format(_T("The translation from the url \"%s\" is about to be EXTRACTED and %s ")
-				_T("the translation of the word \"%s\" in the dictionary \"%s\". Are you sure?"),
-				m_pDictHtmlCtrl->GetLocationURL(), nID == ID_TB_EXTRACT_OVERWRITE ? _T("used to REPLACE") : _T("APPENDED to"),
-				m_strWord, m_pDictHtmlCtrl->m_strDictName);
-		}
-		else if(!m_pDictHtmlCtrl->m_bEmptyTrans)
-			strMsg.Format(_T("The translation of the word \"%s\" in the dictionary \"%s\" ")
-				_T("is about to be DELETED and EXTRACTED from the web again. Are you sure?"),
-				m_strWord, m_pDictHtmlCtrl->m_strDictName);
-
-		if(strMsg.IsEmpty() || MessageBox(strMsg, _T(""), MB_YESNO + MB_ICONQUESTION) == IDYES)
-			if(m_pDictHtmlCtrl->m_nDictImage == DICTIMAGE_ONLINE){
-				theApp.OpenDictTable(m_strWord, m_pDictHtmlCtrl->m_rsWord, m_pDictHtmlCtrl->m_rsDict);
-				theApp.UpdateDictTable(m_pDictHtmlCtrl, m_pDictHtmlCtrl->m_rsWord, m_pDictHtmlCtrl->m_rsDict, nID == ID_TB_EXTRACT_APPEND);
-			}
-			else
-				theApp.ExtractTranslation(vector<CString>(1, m_strWord), vector<CString>(1, m_pDictHtmlCtrl->m_strDictName), true);
-	}
 }
 
 void CWordsWebFrame::OnUpdateExtractOverwrite( CCmdUI* pCmdUI )
 {
-	pCmdUI->Enable(!m_strWord.IsEmpty() && m_pDictHtmlCtrl != NULL &&
-		(m_pDictHtmlCtrl->m_nDictImage == DICTIMAGE_OFFLINE || m_pDictHtmlCtrl->m_nDictImage == DICTIMAGE_ONLINE ||
-		m_pDictHtmlCtrl->m_strDictName == DICT_DEFAULT));
+	pCmdUI->Enable(!m_strWord.IsEmpty() && m_pDictHtmlCtrl != NULL && m_pDictHtmlCtrl->CanExtractAndOverriteTranslation());
 }
 
 void CWordsWebFrame::OnUpdateExtractAppend( CCmdUI* pCmdUI )
 {
-	pCmdUI->Enable(!m_strWord.IsEmpty() && m_pDictHtmlCtrl != NULL && m_pDictHtmlCtrl->m_nDictImage == DICTIMAGE_ONLINE);
+	pCmdUI->Enable(!m_strWord.IsEmpty() && m_pDictHtmlCtrl != NULL && m_pDictHtmlCtrl->CanExtractAndAppendTranslation());
 }
 
 void CWordsWebFrame::OnEditTrans()
 {
-	CEditTransDlg dlg;
-	dlg.m_strTrans = m_pDictHtmlCtrl->m_rsWord.GetFieldValueAsString(_T("TRANSLATION"));
-	if(dlg.DoModal() == IDOK){
-		m_pDictHtmlCtrl->m_rsWord.Edit();
-		m_pDictHtmlCtrl->m_rsWord.SetFieldValue(_T("TRANSLATION"), dlg.m_strTrans);
-		m_pDictHtmlCtrl->m_rsWord.Update();
-		UpdateHtml();
-	}
+    if(m_pDictHtmlCtrl->DoEditTranslation(m_strWord))
+        UpdateHtml();
 }
 
 void CWordsWebFrame::OnUpdateEditTrans( CCmdUI* pCmdUI )
 {
-	pCmdUI->Enable(!m_strWord.IsEmpty() && m_pDictHtmlCtrl != NULL && m_pDictHtmlCtrl->m_nDictImage == DICTIMAGE_OFFLINE);
+	pCmdUI->Enable(!m_strWord.IsEmpty() && m_pDictHtmlCtrl != NULL && m_pDictHtmlCtrl->CanEditTranslation());
 }
 
 void CWordsWebFrame::OnDeleteTrans()
 {
-	auto DoDeleteTrans = [&]{
-		CString sql;
-		sql.Format(_T("UPDATE [%s] SET [TRANSLATION]='%s' WHERE WORD=N'%s'"),
-			m_pDictHtmlCtrl->m_rsDict.GetFieldValueAsString(_T("DICTTABLE")), theApp.m_strNoTrans,
-			DoubleApostrophe(m_strWord));
-		theApp.m_db.Execute(sql);
-	};
-
-	CString strMsg;
-	if(m_pDictHtmlCtrl->m_strDictName == DICT_DEFAULT){
-		strMsg.Format(_T("ALL translations of the word \"%s\" ")
-			_T("are about to be DELETED. Are you sure?"), m_strWord);
-		if(MessageBox(strMsg, _T(""), MB_YESNO + MB_ICONQUESTION) == IDYES)
-			for(const CString& strDict : m_vstrOfflineDicts){
-				m_pDictHtmlCtrl->FindDict(strDict);
-				DoDeleteTrans();
-			}
-	}
-	else{
-		strMsg.Format(_T("The translation of the word \"%s\" in the dictionary \"%s\" ")
-			_T("is about to be DELETED. Are you sure?"), m_strWord, m_pDictHtmlCtrl->m_strDictName);
-		if(MessageBox(strMsg, _T(""), MB_YESNO + MB_ICONQUESTION) == IDYES)
-			DoDeleteTrans();
-	}
 }
 
 void CWordsWebFrame::OnUpdateDeleteTrans( CCmdUI* pCmdUI )
 {
-	pCmdUI->Enable(!m_strWord.IsEmpty() && m_pDictHtmlCtrl != NULL 
-		&& (m_pDictHtmlCtrl->m_nDictImage == DICTIMAGE_OFFLINE || m_pDictHtmlCtrl->m_strDictName == DICT_DEFAULT));
-}
-
-void CWordsWebFrame::OnAvailableDicts( UINT nID )
-{
-	const auto& info = m_mapDictID2Info[nID];
-	if(info.first == DICT_DEFAULT) return;
-
-	UINT nID2 = nID - ID_TB_DICTS_AVAILABLE + ID_TB_DICTS_OFFLINEALL;
-	if(m_setDictsInUse.count(nID) == 0){
-		AddDict(nID2, info.first, info.second);
-		m_setDictsInUse.insert(nID);
-	}
-	else{
-		RemoveDict(nID2);
-		m_setDictsInUse.erase(nID);
-	}
-}
-
-void CWordsWebFrame::OnUpdateAvailableDicts( CCmdUI* pCmdUI )
-{
-	pCmdUI->SetCheck(m_setDictsInUse.count(pCmdUI->m_nID) != 0);
+	pCmdUI->Enable(!m_strWord.IsEmpty() && m_pDictHtmlCtrl != NULL && m_pDictHtmlCtrl->CanDeleteTranslation());
 }
 
 void CWordsWebFrame::LoadDicts()
@@ -267,7 +182,7 @@ void CWordsWebFrame::OnMoveComplete()
 
 void CWordsWebFrame::UpdateHtml(shared_ptr<CDictHtmlCtrl>& pDictHtmlCtrl)
 {
-	pDictHtmlCtrl->UpdateHtml(m_strWord, m_rsAutoCorrect, m_vstrLingoesDicts, m_vstrOfflineDicts, m_mapCustomDicts);
+	pDictHtmlCtrl->UpdateHtml(m_strWord, m_rsAutoCorrect);
 }
 
 void CWordsWebFrame::UpdateHtml()
@@ -332,25 +247,14 @@ BOOL CWordsWebFrame::PreTranslateMessage(MSG* pMsg)
 LRESULT CWordsWebFrame::OnHtmlViewDocComplete( WPARAM wParam, LPARAM lParam )
 {
 	CDictHtmlCtrl* pDictHtmlCtrl = (CDictHtmlCtrl*)wParam;
-	if((pDictHtmlCtrl->m_nDictImage == DICTIMAGE_ONLINE || pDictHtmlCtrl->m_nDictImage == DICTIMAGE_WEB)){
-		CString strAutomation = pDictHtmlCtrl->m_rsDict.GetFieldValueAsString(_T("AUTOMATION"));
-		if(!strAutomation.IsEmpty() && !pDictHtmlCtrl->m_bAutomationDone){
-			theApp.DoWebAutomation(pDictHtmlCtrl, strAutomation, m_strWord);
-			pDictHtmlCtrl->m_bAutomationDone = true;
-		}
-	}
+    pDictHtmlCtrl->DoWebAutomation(m_strWord);
 	return 0;
 }
 
 void CWordsWebFrame::OnRefresh()
 {
-	m_mapCustomDicts.clear();
-	m_vstrOfflineDicts.clear();
-	m_vstrOfflineDictTables.clear();
-	m_vstrLingoesDicts.clear();
 	m_pDictHtmlCtrl = NULL;
 	m_pView->m_vpDictHtmlCtrls.clear();
-	m_setDictsInUse.clear();
 
 	CWordsBaseFrame::OnRefresh();
 }

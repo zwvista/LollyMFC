@@ -24,18 +24,27 @@ public:
 	//
 	virtual void PostNcDestroy() {  }
 
-	CString m_strDictName;
-	EDictImage m_nDictImage;
-	CADORecordset2 m_rsDict;
+    CDictLangConfig* m_pConfig;
+    vector<CUIDictItem> m_vDictItems;
 	CADORecordset2 m_rsWord;
 	bool m_bEmptyTrans;
 	bool m_bAutomationDone;
 
-	void UpdateLiveHtml(LPCTSTR pszWord, LPCTSTR pszDict, LPCTSTR pszTranslation);
-	void UpdateHtml(const CString& strWord, CADORecordset2& rsAutoCorrect, const vector<CString>& vstrLingoesDicts, const vector<CString>& vstrOfflineDicts, const map<CString, vector<DictInfo>>& mapCustomDicts);
+	void UpdateLiveHtml(LPCTSTR pszIfrId, LPCTSTR pszWord, LPCTSTR pszDict, LPCTSTR pszTranslation);
+	void UpdateHtml(const CString& strWord, CADORecordset2& rsAutoCorrect);
 	void FindDict(LPCTSTR pszDictName);
+    bool CanDeleteTranslation();
+    bool CanEditTranslation();
+    bool CanExtractAndOverriteTranslation();
+    bool CanExtractAndAppendTranslation();
+    bool DoDeleteTranslation(const CString& strWord);
+    bool DoEditTranslation(const CString& strWord);
+    bool DoExtractTranslation(const CString& strWord, bool bOverriteDB);
+    void DoWebAutomation(const CString& strWord);
 
 protected:
+    CString GetTemplatedHtml(const CString& strWord, const CString& str);
+    CString GetTranslation(const CString& strWord);
 
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 

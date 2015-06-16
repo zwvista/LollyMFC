@@ -16,14 +16,14 @@
     <Filter Include="Auxiliary">
       <UniqueIdentifier>{35f97afb-6158-455f-8d86-8354df7cafcd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tools">
-      <UniqueIdentifier>{557432a2-0886-4613-add9-a1371243fa39}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Words Files">
       <UniqueIdentifier>{1ade6e19-f256-400f-a051-fa923c49060e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Phrases Files">
       <UniqueIdentifier>{9a7b85f7-4ab5-490d-8633-3b6c0141e5db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools Files">
+      <UniqueIdentifier>{557432a2-0886-4613-add9-a1371243fa39}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -112,46 +112,46 @@
       <Filter>Auxiliary</Filter>
     </ClCompile>
     <ClCompile Include="Tools\AutoCorrectTextDlg.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\ExtractWebDictFrame.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\ExtractWebDictGrid.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\ExtractWebDictOptionsDlg.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\HtmlUnitFrame.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\OptionsDlg.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\PicBookFrame.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\PicBookView.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\TestDlg.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\TestDlg2.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="HTMLEdView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\Text2PostDlg.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\BlogPostFrame.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Tools\BlogPostView.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClCompile>
     <ClCompile Include="Words\WordsAtWillFrame.cpp">
       <Filter>Words Files</Filter>
@@ -303,43 +303,43 @@
       <Filter>Auxiliary</Filter>
     </ClInclude>
     <ClInclude Include="Tools\AutoCorrectTextDlg.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="Tools\ExtractWebDictFrame.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="Tools\ExtractWebDictGrid.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="Tools\ExtractWebDictOptionsDlg.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="Tools\HtmlUnitFrame.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="Tools\OptionsDlg.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="Tools\PicBookFrame.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="Tools\PicBookView.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="Tools\TestDlg.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="HTMLEdView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tools\Text2PostDlg.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="Tools\BlogPostFrame.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="Tools\BlogPostView.h">
-      <Filter>Tools</Filter>
+      <Filter>Tools Files</Filter>
     </ClInclude>
     <ClInclude Include="Words\WordsAtWillFrame.h">
       <Filter>Words Files</Filter>

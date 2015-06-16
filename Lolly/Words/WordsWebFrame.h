@@ -32,7 +32,6 @@ public:
 protected:
 	CWordsWebView* m_pView;
 	CDictHtmlCtrl* m_pDictHtmlCtrl;
-	set<int> m_setDictsInUse;
 
 	void UpdateHtml(shared_ptr<CDictHtmlCtrl>& pDictHtmlCtrl);
 	void UpdateHtml();
@@ -53,8 +52,6 @@ protected:
 	afx_msg void OnDeleteTrans();
 	afx_msg void OnUpdateDeleteTrans(CCmdUI* pCmdUI);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
-	afx_msg void OnAvailableDicts(UINT nID);
-	afx_msg void OnUpdateAvailableDicts(CCmdUI* pCmdUI);
 	afx_msg LRESULT OnHtmlViewDocComplete(WPARAM wParam, LPARAM lParam);
 	afx_msg void OnRefresh();
 	DECLARE_MESSAGE_MAP()

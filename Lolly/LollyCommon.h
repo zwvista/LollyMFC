@@ -46,16 +46,19 @@ enum EDictImage
 
 typedef pair<CString, CString> DictInfo;
 
-#define DICT_DEFAULT _T("DEFAULT")
-#define DICT_ONLINE _T("Online")
-#define DICT_ONLINEALL _T("ONLINE")
-#define DICT_LINGOES _T("Lingoes")
-#define DICT_LINGOESALL _T("LINGOES")
-#define DICT_WEB _T("Web")
-#define DICT_OFFLINE _T("Offline")
-#define DICT_OFFLINEALL _T("OFFLINE")
-#define DICT_LIVE _T("Live")
-#define DICT_LIVEALL _T("LIVE")
+#define DICT_CONJUGATOR         _T("Conjugator")
+#define DICT_DEFAULT            _T("DEFAULT")
+#define DICT_FRHELPER           _T("Frhelper")
+#define DICT_LINGOES            _T("Lingoes")
+#define DICT_LINGOESALL         _T("LINGOES")
+#define DICT_LIVE               _T("Live")
+#define DICT_LIVEALL            _T("LIVE")
+#define DICT_LOCAL              _T("Local")
+#define DICT_OFFLINE            _T("Offline")
+#define DICT_OFFLINEALL         _T("OFFLINE")
+#define DICT_ONLINE             _T("Online")
+#define DICT_ONLINEALL          _T("ONLINE")
+#define DICT_WEB                _T("Web")
 
 inline CString DoubleApostrophe(LPCTSTR psz)
 {
@@ -90,6 +93,7 @@ public:
 class CUIDictItem : public CUIDict
 {
 public:
+    CUIDictItem(){}
     CUIDictItem(const CString& n, const CString& t, EDictImage e)
         : m_strName(n), m_strType(t), m_ImageIndex(e) {}
 
@@ -101,6 +105,10 @@ public:
 class CUIDictCollection : public CUIDict
 {
 public:
+    CUIDictCollection(){}
+    CUIDictCollection(bool b, const CString& n, const vector<CUIDictItem>& i)
+        : m_bIsPile(b), m_strName(n), m_Items(i) {}
+
     bool m_bIsPile;
     CString m_strName;
     vector<CUIDictItem> m_Items;

@@ -1,6 +1,7 @@
 #include "stdafx.h"
-#include "DictConfig.h"
 #include "Lolly.h"
+#include "LollyCommon.h"
+#include "DictConfig.h"
 
 void CDictConfig::Load(LPCTSTR lpszURI)
 {
@@ -24,6 +25,7 @@ void CDictConfig::Load(LPCTSTR lpszURI)
 }
 
 CDictLangConfig::CDictLangConfig(const wptree& ptLang, const map<CString, wptree>& mapDictGroupInfo, int nLangID)
+    : m_rsDict(&theApp.m_db)
 {
     // replacement
     for(const auto& v : ptLang)
@@ -40,7 +42,7 @@ CDictLangConfig::CDictLangConfig(const wptree& ptLang, const map<CString, wptree
         if(v.first == _T("ebwin"))
             m_vstrDictsEBWin.push_back(v.second.data().c_str());
 
-    auto AddDictGroups = [&](EDictImage nDictImage, const CString& strGroupName, const vector<CString>& vstrDictNames){
+    auto AddDictGroup = [&](EDictImage nDictImage, const CString& strGroupName, const vector<CString>& vstrDictNames){
         if(vstrDictNames.empty()) return;
 
         auto& vobjItems = m_mapDictGroups[strGroupName];
@@ -56,7 +58,6 @@ CDictLangConfig::CDictLangConfig(const wptree& ptLang, const map<CString, wptree
     };
 
     // group
-    CADORecordset2 rsDict(&theApp.m_db);
     CString sql;
     sql.Format(_T("SELECT * FROM DICTALL WHERE LANGID=%d "), nLangID);
     for(const auto& v : ptDicts)
@@ -71,17 +72,17 @@ CDictLangConfig::CDictLangConfig(const wptree& ptLang, const map<CString, wptree
                 sql2 = sql + _T("AND DICTTYPENAME = 'WEB' ORDER BY DICTNAME");
             else
                 sql2.Format(_T("%sAND DICTTYPENAME = '%s' ORDER BY ORD"), sql, strDictType);
-            rsDict.Open(sql2);
-            if(rsDict.GetRecordCount() != 0)
-                for(rsDict.MoveFirst(); !rsDict.IsEof(); rsDict.MoveNext()){
-                    auto strDict = rsDict.GetFieldValueAsString(_T("DICTNAME"));
+            m_rsDict.Open(sql2);
+            if(m_rsDict.GetRecordCount() != 0)
+                for(m_rsDict.MoveFirst(); !m_rsDict.IsEof(); m_rsDict.MoveNext()){
+                    auto strDict = m_rsDict.GetFieldValueAsString(_T("DICTNAME"));
                     vstrDictNames.push_back(strDict);
                     if(strGroupName == DICT_OFFLINE){
                         m_vstrDictsOffline.push_back(strDict);
-                        m_vstrDictTablesOffline.push_back(rsDict.GetFieldValueAsString(_T("DICTTABLE")));
+                        m_vstrDictTablesOffline.push_back(m_rsDict.GetFieldValueAsString(_T("DICTTABLE")));
                     }
                 }
-            AddDictGroups(nDictImage, strGroupName, vstrDictNames);
+            AddDictGroup(nDictImage, strGroupName, vstrDictNames);
         }
 
     // lingoes + special
@@ -94,21 +95,32 @@ CDictLangConfig::CDictLangConfig(const wptree& ptLang, const map<CString, wptree
     if(!m_vstrDictsLingoes.empty())
         vstrSpecialDicts.push_back(_T("Lingoes"));
     boost::sort(vstrSpecialDicts);
-    AddDictGroups(DICTIMAGE_SPECIAL, _T("Special"), vstrSpecialDicts);
+    AddDictGroup(DICTIMAGE_SPECIAL, _T("Special"), vstrSpecialDicts);
 
     // custom
     vector<CString> vstrDictNamesCustom;
     for(const auto& v : ptDicts)
         if(v.first == _T("custom")){
-            const auto& ptCustom = v.second;
-            CString strDictName = ptCustom.get<wstring>(_T("<xmlattr>.name")).c_str();
-            vstrDictNamesCustom.push_back(strDictName);
-            auto& vDicts = m_mapDictsCustom[strDictName];
+            auto& ptCustom = v.second;
+            CString strDictNameCustom = ptCustom.get<wstring>(_T("<xmlattr>.name")).c_str();
+            CString strDictTypeCustom = ptCustom.get<wstring>(_T("<xmlattr>.type")).c_str();
+            vstrDictNamesCustom.push_back(strDictNameCustom);
+            auto& vDicts = m_mapDictsCustom[strDictNameCustom];
+            vector<CUIDictItem> items;
             for(const auto& v2 : ptCustom)
-                if(v2.first == _T("dict"))
-                vDicts.push_back(DictInfo(
-                    v2.second.get<wstring>(_T("<xmlattr>.type")).c_str(),
-                    v2.second.data().c_str()));
+                if(v2.first == _T("dict")){
+                    CString strDictName = v2.second.data().c_str();
+                    CString strDictType = v2.second.get<wstring>(_T("<xmlattr>.type")).c_str();
+                    vector<CUIDictItem> items2 =
+                        strDictName == DICT_OFFLINEALL ? m_mapDictGroups.at(DICT_OFFLINE) :
+                        strDictName == DICT_ONLINEALL ? m_mapDictGroups.at(DICT_ONLINE) :
+                        strDictName == DICT_LIVEALL ? m_mapDictGroups.at(DICT_LIVE) :
+                        vector<CUIDictItem>{m_mapDictItems.at(strDictType + strDictName)};
+                    items.insert(items.end(), items2.begin(), items2.end());
+                }
+            m_mapDictsCustom[strDictNameCustom] = shared_ptr<CUIDict>(
+                new CUIDictCollection(strDictTypeCustom == _T("Pile"), strDictNameCustom, items));
         }
-    AddDictGroups(DICTIMAGE_CUSTOM, _T("Custom"), vstrDictNamesCustom);
+    AddDictGroup(DICTIMAGE_CUSTOM, _T("Custom"), vstrDictNamesCustom);
+    m_rsDict.Open(sql);
 }

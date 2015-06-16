@@ -53,6 +53,9 @@
 #include <boost/range/algorithm.hpp>
 #include <boost/signals2.hpp>
 #include <boost/algorithm/clamp.hpp>
+#include <boost/algorithm/cxx11/none_of.hpp>
+#include <boost/algorithm/cxx11/any_of.hpp>
+#include <boost/algorithm/cxx11/all_of.hpp>
 
 using namespace std;
 using namespace boost::property_tree;
