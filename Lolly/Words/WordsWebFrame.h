@@ -34,7 +34,7 @@ protected:
 	CDictHtmlCtrl* m_pDictHtmlCtrl;
     vector<shared_ptr<CUIDict>> m_vpUIDicts;
 
-	void UpdateHtml(shared_ptr<CDictHtmlCtrl>& pDictHtmlCtrl);
+	void UpdateHtml(CDictHtmlCtrl* pDictHtmlCtrl);
 	void UpdateHtml();
 
 	virtual void OnMoveComplete();

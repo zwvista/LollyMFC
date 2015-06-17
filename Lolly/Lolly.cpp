@@ -161,6 +161,7 @@ BOOL CLollyApp::InitInstance()
 
     CString strConnection;
     strConnection.Format(_T("Driver=SQLite3 ODBC Driver;Database=%sLolly.db;"), m_strAppDataFolder);
+    //strConnection.Format(_T("DSN=Lolly;"));
 	m_db.Open(strConnection);
 	m_lbuSettings.nLangID = GetProfileInt(_T("Settings"), _T("LangID"), 3);
 

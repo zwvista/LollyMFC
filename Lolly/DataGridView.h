@@ -17,7 +17,7 @@ protected:
 
 	CEdit* m_pedtGridItem;
 	CDataGrid* m_pDataGrid;
-	CWndResizer m_resizer;
+    CWndResizer m_resizer;
 
 public:
 	virtual ~CDataGridView();
@@ -27,6 +27,8 @@ protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnSetFocus(CWnd* pOldWnd);
 	DECLARE_MESSAGE_MAP()
+public:
+    afx_msg void OnSize(UINT nType, int cx, int cy);
 };
 
 

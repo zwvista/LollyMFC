@@ -16,7 +16,7 @@ public:
 	virtual void OnDraw(CDC* pDC);  // overridden to draw this view
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
-	vector<shared_ptr<CDictHtmlCtrl>> m_vpDictHtmlCtrls;
+	vector<unique_ptr<CDictHtmlCtrl>> m_vpDictHtmlCtrls;
 
 protected:
 	afx_msg void OnSize(UINT nType, int cx, int cy);

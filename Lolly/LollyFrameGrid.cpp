@@ -84,8 +84,8 @@ void CLollyFrameGrid::LoadTables()
 LRESULT CLollyFrameGrid::OnLblSettingsChanged(WPARAM wParam, LPARAM lParam)
 {
 	m_lbuSettings = theApp.m_lbuSettings;
-    m_pConfig = &theApp.m_objConfig.GetDictLangConfig(m_lbuSettings.nLangID);
-    m_pConfigChn = &theApp.m_objConfig.GetDictLangConfig(0);
+    m_pConfig = theApp.m_objConfig.GetDictLangConfig(m_lbuSettings.nLangID);
+    m_pConfigChn = theApp.m_objConfig.GetDictLangConfig(0);
 	SendMessage(WM_COMMAND, ID_TB_REFRESH);
 	SetWindowText(GetFrameText());
 	return 0;

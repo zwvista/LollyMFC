@@ -136,15 +136,15 @@ void CWordsWebFrame::AddDict(UINT nID, CUIDict* pUIDict)
 {
 	CWordsBaseFrame::AddDict(nID, pUIDict);
 
-    auto pDictHtmlCtrl = make_shared<CDictHtmlCtrl>();
+    auto pDictHtmlCtrl = make_unique<CDictHtmlCtrl>();
     pDictHtmlCtrl->Create(CRect(), m_pView, 1234 + m_pView->m_vpDictHtmlCtrls.size(), WS_CHILD);
     pDictHtmlCtrl->SetSilent(TRUE);
     CRect rc;
     m_pView->GetClientRect(rc);
-    m_pView->m_vpDictHtmlCtrls.push_back(pDictHtmlCtrl);
     m_pView->SendMessage(WM_SIZE, 0, MAKELPARAM(rc.Width(), rc.Height()));
 
     pDictHtmlCtrl->m_pConfig = m_pConfig;
+
     if(auto pUIDictItem = dynamic_cast<CUIDictItem*>(pUIDict))
         pDictHtmlCtrl->m_vpUIDictItems.push_back(pUIDictItem);
     else{
@@ -153,7 +153,8 @@ void CWordsWebFrame::AddDict(UINT nID, CUIDict* pUIDict)
             pDictHtmlCtrl->m_vpUIDictItems.push_back(pUIDictItem.get());
     }
 
-    UpdateHtml(pDictHtmlCtrl);
+    UpdateHtml(pDictHtmlCtrl.get());
+    m_pView->m_vpDictHtmlCtrls.push_back(move(pDictHtmlCtrl));
 }
 
 int CWordsWebFrame::RemoveDict( UINT nID )
@@ -180,15 +181,15 @@ void CWordsWebFrame::OnMoveComplete()
 		UpdateHtml();
 }
 
-void CWordsWebFrame::UpdateHtml(shared_ptr<CDictHtmlCtrl>& pDictHtmlCtrl)
+void CWordsWebFrame::UpdateHtml(CDictHtmlCtrl* pDictHtmlCtrl)
 {
 	pDictHtmlCtrl->UpdateHtml(m_strWord, m_rsAutoCorrect);
 }
 
 void CWordsWebFrame::UpdateHtml()
 {
-	for(auto& v : m_pView->m_vpDictHtmlCtrls)
-		UpdateHtml(v);
+	for(auto&& v : m_pView->m_vpDictHtmlCtrls)
+		UpdateHtml(v.get());
 }
 
 void CWordsWebFrame::OnTimer( UINT_PTR nIDEvent )

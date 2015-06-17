@@ -20,8 +20,8 @@ class CDictConfig
 {
 public:
     void Load(LPCTSTR lpszURI);
-    const CDictLangConfig& GetDictLangConfig(int nLangID) const { return m_mapLang2Config.at(nLangID); }
+    const CDictLangConfig* GetDictLangConfig(int nLangID) const { return m_mapLang2Config.at(nLangID).get(); }
 private:
-    map<int, CDictLangConfig> m_mapLang2Config;
+    map<int, shared_ptr<CDictLangConfig>> m_mapLang2Config;
 };
 

@@ -69,9 +69,16 @@ void CDictHtmlCtrl::UpdateLiveHtml(LPCTSTR pszIfrId, LPCTSTR pszWord, LPCTSTR ps
 
 void CDictHtmlCtrl::FindDict(LPCTSTR pszDictName)
 {
-	CString str;
-	str.Format(_T("DICTNAME='%s'"), pszDictName);
-    m_pConfig->m_rsDict.FindFirst(str);
+    // I have no idea why ADO Find doesn't work for a STRING field.
+    //CString str;
+    //str.Format(_T("DICTNAME='%s'"), pszDictName);
+    //m_pConfig->m_rsDict.FindFirst(str);
+    
+    for(m_pConfig->m_rsDict.MoveFirst(); !m_pConfig->m_rsDict.IsEOF(); m_pConfig->m_rsDict.MoveNext()){
+        auto name = m_pConfig->m_rsDict.GetFieldValueAsString(_T("DICTNAME"));
+        if(name == pszDictName)
+            return;
+    }
 }
 
 CString CDictHtmlCtrl::GetTranslation(const CString& strWord)
