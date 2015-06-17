@@ -26,7 +26,7 @@ END_MESSAGE_MAP()
 
 CWordsUnitsEBFrame::CWordsUnitsEBFrame()
 {
-	m_strReindexItemFieldName = _T("WORD");
+	m_strReorderItemFieldName = _T("WORD");
 }
 
 CWordsUnitsEBFrame::~CWordsUnitsEBFrame()

@@ -24,7 +24,7 @@ END_MESSAGE_MAP()
 CWordsUnitsFrame::CWordsUnitsFrame()
 {
 	m_nToolBarID = IDR_TOOLBAR_WORDSUNITS;
-	m_strReindexItemFieldName = _T("WORD");
+	m_strReorderItemFieldName = _T("WORD");
 }
 
 CWordsUnitsFrame::~CWordsUnitsFrame()

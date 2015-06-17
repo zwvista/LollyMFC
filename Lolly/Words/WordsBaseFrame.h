@@ -34,7 +34,6 @@ protected:
 	CString m_strWord;
 	bool m_bKeepSpeak;
 	CMFCToolBar m_wndToolBarDicts;
-	CMFCToolBarMenuButton* m_pbtnDicts;
 	map<int, pair<CString, EDictImage>> m_mapDictID2Info;
 	int m_nDictIndex;
 	map<CString, int> m_mapWord2Level;

@@ -24,7 +24,7 @@ END_MESSAGE_MAP()
 CAuxAutoCorrectFrame::CAuxAutoCorrectFrame()
 {
 	m_nToolBarID = IDR_TOOLBAR_AUXAUTOCORRECT;
-	m_strReindexItemFieldName = _T("EXTENDED");
+	m_strReorderItemFieldName = _T("EXTENDED");
 }
 
 CAuxAutoCorrectFrame::~CAuxAutoCorrectFrame()

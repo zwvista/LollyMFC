@@ -19,7 +19,7 @@ void CDictConfig::Load(LPCTSTR lpszURI)
         if(v.first == _T("language")){
             auto& ptLang = v.second;
             int nLangID = ptLang.get<int>(_T("<xmlattr>.id"));
-            m_mapLang2Config[nLangID] = make_shared<CDictLangConfig>(ptLang, mapDictGroupInfo, nLangID);
+            m_mapLang2Config[nLangID] = make_unique<CDictLangConfig>(ptLang, mapDictGroupInfo, nLangID);
         }
 }
 

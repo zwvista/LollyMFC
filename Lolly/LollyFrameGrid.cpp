@@ -7,7 +7,7 @@
 
 #include "LollyFrameGrid.h"
 #include "FilterDlg.h"
-#include "ReindexDlg.h"
+#include "ReorderDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -42,8 +42,8 @@ BEGIN_MESSAGE_MAP(CLollyFrameGrid, CLollyFrame)
 	ON_UPDATE_COMMAND_UI(ID_TB_FILTER_SET, OnUpdateFilter)
 	ON_COMMAND(ID_TB_FILTER_REMOVE, OnFilterRemove)
 	ON_UPDATE_COMMAND_UI(ID_TB_FILTER_REMOVE, OnUpdateFilter)
-	ON_COMMAND(ID_TB_REINDEX, OnReindex)
-	ON_UPDATE_COMMAND_UI(ID_TB_REINDEX, OnUpdateReindex)
+	ON_COMMAND(ID_TB_REORDER, OnReorder)
+	ON_UPDATE_COMMAND_UI(ID_TB_REORDER, OnUpdateReorder)
 END_MESSAGE_MAP()
 
 // CLollyFrameGrid construction/destruction
@@ -57,9 +57,9 @@ CLollyFrameGrid::CLollyFrameGrid()
 	, m_nRecordCount(0)
 	, m_bHasFilter(false)
 	, m_bHasMultiAdd(false)
-	, m_bHasReindex(false)
+	, m_bHasReorder(false)
 	, m_bTimerNavigate(false)
-	, m_bIsReindexing(false)
+	, m_bIsReordering(false)
 	, m_pbtnNavigate(NULL)
 {
 	// TODO: add member initialization code here
@@ -100,7 +100,7 @@ LRESULT CLollyFrameGrid::OnToolbarReset( WPARAM wParam, LPARAM lParam )
 		m_wndToolBar.SetToolBarBtnText(m_wndToolBar.CommandToIndex(ID_TB_RECORDCOUNT), _T(""), TRUE, FALSE);
 
 		m_bHasMultiAdd = m_wndToolBar.CommandToIndex(ID_TB_MULTIADD) != -1;
-		m_bHasReindex = m_wndToolBar.CommandToIndex(ID_TB_REINDEX) != -1;
+		m_bHasReorder = m_wndToolBar.CommandToIndex(ID_TB_REORDER) != -1;
 
 		int nIndex = m_wndToolBar.CommandToIndex(ID_TB_NAVIGATE_FORWARD);
 		if(nIndex != -1){
@@ -118,9 +118,9 @@ LRESULT CLollyFrameGrid::OnToolbarReset( WPARAM wParam, LPARAM lParam )
 void CLollyFrameGrid::KeepGridRowWithRS()
 {
 	//m_wndGrid.SetFocus();
-	m_bIsReindexing = true;
+	m_bIsReordering = true;
 	m_wndGrid.GotoRow(m_rs.GetAbsolutePosition() - 1);
-	m_bIsReindexing = false;
+	m_bIsReordering = false;
 }
 
 void CLollyFrameGrid::OnMoveFirst()
@@ -191,7 +191,7 @@ void CLollyFrameGrid::OnRefresh()
 
 void CLollyFrameGrid::MoveComplete( EventReasonEnum adReason, struct Error *pError, EventStatusEnum *adStatus, struct _Recordset *pRecordset )
 {
-	if(!m_wndGrid.IsInitializing() && !m_bIsReindexing && adReason != adRsnRequery)
+	if(!m_wndGrid.IsInitializing() && !m_bIsReordering && adReason != adRsnRequery)
 		OnMoveComplete();
 }
 
@@ -323,24 +323,24 @@ void CLollyFrameGrid::DoNavigate()
 	KeepGridRowWithRS();
 }
 
-void CLollyFrameGrid::OnReindex()
+void CLollyFrameGrid::OnReorder()
 {
-	m_bIsReindexing = true;
-	CReindexDlg dlg(m_rs, m_strReindexItemFieldName, this);
+	m_bIsReordering = true;
+	CReorderDlg dlg(m_rs, m_strReorderItemFieldName, this);
 	if(dlg.DoModal() == IDOK){
-		m_bIsReindexing = false;
+		m_bIsReordering = false;
 		m_wndGrid.Rebind();
 	}
 	else{
 		m_rs.MoveFirst();
 		m_rs.Move(m_wndGrid.GetCurrentRow());
-		m_bIsReindexing = false;
+		m_bIsReordering = false;
 	}
 }
 
-void CLollyFrameGrid::OnUpdateReindex( CCmdUI* pCmdUI )
+void CLollyFrameGrid::OnUpdateReorder( CCmdUI* pCmdUI )
 {
-	pCmdUI->Enable(m_bHasReindex);
+	pCmdUI->Enable(m_bHasReorder);
 }
 
 

@@ -23,7 +23,7 @@ END_MESSAGE_MAP()
 
 CWordsAtWillEBFrame::CWordsAtWillEBFrame()
 {
-	m_strReindexItemFieldName = _T("WORD");
+	m_strReorderItemFieldName = _T("WORD");
 }
 
 CWordsAtWillEBFrame::~CWordsAtWillEBFrame()

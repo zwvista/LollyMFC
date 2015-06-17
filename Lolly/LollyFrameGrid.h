@@ -36,10 +36,10 @@ protected:
 	int m_nRecordPos, m_nRecordCount;
 	int m_nFilterScope;
 	CString m_strFilter;
-	bool m_bHasFilter, m_bHasMultiAdd, m_bHasReindex;
-	bool m_bTimerNavigate, m_bIsReindexing;
+	bool m_bHasFilter, m_bHasMultiAdd, m_bHasReorder;
+	bool m_bTimerNavigate, m_bIsReordering;
 	CMFCToolBarButton* m_pbtnNavigate;
-	CString m_strReindexItemFieldName;
+	CString m_strReorderItemFieldName;
     const CDictLangConfig *m_pConfig, *m_pConfigChn;
 
 	virtual CString GetSQL() {return CString();}
@@ -81,8 +81,8 @@ protected:
 	afx_msg void OnFilterSet(); 
 	afx_msg void OnFilterRemove(); 
 	afx_msg void OnUpdateFilter(CCmdUI* pCmdUI);
-	afx_msg void OnReindex(); 
-	afx_msg void OnUpdateReindex(CCmdUI* pCmdUI);
+	afx_msg void OnReorder(); 
+	afx_msg void OnUpdateReorder(CCmdUI* pCmdUI);
 
 	DECLARE_MESSAGE_MAP()
 public:

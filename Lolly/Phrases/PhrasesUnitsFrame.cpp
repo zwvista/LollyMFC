@@ -24,7 +24,7 @@ END_MESSAGE_MAP()
 CPhrasesUnitsFrame::CPhrasesUnitsFrame()
 {
 	m_nToolBarID = IDR_TOOLBAR_PHRASESUNITS;
-	m_strReindexItemFieldName = _T("PHRASE");
+	m_strReorderItemFieldName = _T("PHRASE");
 }
 
 CPhrasesUnitsFrame::~CPhrasesUnitsFrame()

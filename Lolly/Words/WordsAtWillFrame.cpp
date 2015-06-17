@@ -25,7 +25,7 @@ END_MESSAGE_MAP()
 CWordsAtWillFrame::CWordsAtWillFrame()
 {
 	m_nToolBarID = IDR_TOOLBAR_WORDSATWILL;
-	m_strReindexItemFieldName = _T("WORD");
+	m_strReorderItemFieldName = _T("WORD");
 }
 
 CWordsAtWillFrame::~CWordsAtWillFrame()

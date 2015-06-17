@@ -62,7 +62,7 @@
 #define IDR_TOOLBAR_WORDSLANG           322
 #define IDD_FILTER                      322
 #define IDR_TOOLBAR_WORDSBOOKS          323
-#define IDD_REINDEX                     323
+#define IDD_REORDER                     323
 #define IDR_TOOLBAR_PHRASESUNITS        324
 #define IDD_AUTOCORRECT_TEXT            324
 #define IDR_TOOLBAR_PHRASESLANG         325
@@ -102,7 +102,7 @@
 #define ID_TB_ADDNEW                    413
 #define ID_TB_DELETE                    414
 #define ID_TB_REFRESH                   415
-#define ID_TB_REINDEX                   416
+#define ID_TB_REORDER                   416
 #define ID_TB_EXTRACT_OVERWRITE         417
 #define ID_TB_EXTRACT_APPEND            418
 #define ID_TB_DELETE_TRANS              419

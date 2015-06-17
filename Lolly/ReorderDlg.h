@@ -1,19 +1,19 @@
 #pragma once
 
-// CReindexDlg dialog
+// CReorderDlg dialog
 
 #include "DragAndDropListBox.h"
 
-class CReindexDlg : public CDialog
+class CReorderDlg : public CDialog
 {
-	DECLARE_DYNAMIC(CReindexDlg)
+	DECLARE_DYNAMIC(CReorderDlg)
 
 public:
-	CReindexDlg(CADORecordset2& rs, CString& strItemFieldName, CWnd* pParent = NULL);   // standard constructor
-	virtual ~CReindexDlg();
+	CReorderDlg(CADORecordset2& rs, CString& strItemFieldName, CWnd* pParent = NULL);   // standard constructor
+	virtual ~CReorderDlg();
 
 // Dialog Data
-	enum { IDD = IDD_REINDEX };
+	enum { IDD = IDD_REORDER };
 
 protected:
 	CWndResizer m_resizer;

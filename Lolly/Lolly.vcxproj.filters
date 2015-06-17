@@ -90,9 +90,6 @@
     <ClCompile Include="FilterDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReindexDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Auxiliary\AuxAutoCorrectFrame.cpp">
       <Filter>Auxiliary</Filter>
     </ClCompile>
@@ -213,6 +210,9 @@
     <ClCompile Include="DictConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ReorderDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataGrid.h">
@@ -282,9 +282,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FilterDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ReindexDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Auxiliary\AuxAutoCorrectFrame.h">
@@ -405,6 +402,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LollyCommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReorderDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,43 +1,43 @@
-// ReindexDlg.cpp : implementation file
+// ReorderDlg.cpp : implementation file
 //
 
 #include "stdafx.h"
 #include "Lolly.h"
-#include "ReindexDlg.h"
+#include "ReorderDlg.h"
 #include "afxdialogex.h"
 
 
-// CReindexDlg dialog
+// CReorderDlg dialog
 
-IMPLEMENT_DYNAMIC(CReindexDlg, CDialog)
+IMPLEMENT_DYNAMIC(CReorderDlg, CDialog)
 
-CReindexDlg::CReindexDlg(CADORecordset2& rs, CString& strItemFieldName, CWnd* pParent /*=NULL*/)
-	: CDialog(CReindexDlg::IDD, pParent)
+CReorderDlg::CReorderDlg(CADORecordset2& rs, CString& strItemFieldName, CWnd* pParent /*=NULL*/)
+	: CDialog(CReorderDlg::IDD, pParent)
 	, m_rs(rs)
 	, m_strItemFieldName(strItemFieldName)
 {
 
 }
 
-CReindexDlg::~CReindexDlg()
+CReorderDlg::~CReorderDlg()
 {
 }
 
-void CReindexDlg::DoDataExchange(CDataExchange* pDX)
+void CReorderDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST_ITEMS, m_lstItems);
 }
 
 
-BEGIN_MESSAGE_MAP(CReindexDlg, CDialog)
+BEGIN_MESSAGE_MAP(CReorderDlg, CDialog)
 END_MESSAGE_MAP()
 
 
-// CReindexDlg message handlers
+// CReorderDlg message handlers
 
 
-BOOL CReindexDlg::OnInitDialog()
+BOOL CReorderDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
@@ -62,7 +62,7 @@ BOOL CReindexDlg::OnInitDialog()
 }
 
 
-void CReindexDlg::OnOK()
+void CReorderDlg::OnOK()
 {
 	for(int i = 0, count = m_lstItems.GetCount(); i < count; ++i){
 		int n = m_lstItems.GetItemData(i);

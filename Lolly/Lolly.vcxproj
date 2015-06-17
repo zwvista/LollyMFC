@@ -167,7 +167,7 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <ClCompile Include="Phrases\PhrasesBaseFrame.cpp" />
     <ClCompile Include="Phrases\PhrasesLangFrame.cpp" />
     <ClCompile Include="Phrases\PhrasesUnitsFrame.cpp" />
-    <ClCompile Include="ReindexDlg.cpp" />
+    <ClCompile Include="ReorderDlg.cpp" />
     <ClCompile Include="SelectKanaDlg.cpp" />
     <ClCompile Include="SelectUnitsDlg.cpp" />
     <ClCompile Include="SelectPicBookDlg.cpp" />
@@ -235,7 +235,7 @@ call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
     <ClInclude Include="Phrases\PhrasesBaseFrame.h" />
     <ClInclude Include="Phrases\PhrasesLangFrame.h" />
     <ClInclude Include="Phrases\PhrasesUnitsFrame.h" />
-    <ClInclude Include="ReindexDlg.h" />
+    <ClInclude Include="ReorderDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SelectKanaDlg.h" />
     <ClInclude Include="SelectUnitsDlg.h" />

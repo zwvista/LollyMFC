@@ -34,7 +34,6 @@ END_MESSAGE_MAP()
 
 CWordsBaseFrame::CWordsBaseFrame()
 	: m_bKeepSpeak(false)
-	, m_pbtnDicts(NULL)
 	, m_nDictIndex(-1)
 	, m_rsWordLevel(&theApp.m_db)
 {
@@ -114,17 +113,7 @@ int CWordsBaseFrame::OnCreate( LPCREATESTRUCT lpCreateStruct )
 
 void CWordsBaseFrame::CreateDictCtrls()
 {
-	// Here we have to load the temporary menu IDR_POPUP_NAVIGATE
-	// and use the menu handle to initialize the CMFCToolBarMenuButton object.
-	// The menu has one menu item, so the command list in the object will not be empty
-	// and m_bDrawDownArrow will be set to TRUE in CMFCToolBarMenuButton::OnChangeParentWnd.
-	// The drop-down arrow will be drawn on the button only when m_bDrawDownArrow is set to TRUE.
-	// If we use a NULL menu handle to initialize the object,
-	// m_bDrawDownArrow will be set to FALSE and the drop-down arrow will not appear.
-	CMenu menu;
-	menu.LoadMenu(IDR_POPUP_NAVIGATE);
-	m_wndToolBar.ReplaceButton(ID_TB_DICTS, CMFCToolBarMenuButton((UINT)-1, menu.Detach(), -1,  _T("Dictionaries")));
-	m_pbtnDicts = (CMFCToolBarMenuButton*)m_wndToolBar.GetButton(m_wndToolBar.CommandToIndex((UINT)-1));
+    m_wndToolBar.SetToolBarBtnText(m_wndToolBar.CommandToIndex(ID_TB_DICTS), _T("Dictionaries"));
 }
 
 void CWordsBaseFrame::AddDict(UINT nID, CUIDict* pUIDict)
