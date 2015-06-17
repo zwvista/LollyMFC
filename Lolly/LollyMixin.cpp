@@ -287,7 +287,7 @@ CString GetDocumentTitle( CHtmlView* pView )
 void CLollyMixin::OpenDictTable( const CString& strWord, CADORecordset2& rsWord, CADORecordset2& rsDict )
 {
 	CString sql;
-	sql.Format(_T("SELECT * FROM [%s] WHERE WORD=N'%s'"),
+	sql.Format(_T("SELECT * FROM [%s] WHERE WORD='%s'"),
 		rsDict.GetFieldValueAsString(_T("DICTTABLE")), DoubleApostrophe(strWord));
 	rsWord.Open(sql);
 	if(rsWord.IsEof()){

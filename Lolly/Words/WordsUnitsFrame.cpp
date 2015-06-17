@@ -119,7 +119,7 @@ void CWordsUnitsFrame::InsertWordIfNeeded()
 {
 	CADORecordset2 rs(&theApp.m_db);
 	CString sql;
-	sql.Format(_T("SELECT COUNT(*) FROM WORDSLANG WHERE LANGID=%d AND WORD=N'%s'"),
+	sql.Format(_T("SELECT COUNT(*) FROM WORDSLANG WHERE LANGID=%d AND WORD='%s'"),
 		m_lbuSettings.nLangID, DoubleApostrophe(m_strWord));
 	rs.Open(sql);
 	if(rs.GetFieldValueAsInt(0) == 0){
@@ -134,7 +134,7 @@ void CWordsUnitsFrame::DeleteWordIfNeeded()
 	CADORecordset2 rs(&theApp.m_db);
 	CString sql;
 	sql.Format(_T("SELECT COUNT(*) FROM (BOOKS INNER JOIN WORDSBOOK ON BOOKS.BOOKID ")
-		_T(" = WORDSBOOK.BOOKID) WHERE (BOOKS.LANGID=%d) AND (WORDSBOOK.WORD=N'%s')"),
+		_T(" = WORDSBOOK.BOOKID) WHERE (BOOKS.LANGID=%d) AND (WORDSBOOK.WORD='%s')"),
 		m_lbuSettings.nLangID, DoubleApostrophe(m_strWord));
 	rs.Open(sql);
 	if(rs.GetFieldValueAsInt(0) == 0){
@@ -142,7 +142,7 @@ void CWordsUnitsFrame::DeleteWordIfNeeded()
 		strMsg.Format(_T("The word \"%s\" is about to be DELETED from the language \"%s\". Are you sure?"),
 			m_strWord, m_lbuSettings.GetLangDesc());
 		if(MessageBox(strMsg, _T(""), MB_YESNO + MB_ICONQUESTION) == IDYES){
-			sql.Format(_T("DELETE FROM WORDSLANG WHERE LANGID=%d AND WORD=N'%s'"),
+			sql.Format(_T("DELETE FROM WORDSLANG WHERE LANGID=%d AND WORD='%s'"),
 				m_lbuSettings.nLangID, DoubleApostrophe(m_strWord));
 			theApp.m_db.Execute(sql);
 		}

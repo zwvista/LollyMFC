@@ -86,27 +86,28 @@ CString ExtractFromHtml(LPCTSTR pszText, LPCTSTR pszTransform, LPCTSTR pszDefaul
 class CUIDict
 {
 public:
-    virtual ~CUIDict(){}
-};
-
-class CUIDictItem : public CUIDict
-{
-public:
-    CUIDictItem(const CString& n, const CString& t, EDictImage e)
+    CUIDict(const CString& n, const CString& t, EDictImage e)
         : m_strName(n), m_strType(t), m_ImageIndex(e) {}
+    virtual ~CUIDict(){}
 
     CString m_strName;
     CString m_strType;
     EDictImage m_ImageIndex;
 };
 
+class CUIDictItem : public CUIDict
+{
+public:
+    using CUIDict::CUIDict;
+};
+
 class CUIDictCollection : public CUIDict
 {
 public:
-    CUIDictCollection(bool b, const CString& n, const vector<shared_ptr<CUIDictItem>>& i)
-        : m_bIsPile(b), m_strName(n), m_vpItems(i) {}
+    CUIDictCollection(const CString& n, const CString& t, EDictImage e, const vector<shared_ptr<CUIDictItem>>& i)
+        : CUIDict(n, t, e), m_vpItems(i) {}
 
-    bool m_bIsPile;
-    CString m_strName;
+    bool IsPile() const { return m_strType == _T("Pile"); }
+
     vector<shared_ptr<CUIDictItem>> m_vpItems;
 };

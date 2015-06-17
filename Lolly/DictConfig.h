@@ -11,7 +11,7 @@ public:
     vector<CString> m_vstrDictsLingoes;
     map<CString, shared_ptr<CUIDict>> m_mapDictsCustom;
     vector<CString> m_vstrDictsOffline, m_vstrDictTablesOffline;
-    CADORecordset2 m_rsDict;
+    mutable CADORecordset2 m_rsDict;
     map<CString, vector<shared_ptr<CUIDictItem>>> m_mapDictGroups;
     map<CString, shared_ptr<CUIDictItem>> m_mapDictItems;
 };

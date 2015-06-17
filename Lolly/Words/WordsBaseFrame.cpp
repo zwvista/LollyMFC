@@ -17,7 +17,8 @@ IMPLEMENT_DYNCREATE(CWordsBaseFrame, CLollyFrameGrid)
 
 BEGIN_MESSAGE_MAP(CWordsBaseFrame, CLollyFrameGrid)
 	ON_WM_CREATE()
-	ON_COMMAND(ID_TB_SPEAK, OnSpeak)
+    ON_MESSAGE(WM_LBLSETTINGS_CHANGED, OnLblSettingsChanged)
+    ON_COMMAND(ID_TB_SPEAK, OnSpeak)
 	ON_COMMAND(ID_TB_KEEPSPEAK, OnKeepSpeak)
 	ON_UPDATE_COMMAND_UI(ID_TB_SPEAK, OnUpdateSpeak)
 	ON_UPDATE_COMMAND_UI(ID_TB_KEEPSPEAK, OnUpdateKeepSpeak)
@@ -95,7 +96,6 @@ void CWordsBaseFrame::LoadTables()
 	m_wndGrid.m_sigCellFormatting.connect(std::bind(&CWordsBaseFrame::DataGridCellFormatting, this, 
 		std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 	CLollyFrameGrid::LoadTables();
-	LoadDicts();
 }
 
 int CWordsBaseFrame::OnCreate( LPCREATESTRUCT lpCreateStruct )
@@ -127,12 +127,12 @@ void CWordsBaseFrame::CreateDictCtrls()
 	m_pbtnDicts = (CMFCToolBarMenuButton*)m_wndToolBar.GetButton(m_wndToolBar.CommandToIndex((UINT)-1));
 }
 
-void CWordsBaseFrame::AddDict( UINT nID, LPCTSTR pszDict, EDictImage nImageIndex )
+void CWordsBaseFrame::AddDict(UINT nID, CUIDict* pUIDict)
 {
 	int count = m_wndToolBarDicts.GetCount();
 	if(count > 0) --count;
-	m_wndToolBarDicts.InsertButton(CMFCToolBarButton(nID, CMFCToolBar::GetDefaultImage(ID_TB_DICTS_OFFLINEALL + nImageIndex)));
-	m_wndToolBarDicts.SetToolBarBtnText(count, pszDict);
+	m_wndToolBarDicts.InsertButton(CMFCToolBarButton(nID, CMFCToolBar::GetDefaultImage(ID_TB_DICTS_OFFLINEALL + pUIDict->m_ImageIndex)));
+	m_wndToolBarDicts.SetToolBarBtnText(count, pUIDict->m_strName);
 	m_wndToolBarDicts.EnableCustomizeButton(TRUE, (UINT)-1, _T(""));
 	m_wndToolBarDicts.AdjustSizeImmediate();
 }
@@ -249,7 +249,7 @@ void CWordsBaseFrame::OnWordLevelChange( UINT nID )
 		auto nNewLevel = boost::algorithm::clamp(nLevel + nDelta, -3, 3);
 		if(nLevel != nNewLevel){
 			CString sql;
-			sql.Format(_T("UPDATE WORDSLANG SET LEVEL=%d WHERE LANGID=%d AND WORD=N'%s'"),
+			sql.Format(_T("UPDATE WORDSLANG SET LEVEL=%d WHERE LANGID=%d AND WORD='%s'"),
 				nNewLevel, m_lbuSettings.nLangID, DoubleApostrophe(pszWord));
 			m_rsWordLevel.Open(sql);
 			m_mapWord2Level[pszWord] = nNewLevel;
@@ -262,7 +262,7 @@ int CWordsBaseFrame::GetWordLevel( LPCTSTR pszWord )
 {
 	if(m_mapWord2Level.count(pszWord) == 0){
 		CString sql;
-		sql.Format(_T("SELECT LEVEL FROM WORDSLANG WHERE LANGID=%d AND WORD=N'%s'"),
+		sql.Format(_T("SELECT LEVEL FROM WORDSLANG WHERE LANGID=%d AND WORD='%s'"),
 			m_lbuSettings.nLangID, DoubleApostrophe(pszWord));
 		m_rsWordLevel.Open(sql);
 		m_mapWord2Level[pszWord] = m_rsWordLevel.IsEof() ? 0 : m_rsWordLevel.GetFieldValueAsInt(_T("LEVEL"));
@@ -275,4 +275,11 @@ void CWordsBaseFrame::OnRefresh()
 	m_mapWord2Level.clear();
 	m_mapDictID2Info.clear();
 	CLollyFrameGrid::OnRefresh();
+}
+
+LRESULT CWordsBaseFrame::OnLblSettingsChanged(WPARAM wParam, LPARAM lParam)
+{
+    CLollyFrameGrid::OnLblSettingsChanged(wParam, lParam);
+    LoadDicts();
+    return 0;
 }
