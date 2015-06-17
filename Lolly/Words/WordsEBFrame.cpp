@@ -140,16 +140,16 @@ void CWordsEBFrame::LoadDicts()
 {
 	m_wndToolBarDicts.RemoveAllButtons();
 
-	CMenu mnuDicts;
-	mnuDicts.CreateMenu();
-	int nID = ID_TB_DICTS_AVAILABLE;
-	int nImageIndex = DICTIMAGE_OFFLINE;
-	for(const CString strDictName : m_pConfig->m_vstrDictsEBWin){
-		AddDict(nID, strDictName, (EDictImage)nImageIndex);
-		m_mapDictID2Info[nID] = make_pair(strDictName, (EDictImage)nImageIndex++);
-		mnuDicts.AppendMenu(MF_STRING, (UINT_PTR)nID++, strDictName);
-	}
-	m_pbtnDicts->CreateFromMenu(mnuDicts.Detach());
+	//CMenu mnuDicts;
+	//mnuDicts.CreateMenu();
+	//int nID = ID_TB_DICTS_AVAILABLE;
+	//int nImageIndex = DICTIMAGE_OFFLINE;
+	//for(const CString strDictName : m_pConfig->m_vstrDictsEBWin){
+	//	AddDict(nID, strDictName, (EDictImage)nImageIndex);
+	//	m_mapDictID2Info[nID] = make_pair(strDictName, (EDictImage)nImageIndex++);
+	//	mnuDicts.AppendMenu(MF_STRING, (UINT_PTR)nID++, strDictName);
+	//}
+	//m_pbtnDicts->CreateFromMenu(mnuDicts.Detach());
 
 	SelectDict(0);
 }

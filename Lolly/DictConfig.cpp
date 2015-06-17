@@ -118,7 +118,7 @@ CDictLangConfig::CDictLangConfig(const wptree& ptLang, const map<CString, wptree
                     vpItems.insert(vpItems.end(), vpItems2.begin(), vpItems2.end());
                 }
             m_mapDictsCustom[strDictNameCustom] = shared_ptr<CUIDict>(
-                new CUIDictCollection(strDictTypeCustom == _T("Pile"), strDictNameCustom, vpItems));
+                new CUIDictCollection(strDictNameCustom, strDictTypeCustom, DICTIMAGE_CUSTOM, vpItems));
         }
     AddDictGroup(DICTIMAGE_CUSTOM, _T("Custom"), vstrDictNamesCustom);
     m_rsDict.Open(sql);

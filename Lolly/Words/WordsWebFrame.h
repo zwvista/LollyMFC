@@ -40,7 +40,7 @@ protected:
 	virtual void OnMoveComplete();
 	virtual void LoadDicts();
 	virtual void OnDictSelected();
-	virtual void AddDict(UINT nID, LPCTSTR pszDict, EDictImage nImageIndex);
+	virtual void AddDict(UINT nID, CUIDict* pUIDict);
 	virtual int RemoveDict(UINT nID);
 
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
@@ -54,6 +54,5 @@ protected:
 	afx_msg void OnUpdateDeleteTrans(CCmdUI* pCmdUI);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg LRESULT OnHtmlViewDocComplete(WPARAM wParam, LPARAM lParam);
-	afx_msg void OnRefresh();
 	DECLARE_MESSAGE_MAP()
 };

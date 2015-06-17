@@ -24,8 +24,8 @@ public:
 	//
 	virtual void PostNcDestroy() {  }
 
-    CDictLangConfig* m_pConfig;
-    vector<CUIDictItem> m_vDictItems;
+    const CDictLangConfig* m_pConfig;
+    vector<CUIDictItem*> m_vpUIDictItems;
 	CADORecordset2 m_rsWord;
 	bool m_bEmptyTrans;
 	bool m_bAutomationDone;

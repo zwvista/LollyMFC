@@ -77,7 +77,7 @@ void CDictHtmlCtrl::FindDict(LPCTSTR pszDictName)
 CString CDictHtmlCtrl::GetTranslation(const CString& strWord)
 {
     CString sql;
-    sql.Format(_T("SELECT * FROM [%s] WHERE WORD=N'%s'"),
+    sql.Format(_T("SELECT * FROM [%s] WHERE WORD='%s'"),
         m_pConfig->m_rsDict.GetFieldValueAsString(_T("DICTTABLE")), DoubleApostrophe(strWord));
     m_rsWord.Open(sql);
 
@@ -120,19 +120,19 @@ void CDictHtmlCtrl::UpdateHtml(const CString& strWord, CADORecordset2& rsAutoCor
 	m_bEmptyTrans = true;
 	if(strWord.IsEmpty())
 		SetHTML(_T(""));
-    else if(m_vDictItems.size() == 1){
-        auto& objItem = m_vDictItems[0];
-        FindDict(objItem.m_strName);
-        if(objItem.m_ImageIndex == DICTIMAGE_ONLINE && objItem.m_strName != DICT_FRHELPER ||
-            objItem.m_ImageIndex == DICTIMAGE_CONJUGATOR || objItem.m_ImageIndex == DICTIMAGE_WEB)
+    else if(m_vpUIDictItems.size() == 1){
+        auto pUIDictItem = m_vpUIDictItems[0];
+        FindDict(pUIDictItem->m_strName);
+        if(pUIDictItem->m_ImageIndex == DICTIMAGE_ONLINE && pUIDictItem->m_strName != DICT_FRHELPER ||
+            pUIDictItem->m_ImageIndex == DICTIMAGE_CONJUGATOR || pUIDictItem->m_ImageIndex == DICTIMAGE_WEB)
             m_bAutomationDone = false, Navigate(GetDictURLForCurrentWord());
         else
             SetHTML(
-                objItem.m_ImageIndex == DICTIMAGE_LOCAL || objItem.m_ImageIndex == DICTIMAGE_OFFLINE ? GetTranslationHtml() :
-                objItem.m_ImageIndex == DICTIMAGE_LIVE ? GetLiveHtml(objItem.m_strName, CString()) :
-                objItem.m_ImageIndex == DICTIMAGE_ONLINE && objItem.m_strName == DICT_FRHELPER ? GetFrhelperHtml() :
-                objItem.m_strName == DICT_LINGOES ? GetLingoesHtml() :
-                objItem.m_strName == DICT_LINGOESALL ? GetLingoesAllHtml() :
+                pUIDictItem->m_ImageIndex == DICTIMAGE_LOCAL || pUIDictItem->m_ImageIndex == DICTIMAGE_OFFLINE ? GetTranslationHtml() :
+                pUIDictItem->m_ImageIndex == DICTIMAGE_LIVE ? GetLiveHtml(pUIDictItem->m_strName, CString()) :
+                pUIDictItem->m_ImageIndex == DICTIMAGE_ONLINE && pUIDictItem->m_strName == DICT_FRHELPER ? GetFrhelperHtml() :
+                pUIDictItem->m_strName == DICT_LINGOES ? GetLingoesHtml() :
+                pUIDictItem->m_strName == DICT_LINGOESALL ? GetLingoesAllHtml() :
                 _T("")
 		    );
     }
@@ -141,8 +141,8 @@ void CDictHtmlCtrl::UpdateHtml(const CString& strWord, CADORecordset2& rsAutoCor
         CString strHtml = _T("<html><head><META content=\"IE=10.0000\" http-equiv=\"X-UA-Compatible\"></head><body>\r\n");
         strHtml.AppendFormat(_T("<script type=\"text/javascript\">\r\n%s\r\n</script>"), theApp.m_strJS);
 
-        for(int i = 0; i < m_vDictItems.size(); ++i){
-            auto& objItem = m_vDictItems[i];
+        for(int i = 0; i < m_vpUIDictItems.size(); ++i){
+            auto pUIDictItem = m_vpUIDictItems[i];
             CString strIfrId;
             strIfrId.Format(_T("ifr%d"), i);
 
@@ -173,70 +173,69 @@ void CDictHtmlCtrl::UpdateHtml(const CString& strWord, CADORecordset2& rsAutoCor
                 strHtml += GetIFrameOnlineText(GetDictURLForCurrentWord());
             };
 
-            FindDict(objItem.m_strName);
-            if(objItem.m_strName == DICT_LINGOES)
+            FindDict(pUIDictItem->m_strName);
+            if(pUIDictItem->m_strName == DICT_LINGOES)
                 strHtml += GetIFrameOfflineText(GetLingoesHtml());
-            if(objItem.m_strName == DICT_LINGOESALL)
+            if(pUIDictItem->m_strName == DICT_LINGOESALL)
                 strHtml += GetIFrameOfflineText(GetLingoesAllHtml());
-            else if(objItem.m_strType == DICT_LOCAL || objItem.m_strType == DICT_OFFLINE)
+            else if(pUIDictItem->m_strType == DICT_LOCAL || pUIDictItem->m_strType == DICT_OFFLINE)
                 strHtml += GetIFrameOfflineText(GetTranslationHtml());
-            else if(objItem.m_strType == DICT_LIVE)
-                strHtml += GetIFrameOfflineText(GetLiveHtml(objItem.m_strName, strIfrId));
-            else if(objItem.m_strName == DICT_FRHELPER)
+            else if(pUIDictItem->m_strType == DICT_LIVE)
+                strHtml += GetIFrameOfflineText(GetLiveHtml(pUIDictItem->m_strName, strIfrId));
+            else if(pUIDictItem->m_strName == DICT_FRHELPER)
                 strHtml += GetIFrameOfflineText(GetFrhelperHtml());
             else
                 strHtml += GetIFrameOnlineText(GetDictURLForCurrentWord());
-
-            strHtml += _T("</body></html>\r\n");
-            SetHTML(strHtml);
         }
+        strHtml += _T("</body></html>\r\n");
+        SetHTML(strHtml);
     }
 }
 
 bool CDictHtmlCtrl::CanDeleteTranslation()
 {
-    return boost::algorithm::any_of(m_vDictItems, [](const CUIDictItem& objItem){
-        return objItem.m_strType == DICT_OFFLINE;
+    return boost::algorithm::any_of(m_vpUIDictItems, [](const CUIDictItem* pUIDictItem){
+        return pUIDictItem->m_strType == DICT_OFFLINE;
     });
 }
 
 bool CDictHtmlCtrl::CanEditTranslation()
 {
-    return m_vDictItems.size() == 1 && m_vDictItems[0].m_strType == DICT_OFFLINE;
+    return m_vpUIDictItems.size() == 1 && m_vpUIDictItems[0]->m_strType == DICT_OFFLINE;
 }
 
 bool CDictHtmlCtrl::CanExtractAndOverriteTranslation()
 {
-    return boost::algorithm::any_of(m_vDictItems, [](const CUIDictItem& objItem){
-        return objItem.m_strType == DICT_OFFLINE;
-    }) || m_vDictItems.size() == 1 && m_vDictItems[0].m_strType == DICT_ONLINE;
+    return boost::algorithm::any_of(m_vpUIDictItems, [](const CUIDictItem* pUIDictItem){
+        return pUIDictItem->m_strType == DICT_OFFLINE;
+    }) || m_vpUIDictItems.size() == 1 && m_vpUIDictItems[0]->m_strType == DICT_ONLINE;
 }
 
 bool CDictHtmlCtrl::CanExtractAndAppendTranslation()
 {
-    return m_vDictItems.size() == 1 && m_vDictItems[0].m_strType == DICT_ONLINE;
+    return m_vpUIDictItems.size() == 1 && m_vpUIDictItems[0]->m_strType == DICT_ONLINE;
 }
 
 bool CDictHtmlCtrl::DoDeleteTranslation(const CString& strWord)
 {
-    vector<CUIDictItem> vDictItems;
-    for(auto& objItem : m_vDictItems)
-        if(objItem.m_strType == DICT_OFFLINE)
-            vDictItems.push_back(objItem);
-    bool bIsPlural = vDictItems.size() > 1;
+    vector<CUIDictItem*> vpUIDictItems;
+    for(auto pUIDictItem : m_vpUIDictItems)
+        if(pUIDictItem->m_strType == DICT_OFFLINE)
+            vpUIDictItems.push_back(pUIDictItem);
+    bool bIsPlural = vpUIDictItems.size() > 1;
 
     CString strMsg;
     strMsg.Format(_T("The translation%s of the word \"%s\" in the following dictionar%s\n\n"),
         bIsPlural ? _T("s") : _T(""), bIsPlural ? _T("ies") : _T("y"));
-    for(auto& objItem : vDictItems)
-        strMsg.AppendFormat(_T("\t%s\n"), objItem.m_strName);
+    for(auto&& pUIDictItem : vpUIDictItems)
+        strMsg.AppendFormat(_T("\t%s\n"), pUIDictItem->m_strName);
     strMsg += _T("\nwill be DELETED. Are you sure?");
     if(MessageBox(strMsg, _T(""), MB_YESNO + MB_ICONQUESTION) != IDYES) return false;
 
     CString sql;
-    for(auto& objItem : vDictItems){
-        FindDict(objItem.m_strName);
-        sql.Format(_T("UPDATE [%s] SET [TRANSLATION]='%s' WHERE WORD=N'%s'"),
+    for(auto pUIDictItem : vpUIDictItems){
+        FindDict(pUIDictItem->m_strName);
+        sql.Format(_T("UPDATE [%s] SET [TRANSLATION]='%s' WHERE WORD='%s'"),
             m_pConfig->m_rsDict.GetFieldValueAsString(_T("DICTTABLE")), theApp.m_strNoTrans,
             DoubleApostrophe(strWord));
         theApp.m_db.Execute(sql);
@@ -245,7 +244,7 @@ bool CDictHtmlCtrl::DoDeleteTranslation(const CString& strWord)
 
 bool CDictHtmlCtrl::DoEditTranslation(const CString& strWord)
 {
-    FindDict(m_vDictItems[0].m_strName);
+    FindDict(m_vpUIDictItems[0]->m_strName);
     auto strTranslation = GetTranslation(strWord);
     CEditTransDlg dlg;
     dlg.m_strTrans = strTranslation;
@@ -260,8 +259,8 @@ bool CDictHtmlCtrl::DoEditTranslation(const CString& strWord)
 bool CDictHtmlCtrl::DoExtractTranslation(const CString& strWord, bool bOverwrite)
 {
     CString strMsg;
-    if(m_vDictItems.size() == 1 && m_vDictItems[0].m_strType == DICT_ONLINE){
-        auto strDictName = m_vDictItems[0].m_strName;
+    if(m_vpUIDictItems.size() == 1 && m_vpUIDictItems[0]->m_strType == DICT_ONLINE){
+        auto strDictName = m_vpUIDictItems[0]->m_strName;
         FindDict(strDictName);
         strMsg.Format(_T("The translation from the url \"%s\" will be EXTRACTED and %s ")
             _T("the translation of the word \"%s\" in the dictionary \"%s\". Are you sure?"),
@@ -273,20 +272,20 @@ bool CDictHtmlCtrl::DoExtractTranslation(const CString& strWord, bool bOverwrite
         theApp.UpdateDictTable(this, m_rsWord, m_pConfig->m_rsDict, !bOverwrite);
     }
     else{
-        vector<CUIDictItem> vDictItems;
+        vector<CUIDictItem*> vpUIDictItems;
         vector<CString> vstrDictsOffline;
-        for(auto& objItem : m_vDictItems)
-            if(objItem.m_strType == DICT_OFFLINE){
-                vDictItems.push_back(objItem);
-                vstrDictsOffline.push_back(objItem.m_strName);
+        for(auto pUIDictItem : m_vpUIDictItems)
+            if(pUIDictItem->m_strType == DICT_OFFLINE){
+                vpUIDictItems.push_back(pUIDictItem);
+                vstrDictsOffline.push_back(pUIDictItem->m_strName);
             }
-        bool bIsPlural = vDictItems.size() > 1;
+        bool bIsPlural = vpUIDictItems.size() > 1;
 
         if(!m_bEmptyTrans){
             strMsg.Format(_T("The translation%s of the word \"%s\" in the following dictionar%s\n\n"),
                 bIsPlural ? _T("s") : _T(""), bIsPlural ? _T("ies") : _T("y"));
-            for(auto& objItem : vDictItems)
-                strMsg.AppendFormat(_T("\t%s\n"), objItem.m_strName);
+            for(auto& pUIDictItem : vpUIDictItems)
+                strMsg.AppendFormat(_T("\t%s\n"), pUIDictItem->m_strName);
             strMsg += _T("\nwill be DELETED and EXTRACTED from the web again. Are you sure?");
             if(MessageBox(strMsg, _T(""), MB_YESNO + MB_ICONQUESTION) != IDYES) return false;
 
@@ -298,10 +297,10 @@ bool CDictHtmlCtrl::DoExtractTranslation(const CString& strWord, bool bOverwrite
 
 void CDictHtmlCtrl::DoWebAutomation(const CString& strWord)
 {
-    if(m_vDictItems.size() != 1) return;
+    if(m_vpUIDictItems.size() != 1) return;
 
-    auto strDictType = m_vDictItems[0].m_strType;
-    FindDict(m_vDictItems[0].m_strName);
+    auto strDictType = m_vpUIDictItems[0]->m_strType;
+    FindDict(m_vpUIDictItems[0]->m_strName);
     if((strDictType == DICTIMAGE_ONLINE || strDictType == DICTIMAGE_WEB)){
         CString strAutomation = m_pConfig->m_rsDict.GetFieldValueAsString(_T("AUTOMATION"));
         if(!strAutomation.IsEmpty() && !m_bAutomationDone){
