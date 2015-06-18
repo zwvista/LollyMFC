@@ -34,6 +34,12 @@ BEGIN_MESSAGE_MAP(CConfigDictDlg, CDialog)
     ON_BN_CLICKED(IDC_BUTTON_CLEAR, &CConfigDictDlg::OnBnClickedButtonClear)
     ON_BN_CLICKED(IDC_BUTTON_REMOVE, &CConfigDictDlg::OnBnClickedButtonRemove)
     ON_BN_CLICKED(IDC_BUTTON_TOP, &CConfigDictDlg::OnBnClickedButtonTop)
+    ON_BN_CLICKED(IDC_BUTTON_UP, &CConfigDictDlg::OnBnClickedButtonUp)
+    ON_BN_CLICKED(IDC_BUTTON_DOWN, &CConfigDictDlg::OnBnClickedButtonDown)
+    ON_BN_CLICKED(IDC_BUTTON_BOTTOM, &CConfigDictDlg::OnBnClickedButtonBottom)
+    ON_NOTIFY(NM_CLICK, IDC_TREE_A, &CConfigDictDlg::OnClickTreeA)
+    ON_NOTIFY(TVN_BEGINLABELEDIT, IDC_TREE_B, &CConfigDictDlg::OnBeginlabeleditTreeB)
+    ON_BN_CLICKED(IDOK, &CConfigDictDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -81,11 +87,25 @@ BOOL CConfigDictDlg::OnInitDialog()
                   // 例外 : OCX プロパティ ページは必ず FALSE を返します。
 }
 
-HTREEITEM CConfigDictDlg::AddTreeNode(CTreeCtrl* pTree, LPCTSTR lpszItem, const CString& strKey, int nImage, HTREEITEM hParent /*= TVI_ROOT*/)
+HTREEITEM CConfigDictDlg::AddTreeNode(CTreeCtrl& wndTree, LPCTSTR lpszItem, const CString& strKey, int nImage, HTREEITEM hParent /*= TVI_ROOT*/, HTREEITEM hInsertAfter /* = TVI_LAST */)
 {
-    HTREEITEM hItem = pTree->InsertItem(lpszItem, nImage, nImage, hParent);
+    HTREEITEM hItem = wndTree.InsertItem(lpszItem, nImage, nImage, hParent, hInsertAfter);
     m_mapItem2Key[hItem] = strKey;
     return hItem;
+}
+
+HTREEITEM CConfigDictDlg::CloneTreeNode(CTreeCtrl& tree, HTREEITEM hItem, HTREEITEM hParent /* = TVI_ROOT */, HTREEITEM hInsertAfter /* = TVI_LAST */)
+{
+    int nImage, nSelectedImage;
+    tree.GetItemImage(hItem, nImage, nSelectedImage);
+    auto hNewItem = AddTreeNode(m_treeB, tree.GetItemText(hItem), m_mapItem2Key.at(hItem), nImage, hParent, hInsertAfter);
+
+    for(auto hItem2 = tree.GetChildItem(hItem); hItem2; hItem2 = tree.GetNextSiblingItem(hItem2)){
+        tree.GetItemImage(hItem2, nImage, nSelectedImage);
+        AddTreeNode(m_treeB, tree.GetItemText(hItem2), m_mapItem2Key.at(hItem2), nImage, hNewItem);
+    }
+
+    return hNewItem;
 }
 
 void CConfigDictDlg::FillTreeA()
@@ -94,9 +114,9 @@ void CConfigDictDlg::FillTreeA()
         int nImageIndex = kv.second[0]->m_ImageIndex;
         if(nImageIndex == DICTIMAGE_OFFLINE || nImageIndex == DICTIMAGE_ONLINE || nImageIndex == DICTIMAGE_LIVE)
             --nImageIndex;
-        auto hItem = AddTreeNode(&m_treeA, kv.first, kv.first, nImageIndex);
+        auto hItem = AddTreeNode(m_treeA, kv.first, kv.first, nImageIndex);
         for(auto&& pUIDictItem : kv.second)
-            AddTreeNode(&m_treeA, pUIDictItem->m_strName, kv.first, pUIDictItem->m_ImageIndex, hItem);
+            AddTreeNode(m_treeA, pUIDictItem->m_strName, kv.first, pUIDictItem->m_ImageIndex, hItem);
         m_treeA.Expand(hItem, TVE_EXPAND);
     }
     m_treeA.EnsureVisible(m_treeA.GetChildItem(TVI_ROOT));
@@ -105,14 +125,14 @@ void CConfigDictDlg::FillTreeA()
 void CConfigDictDlg::FillTreeB()
 {
     for(auto&& pUIDict : m_vpUIDicts){
-        if(auto pUIDictItem = dynamic_cast<CUIDictItem*>(pUIDict))
-            AddTreeNode(&m_treeB, pUIDictItem->m_strName, pUIDictItem->m_strType, pUIDictItem->m_ImageIndex);
+        if(auto pUIDictItem = dynamic_cast<CUIDictItem*>(pUIDict.get()))
+            AddTreeNode(m_treeB, pUIDictItem->m_strName, pUIDictItem->m_strType, pUIDictItem->m_ImageIndex);
         else{
-            auto pUIDictCol = dynamic_cast<CUIDictCollection*>(pUIDict);
-            auto hItem = AddTreeNode(&m_treeB, pUIDictCol->m_strName,
+            auto pUIDictCol = dynamic_cast<CUIDictCollection*>(pUIDict.get());
+            auto hItem = AddTreeNode(m_treeB, pUIDictCol->m_strName,
                 CString(pUIDictCol->IsPile() ? _T("Pile") : _T("Switch")), pUIDictCol->m_ImageIndex);
             for(auto&& pUIDictItem : pUIDictCol->m_vpUIDictItems)
-                AddTreeNode(&m_treeB, pUIDictItem->m_strName, pUIDictItem->m_strType, pUIDictItem->m_ImageIndex, hItem);
+                AddTreeNode(m_treeB, pUIDictItem->m_strName, pUIDictItem->m_strType, pUIDictItem->m_ImageIndex, hItem);
             m_treeB.Expand(hItem, TVE_EXPAND);
         }
     }
@@ -128,35 +148,140 @@ void CConfigDictDlg::OnBnClickedButtonAdd(UINT nID)
                 vhCheckedItems.push_back(hDict);
     if(vhCheckedItems.empty()) return;
 
-    auto f = [&](HTREEITEM hItem){
-        int nImage, nSelectedImage;
-        m_treeA.GetItemImage(hItem, nImage, nSelectedImage);
-        AddTreeNode(&m_treeB, m_treeA.GetItemText(hItem), m_mapItem2Key.at(hItem), nImage);
-    };
     if(vhCheckedItems.size() == 1 || nID == IDC_BUTTON_ADD_ALL)
         for(auto hItem : vhCheckedItems)
-            f(hItem);
+            CloneTreeNode(m_treeA, hItem, TVI_ROOT);
     else{
         set<HTREEITEM> sethGroups;
         for(auto hItem : vhCheckedItems)
             sethGroups.insert(m_treeA.GetParentItem(hItem));
+        CString strType = nID == IDC_BUTTON_ADD_PILE ? _T("Pile") : _T("Switch");
+        CString strName = strType;
+        if(sethGroups.size() == 1)
+            strName = m_treeA.GetItemText(*sethGroups.begin()) + _T("_") + strName;
+        auto hParent = AddTreeNode(m_treeB, strName, strType, DICTIMAGE_CUSTOM);
+        for(auto hItem : vhCheckedItems)
+            CloneTreeNode(m_treeA, hItem, hParent);
     }
 }
 
 
 void CConfigDictDlg::OnBnClickedButtonClear()
 {
-    // TODO: ここにコントロール通知ハンドラー コードを追加します。
+    m_treeB.DeleteAllItems();
+    FillTreeB();
 }
 
+void CConfigDictDlg::WithSelectedItem(function<HTREEITEM(HTREEITEM)> action)
+{
+    auto hItem = m_treeB.GetSelectedItem();
+    if(hItem == NULL || m_treeB.GetParentItem(hItem) != NULL) return;
+    auto hItem2 = action(hItem);
+    if(hItem2 == NULL) return;
+    auto hItem3 = CloneTreeNode(m_treeB, hItem, TVI_ROOT, hItem2);
+    m_treeB.DeleteItem(hItem);
+    m_treeB.SelectItem(hItem3);
+}
 
 void CConfigDictDlg::OnBnClickedButtonRemove()
 {
-    // TODO: ここにコントロール通知ハンドラー コードを追加します。
+    WithSelectedItem([&](HTREEITEM hItem)->HTREEITEM{
+        m_treeB.DeleteItem(hItem);
+        return NULL;
+    });
 }
-
 
 void CConfigDictDlg::OnBnClickedButtonTop()
 {
-    // TODO: ここにコントロール通知ハンドラー コードを追加します。
+    WithSelectedItem([&](HTREEITEM hItem)->HTREEITEM{
+        auto hItem2 = m_treeB.GetPrevSiblingItem(hItem);
+        return hItem2 == NULL ? NULL : TVI_FIRST;
+    });
+}
+
+void CConfigDictDlg::OnBnClickedButtonUp()
+{
+    WithSelectedItem([&](HTREEITEM hItem)->HTREEITEM{
+        auto hItem2 = m_treeB.GetPrevSiblingItem(hItem);
+        if(hItem2 == NULL) return NULL;
+        hItem2 = m_treeB.GetPrevSiblingItem(hItem2);
+        return hItem2 == NULL ? TVI_FIRST : hItem2;
+    });
+}
+
+void CConfigDictDlg::OnBnClickedButtonDown()
+{
+    WithSelectedItem([&](HTREEITEM hItem)->HTREEITEM{
+        auto hItem2 = m_treeB.GetNextSiblingItem(hItem);
+        return hItem2 == NULL ? NULL : hItem2;
+    });
+}
+
+void CConfigDictDlg::OnBnClickedButtonBottom()
+{
+    WithSelectedItem([&](HTREEITEM hItem)->HTREEITEM{
+        auto hItem2 = m_treeB.GetNextSiblingItem(hItem);
+        return hItem2 == NULL ? NULL : TVI_LAST;
+    });
+}
+
+void CConfigDictDlg::OnClickTreeA(NMHDR *pNMHDR, LRESULT *pResult)
+{
+    UINT uFlags = 0;
+    CPoint pt(0, 0);
+    GetCursorPos(&pt);
+    m_treeA.ScreenToClient(&pt);
+    HTREEITEM hItem = m_treeA.HitTest(pt, &uFlags);
+    if(NULL != hItem && (TVHT_ONITEMSTATEICON  & uFlags))
+    {
+        m_treeA.SelectItem(hItem);
+        auto hItemParent = m_treeA.GetParentItem(hItem);
+        if(hItemParent == NULL){
+            BOOL fCheck = !m_treeA.GetCheck(hItem);
+            for(auto hDict = m_treeA.GetChildItem(hItem); hDict; hDict = m_treeA.GetNextSiblingItem(hDict))
+                m_treeA.SetCheck(hDict, fCheck);
+        }
+        else{
+            BOOL fCheck = TRUE;
+            for(auto hDict = m_treeA.GetChildItem(hItemParent); hDict; hDict = m_treeA.GetNextSiblingItem(hDict))
+                if((hDict == hItem) == m_treeA.GetCheck(hDict))
+                    fCheck = FALSE;
+            m_treeA.SetCheck(hItemParent, fCheck);
+        }
+    }
+    *pResult = 0;
+}
+
+void CConfigDictDlg::OnBeginlabeleditTreeB(NMHDR *pNMHDR, LRESULT *pResult)
+{
+    LPNMTVDISPINFO pTVDispInfo = reinterpret_cast<LPNMTVDISPINFO>(pNMHDR);
+    *pResult = m_treeB.GetParentItem(pTVDispInfo->item.hItem) != NULL;
+}
+
+void CConfigDictDlg::OnBnClickedOk()
+{
+    m_vpUIDicts.clear();
+    int nImage, nSelectedImage;
+    for(auto hItem = m_treeB.GetChildItem(TVI_ROOT); hItem; hItem = m_treeB.GetNextSiblingItem(hItem))
+        if(m_treeB.GetChildItem(hItem) == NULL){
+            m_treeB.GetItemImage(hItem, nImage, nSelectedImage);
+            m_vpUIDicts.push_back(shared_ptr<CUIDict>(new CUIDictItem(
+                m_treeB.GetItemText(hItem), m_mapItem2Key.at(hItem), (EDictImage)nImage
+            )));
+        }
+        else{
+            vector<shared_ptr<CUIDictItem>> vpUIDictItems;
+            for(auto hItem2 = m_treeB.GetChildItem(hItem); hItem2; hItem2 = m_treeB.GetNextSiblingItem(hItem2)){
+                m_treeB.GetItemImage(hItem2, nImage, nSelectedImage);
+                vpUIDictItems.push_back(make_shared<CUIDictItem>(
+                    m_treeB.GetItemText(hItem2), m_mapItem2Key.at(hItem2), (EDictImage)nImage
+                ));
+            }
+            m_treeB.GetItemImage(hItem, nImage, nSelectedImage);
+            m_vpUIDicts.push_back(shared_ptr<CUIDict>(new CUIDictCollection(
+                m_treeB.GetItemText(hItem), m_mapItem2Key.at(hItem), (EDictImage)nImage, vpUIDictItems
+            )));
+        }
+
+    CDialog::OnOK();
 }

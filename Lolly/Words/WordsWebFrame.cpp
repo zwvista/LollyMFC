@@ -126,11 +126,11 @@ void CWordsWebFrame::LoadDicts()
 	//m_pbtnDicts->CreateFromMenu(mnuDictGroups.Detach());
 
     if(m_vpUIDicts.empty())
-        m_vpUIDicts.push_back(m_pConfig->m_mapDictsCustom.at(DICT_DEFAULT).get());
+        m_vpUIDicts.push_back(m_pConfig->m_mapDictsCustom.at(DICT_DEFAULT));
 
     m_wndToolBarDicts.RemoveAllButtons();
     for(auto&& pUIDict : m_vpUIDicts)
-        AddDict(nID++ - ID_TB_DICTS_AVAILABLE + ID_TB_DICTS_OFFLINEALL, pUIDict);
+        AddDict(nID++ - ID_TB_DICTS_AVAILABLE + ID_TB_DICTS_OFFLINEALL, pUIDict.get());
     SelectDict(0);
 }
 
@@ -255,5 +255,8 @@ void CWordsWebFrame::OnConfigDicts()
     CConfigDictDlg dlg;
     dlg.m_pConfig = m_pConfig;
     dlg.m_vpUIDicts = m_vpUIDicts;
-    dlg.DoModal();
+    if(dlg.DoModal()){
+        m_vpUIDicts = dlg.m_vpUIDicts;
+        LoadDicts();
+    }
 }

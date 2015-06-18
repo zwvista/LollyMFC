@@ -32,7 +32,7 @@ public:
 protected:
 	CWordsWebView* m_pView;
 	CDictHtmlCtrl* m_pDictHtmlCtrl;
-    vector<CUIDict*> m_vpUIDicts;
+    vector<shared_ptr<CUIDict>> m_vpUIDicts;
 
 	void UpdateHtml(CDictHtmlCtrl* pDictHtmlCtrl);
 	void UpdateHtml();

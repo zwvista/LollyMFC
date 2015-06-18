@@ -118,11 +118,23 @@ void CWordsBaseFrame::CreateDictCtrls()
 
 void CWordsBaseFrame::AddDict(UINT nID, CUIDict* pUIDict)
 {
-	int count = m_wndToolBarDicts.GetCount();
-	if(count > 0) --count;
-	m_wndToolBarDicts.InsertButton(CMFCToolBarButton(nID, CMFCToolBar::GetDefaultImage(ID_TB_DICTS_OFFLINEALL + pUIDict->m_ImageIndex)));
+    int count = m_wndToolBarDicts.GetCount();
+    if(count > 0) --count;
+    if(auto pUIDictItem = dynamic_cast<CUIDictItem*>(pUIDict))
+        m_wndToolBarDicts.InsertButton(CMFCToolBarButton(nID, CMFCToolBar::GetDefaultImage(ID_TB_DICTS_OFFLINEALL + pUIDict->m_ImageIndex)));
+    else{
+        auto pUIDictCol = dynamic_cast<CUIDictCollection*>(pUIDict);
+        if(pUIDictCol->IsPile())
+            m_wndToolBarDicts.InsertButton(CMFCToolBarButton(nID, CMFCToolBar::GetDefaultImage(ID_TB_DICTS_OFFLINEALL + pUIDict->m_ImageIndex)));
+        else{
+            auto pUIDictItem = pUIDictCol->m_vpUIDictItems[0].get();
+            CMenu menu;
+            menu.LoadMenu(IDR_POPUP_NAVIGATE);
+            m_wndToolBarDicts.InsertButton(CMFCToolBarMenuButton(nID, menu.Detach(), CMFCToolBar::GetDefaultImage(ID_TB_DICTS_OFFLINEALL + pUIDictItem->m_ImageIndex)));
+        }
+    }
 	m_wndToolBarDicts.SetToolBarBtnText(count, pUIDict->m_strName);
-	m_wndToolBarDicts.EnableCustomizeButton(TRUE, (UINT)-1, _T(""));
+	m_wndToolBarDicts.EnableCustomizeButton(TRUE, nID, _T(""));
 	m_wndToolBarDicts.AdjustSizeImmediate();
 }
 
