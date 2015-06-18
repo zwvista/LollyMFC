@@ -62,7 +62,7 @@ void CDataGridView::OnInitialUpdate()
     //m_resizer.SetDock(IDC_EDIT_NEW_WORD, DOCK_TOP);
     //m_resizer.SetDock(IDC_GRID_WORD, DOCK_FILL);
 
-	AFXGetParentFrame(this)->SendMessage(WM_LBLSETTINGS_CHANGED);
+	AFXGetParentFrame(this)->SendMessage(WM_LBUSETTINGS_CHANGED);
 
     CRect r;
     GetClientRect(r);

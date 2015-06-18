@@ -33,13 +33,17 @@ CPhrasesLangFrame::~CPhrasesLangFrame()
 
 CString CPhrasesLangFrame::GetSQL()
 {
-	CString sql;
+	CString sql, str;
 	switch(m_nFilterScope){
 	case 0:
-		sql.Format(_T("SELECT PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.ORD, PHRASES.PHRASE,")
+        if(m_bFilterMatchWholeWords)
+            str.Format(_T("' ' || PHRASES.PHRASE || ' ' LIKE '%% %s %%'"), m_strFilter);
+        else
+            str.Format(_T("PHRASES.PHRASE LIKE '%%%s%%'"), m_strFilter);
+        sql.Format(_T("SELECT PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.ORD, PHRASES.PHRASE,")
 			_T("PHRASES.[TRANSLATION] FROM (PHRASES INNER JOIN BOOKS ON PHRASES.BOOKID = BOOKS.BOOKID)")
-			_T("WHERE (BOOKS.LANGID = %d) AND (PHRASES.PHRASE LIKE '%%%s%%')"),
-			m_lbuSettings.nLangID, m_strFilter);
+			_T("WHERE (BOOKS.LANGID = %d) AND (%s)"),
+			m_lbuSettings.nLangID, str);
 		break;
 	case 1:
 		sql.Format(_T("SELECT PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.ORD, PHRASES.PHRASE,")

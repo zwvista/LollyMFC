@@ -17,10 +17,10 @@ public:
 
 	CString m_strFilter;
 	int m_nScope;
+    BOOL m_bMatchWholeWords;
 
 protected:
 	CComboBox m_cboFilter;
-	CComboBox m_cboScope;
 	CADORecordset2& m_rsAutoCorrect;
 
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support

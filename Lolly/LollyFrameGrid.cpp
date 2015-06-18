@@ -18,7 +18,7 @@
 IMPLEMENT_DYNCREATE(CLollyFrameGrid, CLollyFrame)
 
 BEGIN_MESSAGE_MAP(CLollyFrameGrid, CLollyFrame)
-	ON_MESSAGE(WM_LBLSETTINGS_CHANGED, OnLblSettingsChanged)
+	ON_MESSAGE(WM_LBUSETTINGS_CHANGED, OnLbuSettingsChanged)
 	ON_REGISTERED_MESSAGE(AFX_WM_RESETTOOLBAR, OnToolbarReset)
 	ON_WM_TIMER()
 	ON_COMMAND(ID_TB_MOVEFIRST, OnMoveFirst)
@@ -81,7 +81,7 @@ void CLollyFrameGrid::LoadTables()
 	m_rsAutoCorrect.Open(sql);
 }
 
-LRESULT CLollyFrameGrid::OnLblSettingsChanged(WPARAM wParam, LPARAM lParam)
+LRESULT CLollyFrameGrid::OnLbuSettingsChanged(WPARAM wParam, LPARAM lParam)
 {
 	m_lbuSettings = theApp.m_lbuSettings;
     m_pConfig = theApp.m_objConfig.GetDictLangConfig(m_lbuSettings.nLangID);
@@ -249,6 +249,7 @@ void CLollyFrameGrid::OnFilterSet()
 	if(dlg.DoModal() == IDOK){
 		m_strFilter = dlg.m_strFilter;
 		m_nFilterScope = dlg.m_nScope;
+        m_bFilterMatchWholeWords = dlg.m_bMatchWholeWords;
 		SendMessage(WM_COMMAND, ID_TB_REFRESH);
 	}
 }

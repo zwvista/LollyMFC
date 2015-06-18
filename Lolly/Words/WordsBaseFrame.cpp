@@ -17,7 +17,7 @@ IMPLEMENT_DYNCREATE(CWordsBaseFrame, CLollyFrameGrid)
 
 BEGIN_MESSAGE_MAP(CWordsBaseFrame, CLollyFrameGrid)
 	ON_WM_CREATE()
-    ON_MESSAGE(WM_LBLSETTINGS_CHANGED, OnLblSettingsChanged)
+    ON_MESSAGE(WM_LBUSETTINGS_CHANGED, OnLbuSettingsChanged)
     ON_COMMAND(ID_TB_SPEAK, OnSpeak)
 	ON_COMMAND(ID_TB_KEEPSPEAK, OnKeepSpeak)
 	ON_UPDATE_COMMAND_UI(ID_TB_SPEAK, OnUpdateSpeak)
@@ -126,28 +126,6 @@ void CWordsBaseFrame::AddDict(UINT nID, CUIDict* pUIDict)
 	m_wndToolBarDicts.AdjustSizeImmediate();
 }
 
-int CWordsBaseFrame::GetDictIndexByID( UINT nID )
-{
-	const CObList& buttons = m_wndToolBarDicts.GetAllButtons();
-	int i = 0;
-	for(POSITION pos = buttons.GetHeadPosition(); pos != NULL; i++){
-		CMFCToolBarButton* pButton = (CMFCToolBarButton*) buttons.GetNext(pos);
-		if(pButton == NULL) return -1;
-		if(pButton->m_nID == nID) return i;
-	}
-	return -1;
-}
-
-int CWordsBaseFrame::RemoveDict( UINT nID )
-{
-	int i = GetDictIndexByID(nID);
-	if(m_nDictIndex == i)
-		SelectDict(i - 1);
-	m_wndToolBarDicts.RemoveButton(i);
-	m_wndToolBarDicts.AdjustSizeImmediate();
-	return i;
-}
-
 void CWordsBaseFrame::OnUpdateFrameTitle(BOOL bAddToTitle)
 {
 	CLollyFrameGrid::OnUpdateFrameTitle(bAddToTitle);
@@ -157,7 +135,7 @@ void CWordsBaseFrame::OnUpdateFrameTitle(BOOL bAddToTitle)
 
 void CWordsBaseFrame::OnDicts( UINT nID )
 {
-	SelectDict(GetDictIndexByID(nID));
+	SelectDict(m_wndToolBarDicts.CommandToIndex(nID));
 }
 
 void CWordsBaseFrame::OnUpdateDicts( CCmdUI* pCmdUI )
@@ -266,9 +244,9 @@ void CWordsBaseFrame::OnRefresh()
 	CLollyFrameGrid::OnRefresh();
 }
 
-LRESULT CWordsBaseFrame::OnLblSettingsChanged(WPARAM wParam, LPARAM lParam)
+LRESULT CWordsBaseFrame::OnLbuSettingsChanged(WPARAM wParam, LPARAM lParam)
 {
-    CLollyFrameGrid::OnLblSettingsChanged(wParam, lParam);
+    CLollyFrameGrid::OnLbuSettingsChanged(wParam, lParam);
     LoadDicts();
     return 0;
 }

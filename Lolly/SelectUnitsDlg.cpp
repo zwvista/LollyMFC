@@ -14,7 +14,8 @@ CSelectUnitsDlg::CSelectUnitsDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CSelectUnitsDlg::IDD, pParent)
 	, m_rsLang(&theApp.m_db)
 	, m_rsBook(&theApp.m_db)
-	, m_bActiveInclude(TRUE)
+    , m_bApplyActive(TRUE)
+	, m_bApplyAll(TRUE)
 {
 
 }
@@ -37,7 +38,8 @@ void CSelectUnitsDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_COMBO_PARTTO, m_cboPartTo);
 	DDX_Control(pDX, IDC_STATIC_UNITINALLTO, m_stcUnitInAllTo);
 	DDX_Control(pDX, IDC_CHECK_TO, m_chkTo);
-	DDX_Check(pDX, IDC_CHECK_ACTIVEINCLUDE, m_bActiveInclude);
+    DDX_Check(pDX, IDC_CHECK_APPLY_ACTIVE, m_bApplyActive);
+	DDX_Check(pDX, IDC_CHECK_APPLY_ALL, m_bApplyAll);
 }
 
 

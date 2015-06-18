@@ -45,8 +45,6 @@ protected:
 	virtual void OnDictSelected(){}
 	virtual void OnGridItemEntered(const CString& strGridItem);
 	virtual void AddDict(UINT nID, CUIDict* pUIDict);
-	virtual int RemoveDict(UINT nID);
-	int GetDictIndexByID(UINT nID);
 	virtual void OnAddComplete(){}
 
 	void CreateDictCtrls();
@@ -55,7 +53,7 @@ protected:
 	void DataGridCellFormatting(int col,long row,CUGCell *cell);
 	int GetWordLevel(LPCTSTR pszWord);
 
-    afx_msg LRESULT OnLblSettingsChanged(WPARAM wParam, LPARAM lParam);
+    afx_msg LRESULT OnLbuSettingsChanged(WPARAM wParam, LPARAM lParam);
     afx_msg void OnSpeak();
 	afx_msg void OnKeepSpeak();
 	afx_msg void OnUpdateSpeak(CCmdUI* pCmdUI);

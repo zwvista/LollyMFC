@@ -35,6 +35,7 @@ protected:
 	CMFCToolBarEditBoxButton2 *m_pedtRecordPos;
 	int m_nRecordPos, m_nRecordCount;
 	int m_nFilterScope;
+    BOOL m_bFilterMatchWholeWords;
 	CString m_strFilter;
 	bool m_bHasFilter, m_bHasMultiAdd, m_bHasReorder;
 	bool m_bTimerNavigate, m_bIsReordering;
@@ -58,7 +59,7 @@ protected:
 	void SetTimerNavigate();
 	void DoNavigate();
 
-	afx_msg LRESULT OnLblSettingsChanged(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnLbuSettingsChanged(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnToolbarReset(WPARAM wParam, LPARAM lParam);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnMoveFirst();

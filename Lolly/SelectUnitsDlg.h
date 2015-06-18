@@ -10,7 +10,8 @@ public:
 	CSelectUnitsDlg(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CSelectUnitsDlg();
 
-	BOOL m_bActiveInclude;
+    BOOL m_bApplyActive;
+	BOOL m_bApplyAll;
 // Dialog Data
 	enum { IDD = IDD_SELECT_UNITS };
 

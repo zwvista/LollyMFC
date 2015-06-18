@@ -268,10 +268,12 @@ void CLollyApp::OnLearnSelectUnits()
 	CSelectUnitsDlg dlg;
 	if(dlg.DoModal() == IDOK){
 		m_lbuSettings.Init();
-		if(dlg.m_bActiveInclude){
+        if(dlg.m_bApplyAll)
+            ((CMDIFrameWnd*)AfxGetMainWnd())->SendMessageToDescendants(WM_LBUSETTINGS_CHANGED);
+		else if(dlg.m_bApplyActive){
 			CFrameWnd* pFrameWnd = ((CMDIFrameWnd*)AfxGetMainWnd())->GetActiveFrame();
 			if(pFrameWnd)
-				pFrameWnd->SendMessage(WM_LBLSETTINGS_CHANGED);
+				pFrameWnd->SendMessage(WM_LBUSETTINGS_CHANGED);
 		}
 	}
 }

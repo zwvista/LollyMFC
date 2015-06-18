@@ -1,18 +1,18 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ 生成的包含文件。
-// 供 Lolly.rc 使用
+// Microsoft Visual C++ 偱惗惉偝傟偨僀儞僋儖乕僪 僼傽僀儖丅
+// Lolly.rc 偱巊梡
 //
 #define IDC_BUTTON_COPY                 3
 #define IDC_BUTTON_COPYTEXT             3
-#define IDCANCEL2                       3
-#define IDCANCEL3                       4
-#define IDCANCEL4                       5
-#define IDCANCEL5                       6
-#define IDCANCEL6                       7
-#define IDCANCEL7                       8
-#define IDCANCEL8                       9
-#define IDCANCEL9                       10
-#define IDCANCEL10                      11
+#define IDC_BUTTON_ADD_PILE             3
+#define IDC_BUTTON_ADD_SWITCH           4
+#define IDC_BUTTON_ADD_ALL              5
+#define IDC_BUTTON_CLEAR                6
+#define IDC_BUTTON_REMOVE               7
+#define IDC_BUTTON_TOP                  8
+#define IDC_BUTTON_UP                   9
+#define IDC_BUTTON_DOWN                 10
+#define IDC_BUTTON_BOTTOM               11
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDD_MFCAPPLICATION1_FORM        101
@@ -208,7 +208,7 @@
 #define IDC_SPIN_UNITFROM               1004
 #define IDC_EDIT_UNITTO                 1005
 #define IDC_SPIN_UNITTO                 1006
-#define IDC_CHECK_ACTIVEINCLUDE         1007
+#define IDC_CHECK_APPLY_ACTIVE          1007
 #define IDC_STATIC_UNITINALLFROM        1008
 #define IDC_COMBO_PARTFROM              1009
 #define IDC_BOOKUNITS                   1010
@@ -216,6 +216,8 @@
 #define IDC_LANG                        1011
 #define IDC_STATIC_UNITINALLTO          1011
 #define IDC_CHECKALLWORDS               1012
+#define IDC_CHECK_ALL                   1012
+#define IDC_CHECK_APPLY_ALL             1012
 #define IDC_UNCHECKALLWORDS             1013
 #define IDC_CHECKSELECTEDWORDS          1014
 #define IDC_UNCHECKSELECTEDWORDS        1015
@@ -256,10 +258,12 @@
 #define IDC_LABEL2                      1055
 #define IDC_LABEL3                      1056
 #define IDC_COMBO_PARAGRAPH_END         1057
-#define IDC_EDIT1                       1058
 #define IDC_EDIT_NEW_WORD               1058
-#define IDC_TREE1                       1059
-#define IDC_TREE2                       1060
+#define IDC_TREE_A                      1059
+#define IDC_TREE_B                      1060
+#define IDC_RADIO_WORDS_PHRASES         1060
+#define IDC_RADIO_TRANSLATIONS          1061
+#define IDC_CHECK_MATCH_WHOLE_WORDS     1062
 #define ID_WRITE_PASTEASHYPERLINK       32770
 #define ID_AUXILIARY_AUTOCORRECT        32772
 #define ID_AUXILIARY_BOOKS              32773
@@ -316,9 +320,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        342
+#define _APS_NEXT_RESOURCE_VALUE        350
 #define _APS_NEXT_COMMAND_VALUE         32925
-#define _APS_NEXT_CONTROL_VALUE         1060
+#define _APS_NEXT_CONTROL_VALUE         1063
 #define _APS_NEXT_SYMED_VALUE           337
 #endif
 #endif

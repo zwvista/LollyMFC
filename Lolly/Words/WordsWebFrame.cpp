@@ -7,6 +7,7 @@
 
 #include "WordsWebFrame.h"
 #include "DataGridView.h"
+#include "ConfigDictDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -28,6 +29,7 @@ BEGIN_MESSAGE_MAP(CWordsWebFrame, CWordsBaseFrame)
 	ON_COMMAND(ID_TB_DELETE_TRANS, OnDeleteTrans)
 	ON_UPDATE_COMMAND_UI(ID_TB_DELETE_TRANS, OnUpdateDeleteTrans)
 	ON_MESSAGE(WM_HTMLVIEW_DOCCOMPLETE, OnHtmlViewDocComplete)
+    ON_COMMAND(ID_TB_DICTS, OnConfigDicts)
 END_MESSAGE_MAP()
 
 // CWordsWebFrame construction/destruction
@@ -124,11 +126,11 @@ void CWordsWebFrame::LoadDicts()
 	//m_pbtnDicts->CreateFromMenu(mnuDictGroups.Detach());
 
     if(m_vpUIDicts.empty())
-        m_vpUIDicts.push_back(m_pConfig->m_mapDictsCustom.at(DICT_DEFAULT));
+        m_vpUIDicts.push_back(m_pConfig->m_mapDictsCustom.at(DICT_DEFAULT).get());
 
     m_wndToolBarDicts.RemoveAllButtons();
     for(auto&& pUIDict : m_vpUIDicts)
-        AddDict(nID++ - ID_TB_DICTS_AVAILABLE + ID_TB_DICTS_OFFLINEALL, pUIDict.get());
+        AddDict(nID++ - ID_TB_DICTS_AVAILABLE + ID_TB_DICTS_OFFLINEALL, pUIDict);
     SelectDict(0);
 }
 
@@ -149,20 +151,16 @@ void CWordsWebFrame::AddDict(UINT nID, CUIDict* pUIDict)
         pDictHtmlCtrl->m_vpUIDictItems.push_back(pUIDictItem);
     else{
         auto pUIDictCol = dynamic_cast<CUIDictCollection*>(pUIDict);
-        for(auto&& pUIDictItem : pUIDictCol->m_vpUIDictItems)
-            pDictHtmlCtrl->m_vpUIDictItems.push_back(pUIDictItem.get());
+        if(pUIDictCol->IsPile())
+            for(auto&& pUIDictItem : pUIDictCol->m_vpUIDictItems)
+                pDictHtmlCtrl->m_vpUIDictItems.push_back(pUIDictItem.get());
+        else{
+            pDictHtmlCtrl->m_vpUIDictItems.push_back(pUIDictCol->m_vpUIDictItems[0].get());
+        }
     }
 
     UpdateHtml(pDictHtmlCtrl.get());
     m_pView->m_vpDictHtmlCtrls.push_back(move(pDictHtmlCtrl));
-}
-
-int CWordsWebFrame::RemoveDict( UINT nID )
-{
-	int i = CWordsBaseFrame::RemoveDict(nID);
-	auto it = m_pView->m_vpDictHtmlCtrls.begin() + i;
-	m_pView->m_vpDictHtmlCtrls.erase(it);
-	return i;
 }
 
 void CWordsWebFrame::OnDictSelected()
@@ -250,4 +248,12 @@ LRESULT CWordsWebFrame::OnHtmlViewDocComplete( WPARAM wParam, LPARAM lParam )
 	CDictHtmlCtrl* pDictHtmlCtrl = (CDictHtmlCtrl*)wParam;
     pDictHtmlCtrl->DoWebAutomation(m_strWord);
 	return 0;
+}
+
+void CWordsWebFrame::OnConfigDicts()
+{
+    CConfigDictDlg dlg;
+    dlg.m_pConfig = m_pConfig;
+    dlg.m_vpUIDicts = m_vpUIDicts;
+    dlg.DoModal();
 }

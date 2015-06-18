@@ -15,6 +15,7 @@ CFilterDlg::CFilterDlg(CADORecordset2& rsAutoCorrect, CWnd* pParent /*=NULL*/)
 	: CDialog(CFilterDlg::IDD, pParent)
 	, m_rsAutoCorrect(rsAutoCorrect)
 	, m_nScope(0)
+    , m_bMatchWholeWords(TRUE)
 {
 
 }
@@ -28,8 +29,8 @@ void CFilterDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_CBString(pDX, IDC_COMBO_FILTER, m_strFilter);
 	DDX_Control(pDX, IDC_COMBO_FILTER, m_cboFilter);
-	DDX_CBIndex(pDX, IDC_COMBO_SCOPE, m_nScope);
-	DDX_Control(pDX, IDC_COMBO_SCOPE, m_cboScope);
+    DDX_Radio(pDX, IDC_RADIO_WORDS_PHRASES, m_nScope);
+	DDX_Check(pDX, IDC_CHECK_MATCH_WHOLE_WORDS, m_bMatchWholeWords);
 }
 
 
@@ -43,10 +44,6 @@ END_MESSAGE_MAP()
 BOOL CFilterDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-
-	m_cboScope.AddString(_T("Words/Phrases"));
-	m_cboScope.AddString(_T("Translations"));
-	m_cboScope.SetCurSel(0);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE

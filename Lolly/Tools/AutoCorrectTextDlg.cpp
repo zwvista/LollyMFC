@@ -46,6 +46,27 @@ BOOL CAutoCorrectTextDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
+    m_resizer.Hook(this);
+    m_resizer.SetShowResizeGrip(TRUE);
+    CRect rc;
+    GetClientRect(rc);
+    m_resizer.SetMinimumSize(_T("_root"), rc.Size());
+
+    m_resizer.CreateSplitContainer(_T("splitA"), IDC_LABEL1, IDC_EDIT_BEFORE);
+    m_resizer.SetFixedPanel(_T("splitA"), 1);
+    m_resizer.SetIsSplitterFixed(_T("splitA"), TRUE);
+    m_resizer.CreateSplitContainer(_T("splitB"), IDC_LABEL2, IDC_EDIT_AFTER);
+    m_resizer.SetFixedPanel(_T("splitB"), 1);
+    m_resizer.SetIsSplitterFixed(_T("splitB"), TRUE);
+    m_resizer.CreateSplitContainer(_T("splitMain"), _T("splitA"), _T("splitB"));
+    m_resizer.SetIsSplitterFixed(_T("splitMain"), TRUE);
+    m_resizer.SetAnchor(_T("splitMain"), ANCHOR_ALL);
+
+    m_resizer.SetAnchor(IDC_LABEL3, ANCHOR_LEFT | ANCHOR_BOTTOM);
+    m_resizer.SetAnchor(IDC_COMBO_LANG, ANCHOR_LEFT | ANCHOR_BOTTOM);
+    m_resizer.SetAnchor(IDC_BUTTON_COPYTEXT, ANCHOR_LEFT | ANCHOR_BOTTOM);
+    m_resizer.SetAnchor(IDCANCEL, ANCHOR_RIGHT | ANCHOR_BOTTOM);
+
 	m_rsLang.Open(_T("SELECT * FROM LANGUAGES WHERE LANGID > 0 ORDER BY LANGID"));
 	theApp.ComboBox_FillWithRS(m_cboLang, m_rsLang, _T("CHNNAME"), _T("LANGID"));
 	theApp.ComboBox_SelectByValue(m_cboLang, theApp.m_lbuSettings.nLangID);

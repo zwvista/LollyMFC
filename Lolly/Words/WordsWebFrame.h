@@ -32,7 +32,7 @@ public:
 protected:
 	CWordsWebView* m_pView;
 	CDictHtmlCtrl* m_pDictHtmlCtrl;
-    vector<shared_ptr<CUIDict>> m_vpUIDicts;
+    vector<CUIDict*> m_vpUIDicts;
 
 	void UpdateHtml(CDictHtmlCtrl* pDictHtmlCtrl);
 	void UpdateHtml();
@@ -41,7 +41,6 @@ protected:
 	virtual void LoadDicts();
 	virtual void OnDictSelected();
 	virtual void AddDict(UINT nID, CUIDict* pUIDict);
-	virtual int RemoveDict(UINT nID);
 
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnDelete();
@@ -54,5 +53,6 @@ protected:
 	afx_msg void OnUpdateDeleteTrans(CCmdUI* pCmdUI);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg LRESULT OnHtmlViewDocComplete(WPARAM wParam, LPARAM lParam);
-	DECLARE_MESSAGE_MAP()
+    afx_msg void OnConfigDicts();
+    DECLARE_MESSAGE_MAP()
 };

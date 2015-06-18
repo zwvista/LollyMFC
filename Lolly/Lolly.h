@@ -14,7 +14,7 @@
 #include "LollyFrame.h"
 #include "DictHtmlCtrl.h"
 
-#define WM_LBLSETTINGS_CHANGED		WM_USER + 1
+#define WM_LBUSETTINGS_CHANGED		WM_USER + 1
 #define WM_GRID_ROWCHANGE			WM_USER + 2
 
 // CLollyApp:

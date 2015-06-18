@@ -15,7 +15,8 @@ public:
 	enum { IDD = IDD_AUTOCORRECT_TEXT };
 
 protected:
-	CADORecordset2 m_rsLang, m_rsAutoCorrect;
+    CWndResizer m_resizer;
+    CADORecordset2 m_rsLang, m_rsAutoCorrect;
 	CComboBox m_cboLang;
 	CEdit m_edtBefore, m_edtAfter;
 	CString m_strText;
