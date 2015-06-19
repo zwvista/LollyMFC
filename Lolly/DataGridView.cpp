@@ -26,7 +26,7 @@ CDataGridView::~CDataGridView()
 BEGIN_MESSAGE_MAP(CDataGridView, CFormView)
 	ON_WM_CREATE()
 	ON_WM_SETFOCUS()
-    ON_WM_SIZE()
+    //ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -53,20 +53,24 @@ void CDataGridView::OnInitialUpdate()
 {
     CFormView::OnInitialUpdate();
 
+    LockWindowUpdate();
+
     //GetParentFrame()->RecalcLayout();
     //ResizeParentToFit();
 
 	m_pDataGrid->AttachGrid(this, IDC_GRID_WORD);
 
-    //m_resizer.Hook(this);
-    //m_resizer.SetDock(IDC_EDIT_NEW_WORD, DOCK_TOP);
-    //m_resizer.SetDock(IDC_GRID_WORD, DOCK_FILL);
+    m_resizer.Hook(this);
+    m_resizer.SetDock(IDC_EDIT_NEW_WORD, DOCK_TOP);
+    m_resizer.SetDock(IDC_GRID_WORD, DOCK_FILL);
 
 	AFXGetParentFrame(this)->SendMessage(WM_LBUSETTINGS_CHANGED);
 
     CRect r;
     GetClientRect(r);
     SendMessage(WM_SIZE, SIZE_RESTORED, MAKELPARAM(r.Width(), r.Height()));
+
+    UnlockWindowUpdate();
 }
 
 // CDataGridView message handlers

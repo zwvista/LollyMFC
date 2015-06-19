@@ -157,6 +157,8 @@ BOOL CLollyApp::InitInstance()
 	m_strLingoesWindowName = GetProfileString(_T("Settings"), _T("LingoesWindowName"), _T(""));
 	m_objLingoes.FindLingoes();
 
+    m_strFrhelperClassName = GetProfileString(_T("Settings"), _T("FrhelperClassName"), _T(""));
+
 	m_strJS = ReadAllTextFromFile(m_strAppDataFolder + "Lolly.js");
 
     CString strConnection;
@@ -381,12 +383,12 @@ void CLollyApp::OnToolsHtmlUnit()
 	OnNewChild(RUNTIME_CLASS(CHtmlUnitFrame));
 }
 
-void CLollyApp::ExtractTranslation(const vector<CString>& vstrWords, const vector<CString>& vstrDicts, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl /* = nullptr */, LPCTSTR pszIfrId /* = nullptr */)
+void CLollyApp::ExtractTranslation(const vector<CString>& vstrWords, const vector<CString>& vstrDicts, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl /* = nullptr */, const CString& strIfrId /* = _T("") */)
 {
 	for(const CString& strDict : vstrDicts){
 		CExtractWebDictFrame* pFrame = DYNAMIC_DOWNCAST(CExtractWebDictFrame,
 			OnNewChild(RUNTIME_CLASS(CExtractWebDictFrame)));
-		pFrame->Init(vstrWords, strDict, bOverwrite, pDictHtmlCtrl, pszIfrId);
+		pFrame->Init(vstrWords, strDict, bOverwrite, pDictHtmlCtrl, strIfrId);
 	}
 }
 

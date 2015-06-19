@@ -113,22 +113,22 @@ CString ExtractFromHtml(LPCTSTR pszText, LPCTSTR pszTransform, LPCTSTR pszDefaul
 	SplitString(strTransform, _T("\r\n"), vstrs);
 	ASSERT(vstrs.size() % 2 == 0);
 	wregex reg(vstrs[0]);
-	wsregex_token_iterator it(strText.begin(), strText.end(), reg, 1), end;
+	wsregex_token_iterator it(strText.begin(), strText.end(), reg), end;
 	if(it == end) return _T("");
 
 	strText = it->str();
 	auto f = [&](CString strReplacer){
-		strReplacer.Replace(_T("\\r"), _T("\r"));
-		strReplacer.Replace(_T("\\n"), _T("\n"));
-		if(strReplacer == _T("<delete>"))
-			strReplacer = _T("");
+        strReplacer.Replace(_T("\\r"), _T("\r"));
+        strReplacer.Replace(_T("\\n"), _T("\n"));
+        strReplacer.Replace(_T("\\t"), _T("\t"));
+		strReplacer.Replace(_T("<delete>"), _T(""));
 		strText = regex_replace(strText, reg, wstring(strReplacer));
 	};
 
 	f(vstrs[1]);
 	if(vstrs.size() > 2)
 		for(size_t i = 2; i < vstrs.size();){
-			wregex reg(vstrs[i++]);
+			reg = wregex(vstrs[i++]);
 			f(vstrs[i++]);
 		}
 	

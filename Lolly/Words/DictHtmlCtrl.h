@@ -30,7 +30,7 @@ public:
 	bool m_bEmptyTrans;
 	bool m_bAutomationDone;
 
-	void UpdateLiveHtml(LPCTSTR pszIfrId, LPCTSTR pszWord, LPCTSTR pszDict, LPCTSTR pszTranslation);
+	void UpdateLiveHtml(const CString& strIfrId, LPCTSTR pszWord, LPCTSTR pszDict, LPCTSTR pszTranslation);
 	void UpdateHtml(const CString& strWord, CADORecordset2& rsAutoCorrect);
 	void FindDict(LPCTSTR pszDictName);
     bool CanDeleteTranslation();

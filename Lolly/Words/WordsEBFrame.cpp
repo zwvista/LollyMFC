@@ -116,7 +116,8 @@ void CWordsEBFrame::OnFindKana()
 	//m_pView->ChoooseDict(_T("新明解国語辞典　第五版"));
 	m_pView->ChooseDict(_T("三省堂　スーパー大辞林"));
 	for(m_rs.MoveFirst(); !m_rs.IsEof(); m_rs.MoveNext()){
-		if(!m_rs.GetFieldValueAsString(_T("NOTE")).IsEmpty()) continue;
+        CString strNote = m_rs.GetFieldValueAsString(_T("NOTE"));
+		if(!strNote.IsEmpty()) continue;
 		m_rs.Edit();
 		m_rs.SetFieldValue(_T("NOTE"), m_pView->FindKana(m_rs.GetFieldValueAsString(_T("WORD"))));
 		m_rs.Update();

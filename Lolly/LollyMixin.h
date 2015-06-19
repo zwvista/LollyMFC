@@ -23,7 +23,8 @@ public:
 	CString m_strAppDataFolder, m_strAppDataFolderInHtml, m_strJS;
     CDictConfig m_objConfig;
 	CString m_strXmlNotepadExe, m_strEBWinExe;
-	CString m_strLingoesClassName, m_strLingoesWindowName;
+    CString m_strLingoesClassName, m_strLingoesWindowName;
+	CString m_strFrhelperClassName;
 	CFavoritesManager	m_Favorites;
 
 	void ComboBox_FillWithRS(CComboBox& cbo, CADORecordset2& rs, LPCTSTR pszDisplayField, LPCTSTR pszValueField = NULL);

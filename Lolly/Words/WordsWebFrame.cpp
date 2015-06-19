@@ -141,12 +141,7 @@ void CWordsWebFrame::AddDict(UINT nID, CUIDict* pUIDict)
     auto pDictHtmlCtrl = make_unique<CDictHtmlCtrl>();
     pDictHtmlCtrl->Create(CRect(), m_pView, 1234 + m_pView->m_vpDictHtmlCtrls.size(), WS_CHILD);
     pDictHtmlCtrl->SetSilent(TRUE);
-    CRect rc;
-    m_pView->GetClientRect(rc);
-    m_pView->SendMessage(WM_SIZE, 0, MAKELPARAM(rc.Width(), rc.Height()));
-
     pDictHtmlCtrl->m_pConfig = m_pConfig;
-
     if(auto pUIDictItem = dynamic_cast<CUIDictItem*>(pUIDict))
         pDictHtmlCtrl->m_vpUIDictItems.push_back(pUIDictItem);
     else{
@@ -158,9 +153,12 @@ void CWordsWebFrame::AddDict(UINT nID, CUIDict* pUIDict)
             pDictHtmlCtrl->m_vpUIDictItems.push_back(pUIDictCol->m_vpUIDictItems[0].get());
         }
     }
-
     UpdateHtml(pDictHtmlCtrl.get());
+
     m_pView->m_vpDictHtmlCtrls.push_back(move(pDictHtmlCtrl));
+    CRect rc;
+    m_pView->GetClientRect(rc);
+    m_pView->SendMessage(WM_SIZE, 0, MAKELPARAM(rc.Width(), rc.Height()));
 }
 
 void CWordsWebFrame::OnDictSelected()
@@ -255,7 +253,7 @@ void CWordsWebFrame::OnConfigDicts()
     CConfigDictDlg dlg;
     dlg.m_pConfig = m_pConfig;
     dlg.m_vpUIDicts = m_vpUIDicts;
-    if(dlg.DoModal()){
+    if(dlg.DoModal() == IDOK){
         m_vpUIDicts = dlg.m_vpUIDicts;
         LoadDicts();
     }

@@ -153,6 +153,9 @@
     <ClCompile Include="WndResizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WebPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutoSelEdit.h">
@@ -300,6 +303,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WndResizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WebPage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

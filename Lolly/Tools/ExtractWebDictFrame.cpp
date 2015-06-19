@@ -97,12 +97,13 @@ void CExtractWebDictFrame::OnSize(UINT nType, int cx, int cy)
 	m_wndToolBar.CWnd::MoveWindow(0, 0, cx, ht);
 }
 
-void CExtractWebDictFrame::Init(const vector<CString>& vstrWords, LPCTSTR pszDict, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl /* = nullptr */, LPCTSTR pszIfrId /* = nullptr */)
+void CExtractWebDictFrame::Init(const vector<CString>& vstrWords, LPCTSTR pszDict, bool bOverwrite, CDictHtmlCtrl* pDictHtmlCtrl /* = nullptr */, const CString& strIfrId /* = _T("") */)
 {
 	m_vstrWords = vstrWords;
+    m_strDict = pszDict;
 	m_bOverwrite = bOverwrite;
 	m_pDictHtmlCtrl = pDictHtmlCtrl;
-    m_strIfrId = pszIfrId;
+    m_strIfrId = strIfrId;
 
 	m_pedtDict->SetContents(pszDict);
 	m_wndToolBar.AdjustSizeImmediate();
@@ -149,7 +150,7 @@ void CExtractWebDictFrame::SearchDictForWord()
 	m_wndToolBar.AdjustSizeImmediate();
 
 	m_eDicStatus = DIC_NAVIGATING;
-	if(m_rsDict.GetFieldValueAsString(_T("DICTNAME") == _T("Frhelper")))
+	if(m_strDict == _T("Frhelper"))
 		m_pView->SetHTML(theApp.m_objFrhelper.Search(m_strWord));
 	else{
 		CString strURL = theApp.GetDictURLForWord(m_strWord, m_rsDict, m_rsAutoCorrect);
@@ -164,7 +165,7 @@ void CExtractWebDictFrame::ExtractWebDict()
 	if(m_pDictHtmlCtrl == NULL)
 		theApp.UpdateDictTable(m_pView, m_rsWord, m_rsDict, false);
 	else
-		m_pDictHtmlCtrl->UpdateLiveHtml(m_strIfrId, m_strWord, m_rsDict.GetFieldValueAsString(_T("DICTNAME")),
+		m_pDictHtmlCtrl->UpdateLiveHtml(m_strIfrId, m_strWord, m_strDict,
 			theApp.ExtractFromWeb(m_pView, m_rsDict, theApp.m_strNoTrans));
 }
 

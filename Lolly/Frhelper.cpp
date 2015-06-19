@@ -3,27 +3,26 @@
 #include "Frhelper.h"
 
 CFrhelper::CFrhelper(void)
-	: m_hwndMain(NULL)
 {
 }
 
 void CFrhelper::FindFrhelper()
 {
-	if(m_elemHtml.p) return;
+	if(m_hwndHtml) return;
 
-	m_hwndMain = ::FindWindow(_T("TFormMainEudic"), NULL);
+	m_hwndMain = ::FindWindow(theApp.m_strFrhelperClassName, NULL);
 	if(m_hwndMain == NULL)	return;
 
 	HWND hwndToolbar = ::FindWindowEx(m_hwndMain, NULL, _T("TbsSkinToolBar"), _T(""));
-	HWND hwnd = ::FindWindowEx(m_hwndMain, NULL, _T("TbsSkinComboBox"), _T(""));
-	m_hwndEditWord = ::FindWindowEx(m_hwndMain, NULL, _T("TbsCustomEdit"), _T(""));
+	HWND hwnd = ::FindWindowEx(hwndToolbar, NULL, _T("TbsSkinComboBox"), NULL);
+	m_hwndEditWord = ::FindWindowEx(hwnd, NULL, _T("TbsCustomEdit"), NULL);
 
 	HWND hwndPnlMain = ::FindWindowEx(m_hwndMain, NULL, _T("TbsSkinPanel"), _T("panelMain"));
 
-	hwnd = ::FindWindowEx(m_hwndMain, NULL, _T("TPanel"), _T("leftPanel"));
-	m_hwndListWords = ::FindWindowEx(m_hwndMain, NULL, _T("TVirtualStringTree"), _T(""));
+	hwnd = ::FindWindowEx(hwndPnlMain, NULL, _T("TPanel"), _T("leftPanel"));
+	m_hwndListWords = ::FindWindowEx(hwnd, NULL, _T("TVirtualStringTree"), _T(""));
 
-	hwnd = ::FindWindowEx(m_hwndMain, NULL, _T("Shell Embedding"), _T(""));
+	hwnd = ::FindWindowEx(hwndPnlMain, NULL, _T("Shell Embedding"), _T(""));
 	hwnd = ::GetDlgItem(hwnd, 0);
 	m_hwndHtml = ::GetDlgItem(hwnd, 0);
 
@@ -40,9 +39,10 @@ CString CFrhelper::GetContent()
 		HRESULT hres = ::ObjectFromLresult(lRes, __uuidof(IHTMLDocument2), 0, (void**)&doc);
 		CComPtr<IHTMLElement> body;
 		doc->get_body(&body);
-		body->get_parentElement(&m_elemHtml);
+        CComPtr<IHTMLElement> elemHtml;
+		body->get_parentElement(&elemHtml);
 		CComBSTR bstr;
-		m_elemHtml->get_outerHTML(&bstr);
+		elemHtml->get_outerHTML(&bstr);
 		strHtml = CString(bstr);
 	}while(strHtml.IsEmpty());
 	return strHtml;

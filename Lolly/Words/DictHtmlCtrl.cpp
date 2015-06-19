@@ -5,6 +5,7 @@
 #include "Lolly.h"
 #include "DictHtmlCtrl.h"
 #include "EditTransDlg.h"
+#include "WebPage.h"
 
 // CDictHtmlCtrl
 
@@ -53,16 +54,22 @@ CString CDictHtmlCtrl::GetTemplatedHtml(const CString& strWord, const CString& s
     return strHtml;
 };
 
-void CDictHtmlCtrl::UpdateLiveHtml(LPCTSTR pszIfrId, LPCTSTR pszWord, LPCTSTR pszDict, LPCTSTR pszTranslation)
+void CDictHtmlCtrl::UpdateLiveHtml(const CString& strIfrId, LPCTSTR pszWord, LPCTSTR pszDict, LPCTSTR pszTranslation)
 {
 	CString strHtml = GetDocumentText(this);
     CString strText = theApp.GetLiveHtml(pszWord, pszDict, _istupper(strHtml[2]));
-    if(pszIfrId == nullptr)
+    if(strIfrId.IsEmpty())
 	    strHtml.Replace(strText, pszTranslation);
     else
     {
         FindDict(pszDict);
-        CString strIfrContent = GetTemplatedHtml(pszWord, pszTranslation);
+        wstring strIfrContent = (LPCTSTR)GetTemplatedHtml(pszWord, pszTranslation);
+        wregex regBody(_T(R"((?:<(?:body|BODY).*?>)((?:.*\r?\n)*?.*?)(?:</body>|</BODY>))"));
+        wsregex_token_iterator it(strIfrContent.begin(), strIfrContent.end(), regBody, 1), end;
+        CString strBodyContent = it->str().c_str();
+        CWebPage wp;
+        wp.SetDocument(GetHtmlDocument());
+        wp.CallJScript(_T("updateLiveHtml"), strIfrId, strBodyContent);
     }
 	SetHTML(strHtml);
 }
@@ -130,14 +137,14 @@ void CDictHtmlCtrl::UpdateHtml(const CString& strWord, CADORecordset2& rsAutoCor
     else if(m_vpUIDictItems.size() == 1){
         auto pUIDictItem = m_vpUIDictItems[0];
         FindDict(pUIDictItem->m_strName);
-        if(pUIDictItem->m_ImageIndex == DICTIMAGE_ONLINE && pUIDictItem->m_strName != DICT_FRHELPER ||
-            pUIDictItem->m_ImageIndex == DICTIMAGE_CONJUGATOR || pUIDictItem->m_ImageIndex == DICTIMAGE_WEB)
+        if(pUIDictItem->m_strType == DICT_ONLINE && pUIDictItem->m_strName != DICT_FRHELPER ||
+            pUIDictItem->m_strType == DICT_CONJUGATOR || pUIDictItem->m_strType == DICT_WEB)
             m_bAutomationDone = false, Navigate(GetDictURLForCurrentWord());
         else
             SetHTML(
-                pUIDictItem->m_ImageIndex == DICTIMAGE_LOCAL || pUIDictItem->m_ImageIndex == DICTIMAGE_OFFLINE ? GetTranslationHtml() :
-                pUIDictItem->m_ImageIndex == DICTIMAGE_LIVE ? GetLiveHtml(pUIDictItem->m_strName, CString()) :
-                pUIDictItem->m_ImageIndex == DICTIMAGE_ONLINE && pUIDictItem->m_strName == DICT_FRHELPER ? GetFrhelperHtml() :
+                pUIDictItem->m_strType == DICT_LOCAL || pUIDictItem->m_strType == DICT_OFFLINE ? GetTranslationHtml() :
+                pUIDictItem->m_strType == DICT_LIVE ? GetLiveHtml(pUIDictItem->m_strName, CString()) :
+                pUIDictItem->m_strType == DICT_ONLINE && pUIDictItem->m_strName == DICT_FRHELPER ? GetFrhelperHtml() :
                 pUIDictItem->m_strName == DICT_LINGOES ? GetLingoesHtml() :
                 pUIDictItem->m_strName == DICT_LINGOESALL ? GetLingoesAllHtml() :
                 _T("")
@@ -168,16 +175,6 @@ void CDictHtmlCtrl::UpdateHtml(const CString& strWord, CADORecordset2& rsAutoCor
                 CString strText;
                 strText.Format(_T("<iframe id='%s' frameborder='1' style='width:100%%; height:500px; display:block' src='%s'></iframe>\r\n"), strIfrId, pszText);
                 return strText;
-            };
-
-            auto AddOfflineDictText = [&](LPCTSTR pszDictName){
-                FindDict(pszDictName);
-                strHtml += GetIFrameOfflineText(GetTranslationHtml());
-            };
-
-            auto AddOnlineDictText = [&](LPCTSTR pszDictName){
-                FindDict(pszDictName);
-                strHtml += GetIFrameOnlineText(GetDictURLForCurrentWord());
             };
 
             FindDict(pUIDictItem->m_strName);

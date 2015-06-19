@@ -140,6 +140,7 @@
     <ClCompile Include="..\ADO\ado.cpp" />
     <ClCompile Include="..\ADO\ADOEvents.cpp" />
     <ClCompile Include="..\ADO\AutoFont.cpp" />
+    <ClCompile Include="WebPage.cpp" />
     <ClCompile Include="WndResizer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +192,7 @@
     <ClInclude Include="..\ADO\ado.h" />
     <ClInclude Include="..\ADO\ADOEvents.h" />
     <ClInclude Include="..\ADO\AutoFont.h" />
+    <ClInclude Include="WebPage.h" />
     <ClInclude Include="WndResizer.h" />
   </ItemGroup>
   <ItemGroup>
